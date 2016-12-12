@@ -198,7 +198,7 @@
 - (void)hideRightAnimView{
     
      [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        self.frame = CGRectMake(SCREEN_WIDTH, self.frame.origin.y-20, self.frame.size.width, self.frame.size.height);
+        self.frame = CGRectMake(SCREEN_WIDTH, self.frame.origin.y, self.frame.size.width, self.frame.size.height);
         self.alpha = 0;
     } completion:^(BOOL finished) {
         if (self.completeBlock) {
