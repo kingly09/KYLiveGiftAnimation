@@ -37,8 +37,6 @@ typedef void(^completeBlock)(BOOL finished,NSInteger finishCount);
 
 @property (nonatomic,strong) MZGiftModel *model;
 
-@property (nonatomic,strong) UIImageView *headImageView; // 头像
-@property (nonatomic,strong) UIImageView *giftImageView; // 礼物
 @property (nonatomic,strong) UILabel *nameLabel; // 送礼物者
 @property (nonatomic,strong) UILabel *giftLabel; // 礼物名称
 @property (nonatomic,assign) NSInteger giftCount; // 礼物个数

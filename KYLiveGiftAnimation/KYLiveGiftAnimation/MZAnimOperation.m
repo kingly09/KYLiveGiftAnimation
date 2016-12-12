@@ -80,7 +80,8 @@
   if (_model.gifType == GIFT_TYPE_DEFAULT) { //普通动画
           [self addOperationWithPresentView];
    }else if (_model.gifType == GIFT_TYPE_GUARD) { //爱心守护者
-      
+          [self addOperationWithPightAnimView];
+          
    }else if (_model.gifType == GIFT_TYPE_MASK) {  //贵族面具
   
    }else if (_model.gifType == GIFT_TYPE_OCEAN) { //海洋之星

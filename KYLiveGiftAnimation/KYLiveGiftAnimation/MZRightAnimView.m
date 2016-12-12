@@ -33,9 +33,16 @@
 @property (nonatomic,strong) UIImageView *bgImageView;
 @property (nonatomic,strong) NSTimer *timer;
 @property (nonatomic,copy) void(^completeBlock)(BOOL finished,NSInteger finishCount); // 新增了回调参数 finishCount， 用来记录动画结束时累加数量，将来在3秒内，还能继续累加
+
+@property (nonatomic,strong) UIImageView *loveAnimateView;
 @end
 
 @implementation MZRightAnimView
+{
+
+ __unsafe_unretained UIImageView *_animateView;
+
+}
 
 - (instancetype)init {
     if (self = [super init]) {
@@ -48,18 +55,15 @@
 -(void)setupCustomView{
 
     _bgImageView = [[UIImageView alloc] init];
-    _bgImageView.backgroundColor = [UIColor blackColor];
-    _bgImageView.alpha = 0.3;
-    _headImageView = [[UIImageView alloc] init];
-    _giftImageView = [[UIImageView alloc] init];
+  
     _nameLabel = [[UILabel alloc] init];
     _giftLabel = [[UILabel alloc] init];
     
     _nameLabel.textColor  = [UIColor whiteColor];
-    _nameLabel.font = [UIFont systemFontOfSize:12];
+    _nameLabel.font = [UIFont systemFontOfSize:15];
     
-    _giftLabel.textColor  = [UIColor colorWithHex:0x00eaff];
-    _giftLabel.font = [UIFont systemFontOfSize:12];
+    _giftLabel.textColor  = [UIColor whiteColor];
+    _giftLabel.font = [UIFont systemFontOfSize:15];
     
     // 初始化动画label
     _skLabel =  [[MZShakeLabel alloc] init];
@@ -69,12 +73,16 @@
     _skLabel.textAlignment = NSTextAlignmentLeft;
     _animCount = 0;
     
+    //爱心动画
+    _loveAnimateView = [[UIImageView alloc] init];
+    
     [self addSubview:_bgImageView];
-    [self addSubview:_headImageView];
-    [self addSubview:_giftImageView];
     [self addSubview:_nameLabel];
     [self addSubview:_giftLabel];
     [self addSubview:_skLabel];
+    [self addSubview:_loveAnimateView];
+
+    
 
 }
 
@@ -82,22 +90,17 @@
 - (void)layoutSubviews {
     
     [super layoutSubviews];
-    _headImageView.frame = CGRectMake(KLivePresentViewWidthSpace, 0, self.frame.size.height, self.frame.size.height);
-    _headImageView.layer.cornerRadius = _headImageView.frame.size.height / 2;
-    _headImageView.layer.masksToBounds = YES;
+  
     
-    _giftImageView.frame = CGRectMake(self.frame.size.width - KGiftImageViewWidth + KLivePresentViewWidthSpace, self.frame.size.height - KGiftImageViewWidth, KGiftImageViewWidth, KGiftImageViewWidth);
-    
-    _nameLabel.frame = CGRectMake(_headImageView.frame.size.width + KLivePresentViewWidthSpace*2, 0, KLivePresentViewWidth - KGiftImageViewWidth - self.frame.size.height, self.frame.size.height/2);
-    _giftLabel.frame = CGRectMake(_nameLabel.frame.origin.x, CGRectGetMaxY(_headImageView.frame) - self.frame.size.height/2-2, _nameLabel.frame.size.width, self.frame.size.height/2);
+    _nameLabel.frame = CGRectMake(KLiveRightAnimViewLabelSpace, KLiveRightAnimViewLabelVarSpace, KLiveRightAnimViewLabelWidth, KLiveRightAnimViewLabelHight);
+    _giftLabel.frame = CGRectMake(_nameLabel.frame.origin.x, KLiveRightAnimViewLabelHight+KLiveRightAnimViewLabelVarSpace, KLiveRightAnimViewLabelWidth, KLiveRightAnimViewLabelHight);
     
     _bgImageView.frame = self.bounds;
-    _bgImageView.frame = CGRectMake(KLivePresentViewWidthSpace, 0, self.frame.size.width - KLivePresentViewWidthSpace, self.frame.size.height);
-    
-    _bgImageView.layer.cornerRadius = self.frame.size.height / 2;
-    _bgImageView.layer.masksToBounds = YES;
-    
-    _skLabel.frame = CGRectMake(CGRectGetMaxX(_giftImageView.frame),self.frame.size.height-KLiveShakeLabelHight, KLiveShakeLabelWidth, KLiveShakeLabelHight);
+    _bgImageView.frame = CGRectMake(0, 0, self.frame.size.width - KLiveRightAnimViewWidthSpace, self.frame.size.height);
+    _bgImageView.image = [UIImage imageNamed:@"bg_backgroundcolor_14th"];
+  
+    _loveAnimateView.frame = CGRectMake(0,-KLiveRightAnimViewLoveHight+KLiveRightAnimViewLabelVarSpace*2, KLiveRightAnimViewLoveWidth,KLiveRightAnimViewLoveHight);
+    _skLabel.frame = CGRectMake(self.frame.size.width - KLiveShakeLabelWidth,-KLiveRightAnimViewShakeNumberLabelVarSpace-KLiveShakeLabelHight, KLiveShakeLabelWidth, KLiveShakeLabelHight);
     
 }
 
@@ -106,14 +109,21 @@
 - (void)setModel:(MZGiftModel *)model {
 
   if (_model != model) {
-        _model = nil;
-        _model = model;
+    _model = nil;
+    _model = model;
+    
 
-#warning  修改
-    _headImageView.image = model.headImage;
-    _giftImageView.image = model.giftImage;
-    _nameLabel.text = model.userName;
-    _giftLabel.text = [NSString stringWithFormat:@"送出【%@】",model.giftName];
+    NSString *nameLabelStr = [NSString stringWithFormat:@"感谢%@",model.userName];
+    NSMutableAttributedString *attstr = [[NSMutableAttributedString alloc]initWithString:nameLabelStr];
+    NSRange rangeStr = [nameLabelStr rangeOfString:[NSString stringWithFormat:@"%@",model.userName]];
+    [attstr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHex:0x00ff00] range:rangeStr];
+    _nameLabel.attributedText = attstr;
+
+    NSString *giftLabelStr = [NSString stringWithFormat:@"送出的【%@】",model.giftName];
+    NSMutableAttributedString *giftattstr = [[NSMutableAttributedString alloc]initWithString:giftLabelStr];
+    NSRange giftrangeStr = [giftLabelStr rangeOfString:[NSString stringWithFormat:@"【%@】",model.giftName]];
+    [giftattstr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHex:0x00eaff] range:giftrangeStr];
+    _giftLabel.attributedText = giftattstr;
     _giftCount = model.giftCount;
     
     }
@@ -122,15 +132,43 @@
 
 - (void)animateWithCompleteBlock:(completeBlock)completed{
 
-   [UIView animateWithDuration:0.3 animations:^{
-        self.frame = CGRectMake(0, self.frame.origin.y, self.frame.size.width, self.frame.size.height);
+   [UIView animateWithDuration:0.5 animations:^{
+        self.frame = CGRectMake(KLiveRightAnimViewWidthOriginX, self.frame.origin.y, self.frame.size.width, self.frame.size.height);
     } completion:^(BOOL finished) {
-        [self shakeNumberLabel];
+    
+       if (_model.gifType == GIFT_TYPE_COOFFEE) {
+          [self showOffeeAnim];
+       }else if (_model.gifType == GIFT_TYPE_GUARD){
+          [self showLoveAnim];
+       }
+       
     }];
     self.completeBlock = completed;
 
 
 }
+
+//爱心动画
+-(void)showLoveAnim{
+
+
+    
+    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+          [self startLoveAnimating];
+    } completion:^(BOOL finished) {
+      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+          [self shakeNumberLabel];
+      });
+    }];
+}
+
+//咖啡动画
+-(void)showOffeeAnim{
+
+
+
+}
+
 - (void)shakeNumberLabel{
   
    _animCount ++; 
@@ -145,18 +183,18 @@
    }
 
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(hideRightAnimView) object:nil];//可以取消成功。
-    [self performSelector:@selector(hideRightAnimView) withObject:nil afterDelay:2];
+    [self performSelector:@selector(hideRightAnimView) withObject:nil afterDelay:3];
     
     self.skLabel.text = [NSString stringWithFormat:@"x %ld",_animCount];
-    [self.skLabel startAnimWithDuration:0.3];
+    [self.skLabel startAnimWithDuration:0.5];
 
 
 }
 
 - (void)hideRightAnimView{
     
-     [UIView animateWithDuration:0.30 delay:2 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        self.frame = CGRectMake(0, self.frame.origin.y - 20, self.frame.size.width, self.frame.size.height);
+     [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        self.frame = CGRectMake(SCREEN_WIDTH, self.frame.origin.y-20, self.frame.size.width, self.frame.size.height);
         self.alpha = 0;
     } completion:^(BOOL finished) {
         if (self.completeBlock) {
@@ -168,6 +206,31 @@
     }];
 
 }
+
+
+/**
+ * @brief 开始动画
+ */
+- (void)startLoveAnimating
+{
+  
+  NSArray *magesArray = [NSArray arrayWithObjects:
+                         [UIImage imageNamed:@"ic_heart_1_14th"],
+                         [UIImage imageNamed:@"ic_heart_2_14th"],
+                         [UIImage imageNamed:@"ic_heart_3_14th"],
+                         [UIImage imageNamed:@"ic_heart_4_14th"],
+                         [UIImage imageNamed:@"ic_heart_5_14th"],nil];
+  _loveAnimateView.animationImages = magesArray;//将序列帧数组赋给UIImageView的animationImages属性
+  _loveAnimateView.animationDuration = 0.5;//设置动画时间
+  _loveAnimateView.animationRepeatCount = 0;//设置动画次数 0 表示无限
+  [_loveAnimateView startAnimating];//开始播放动画    
+  
+  //延时结束刷新
+  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    [_loveAnimateView stopAnimating];
+  });
+}
+
 // 重置
 - (void)resetframe {
     self.frame = _originFrame;

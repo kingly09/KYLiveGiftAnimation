@@ -29,6 +29,7 @@
 #define MZLiveGiftAnimationHeader_h
 
 #import "UIColor+CustomColor.h"
+#define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
 #define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
 
 #import "MZPresentView.h"
@@ -55,6 +56,21 @@
 #define KLiveShakeLabelHight 27.0 
 
 #define KLiveShakeLabelMaxNum 999 //最大数为999
+
+#define KLiveRightAnimViewWidth  198.0
+#define KLiveRightAnimViewHight  56.0
+#define KLiveRightAnimViewFooterSpace 253.0
+#define KLiveRightAnimViewWidthSpace 12.0
+#define KLiveRightAnimViewLabelVarSpace 10.0
+#define KLiveRightAnimViewLabelSpace 15.0
+#define KLiveRightAnimViewLabelWidth (KLiveRightAnimViewWidth - KLiveRightAnimViewLabelSpace - KLiveRightAnimViewWidthSpace)
+#define KLiveRightAnimViewLabelHight (KLiveRightAnimViewHight - KLiveRightAnimViewLabelVarSpace*2)/2
+#define KLiveRightAnimViewWidthOriginX  (SCREEN_WIDTH - KLiveRightAnimViewWidth)
+#define KLiveRightAnimViewWidthOriginY  (SCREEN_HEIGHT - KLiveRightAnimViewFooterSpace - KLiveRightAnimViewHight)
+#define KLiveRightAnimViewShakeNumberLabelVarSpace 15
+#define KLiveRightAnimViewLoveWidth 145.0
+#define KLiveRightAnimViewLoveHight 110.0
+
 
 #endif /* MZLiveGiftAnimationHeader_h */
 
