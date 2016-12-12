@@ -31,7 +31,7 @@
 
 typedef NS_ENUM(NSInteger, GIFT_INDEX) {
     GIFT_INDEX_queue1          = 1,     //普通队列1
-    GIFT_INDEX_queue2          = 2,     //普通队列2
+    GIFT_INDEX_queue2          = 0,     //普通队列2
     GIFT_INDEX_rightQueue      = 3,     //爱心守护者和咖啡印记 队列
     GIFT_INDEX_markQueue       = 4,     //贵族面具队列
     GIFT_INDEX_oceanQueue      = 5,     //海洋之星队列

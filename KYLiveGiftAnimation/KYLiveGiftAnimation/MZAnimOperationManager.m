@@ -300,7 +300,7 @@
         [self.operationCache setObject:op forKey:userReuseIdentifierID];
         
         // 根据用户ID 控制显示的位置
-        if ([userReuseIdentifierID integerValue] % 2) {
+        if (op.index == GIFT_INDEX_queue2) {
             
             if (op.model.giftCount != 0) {
                 op.presentView.frame  = CGRectMake(-KLivePresentViewWidth, kLiveQueue2OriginY, KLivePresentViewWidth, KLivePresentViewHight);
@@ -347,7 +347,7 @@
         // 将操作添加到缓存池
         [self.operationCache setObject:op forKey:userReuseIdentifierID];
         
-        if ([userReuseIdentifierID integerValue] % 2) {
+        if (op.index == GIFT_INDEX_queue2) {
             
             if (op.model.giftCount != 0) {
                 op.presentView.frame  = CGRectMake(-KLivePresentViewWidth, kLiveQueue2OriginY, KLivePresentViewWidth, KLivePresentViewHight);
