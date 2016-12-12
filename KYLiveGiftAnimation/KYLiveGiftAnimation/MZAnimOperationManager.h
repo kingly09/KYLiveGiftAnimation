@@ -42,4 +42,7 @@
 /// 取消上一次的动画操作
 - (void)cancelOperationWithLastGift:(MZGiftModel *)model;
 
+/// 注销释放内存 
+-(void)resetDealloc;
+
 @end

@@ -28,8 +28,10 @@
 #import "ViewController.h"
 #import "MZLiveGiftAnimationHeader.h"
 
-@interface ViewController ()
+@interface ViewController (){
 
+      MZAnimOperationManager *manager;
+}
 @end
 
 @implementation ViewController
@@ -38,12 +40,30 @@
   [super viewDidLoad];
   // Do any additional setup after loading the view, typically from a nib.
   self.view.backgroundColor = [UIColor grayColor];
+  
+  manager = [MZAnimOperationManager sharedManager];
 }
 
 
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
+  
+  if (manager != nil) {
+     [manager resetDealloc];
+     manager = nil;
+  }
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+ 
+ [super viewWillDisappear:animated];
+ 
+ if (manager != nil) {
+     [manager resetDealloc];
+     manager = nil;
+  }
+
 }
 
 - (IBAction)sendGift01:(id)sender {
@@ -58,16 +78,14 @@
     giftModel.giftName = @"1个【鲜花】";
     giftModel.giftCount = 1;
     
-    
-    MZAnimOperationManager *manager = [MZAnimOperationManager sharedManager];
-    manager.parentView = self.view;
-    // model 传入礼物模型
-    [manager animWithGiftModel:giftModel finishedBlock:^(BOOL result) {
+   if (manager) {
+      manager.parentView = self.view;
+      // model 传入礼物模型
+      [manager animWithGiftModel:giftModel finishedBlock:^(BOOL result) {
         
     }];
-
-
-
+  }
+  
 }
 
 - (IBAction)sendGift02:(id)sender {
@@ -82,37 +100,37 @@
     giftModel.giftName = @"2个【小熊】";
     giftModel.giftCount = 20;
     
-    
-    MZAnimOperationManager *manager = [MZAnimOperationManager sharedManager];
+  if (manager) {
     manager.parentView = self.view;
     // model 传入礼物模型
     [manager animWithGiftModel:giftModel finishedBlock:^(BOOL result) {
-        
+      
     }];
+  }
 
 
 }
 
 - (IBAction)senderGift03:(id)sender {
-
-    // 礼物模型
-    long  x = arc4random() % 9+10;    
-    MZGiftModel *giftModel = [[MZGiftModel alloc] init];
-    giftModel.headImage = [UIImage imageNamed:@"luffy"];
-    giftModel.userId = x;
-    giftModel.userName = [NSString stringWithFormat:@"%ld",x];
-    giftModel.giftImage = [UIImage imageNamed:@"ic_soap_small_14th"];
-    giftModel.giftName = @"甜蜜棒棒糖";
-    giftModel.giftCount = 9999;
-    
-    
-    MZAnimOperationManager *manager = [MZAnimOperationManager sharedManager];
+  
+  // 礼物模型
+  long  x = arc4random() % 9+10;    
+  MZGiftModel *giftModel = [[MZGiftModel alloc] init];
+  giftModel.headImage = [UIImage imageNamed:@"luffy"];
+  giftModel.userId = x;
+  giftModel.userName = [NSString stringWithFormat:@"%ld",x];
+  giftModel.giftImage = [UIImage imageNamed:@"ic_soap_small_14th"];
+  giftModel.giftName = @"甜蜜棒棒糖";
+  giftModel.giftCount = 9999;
+  
+  
+  if (manager) {
     manager.parentView = self.view;
     // model 传入礼物模型
     [manager animWithGiftModel:giftModel finishedBlock:^(BOOL result) {
-        
+      
     }];
-
+  }
   
 }
 
