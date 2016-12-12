@@ -52,8 +52,6 @@
     if (self) {
         _executing = NO;
         _finished  = NO;
-        
-        
     }
     return self;
 }

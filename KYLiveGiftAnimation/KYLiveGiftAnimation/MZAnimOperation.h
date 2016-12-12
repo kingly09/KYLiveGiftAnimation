@@ -29,12 +29,21 @@
 #import "MZPresentView.h"
 #import "MZGiftModel.h"
 
+typedef NS_ENUM(NSInteger, GIFT_INDEX) {
+    GIFT_INDEX_queue1          = 1,     //普通队列1
+    GIFT_INDEX_queue2          = 2,     //普通队列2
+    GIFT_INDEX_rightQueue      = 3,     //爱心守护者和咖啡印记 队列
+    GIFT_INDEX_markQueue       = 4,     //贵族面具队列
+    GIFT_INDEX_oceanQueue      = 5,     //海洋之星队列
+    GIFT_INDEX_castleQueue     = 6      //女皇的城堡队列
+};
+
 @interface MZAnimOperation : NSOperation
 
 @property (nonatomic,strong) MZPresentView *presentView;
 @property (nonatomic,strong) UIView *listView;
 @property (nonatomic,strong) MZGiftModel *model;
-@property (nonatomic,assign) NSInteger index;
+@property (nonatomic)  enum  GIFT_INDEX index;  //属于那个队列 
 
 @property (nonatomic,copy) NSString *userID; // 新增用户唯一标示reuseIdentifier，记录礼物信息
 
