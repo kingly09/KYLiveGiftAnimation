@@ -28,17 +28,24 @@
 #ifndef MZLiveGiftAnimationHeader_h
 #define MZLiveGiftAnimationHeader_h
 
+#import "UIColor+CustomColor.h"
+#define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
+
 #import "MZPresentView.h"
 #import "MZGiftModel.h"
 #import "MZAnimOperation.h"
 #import "MZShakeLabel.h"
 #import "MZAnimOperationManager.h"
 
-#import "UIColor+CustomColor.h"
 
 #define KLivePresentViewWidth 200.0
 #define KLivePresentViewHight 30.0
 #define KLivePresentViewWidthSpace 10.0
+
+#define kLiveQueue2FooterSpace 275.0
+#define kLiveQueue2OriginY (SCREEN_HEIGHT - kLiveQueue2FooterSpace - KGiftImageViewWidth)
+#define kLiveQueue1OriginY (SCREEN_HEIGHT - kLiveQueue2FooterSpace - KGiftImageViewWidth*2 - KLivePresentViewWidthSpace)
+
 
 #define KGiftImageViewWidth 50.0
 

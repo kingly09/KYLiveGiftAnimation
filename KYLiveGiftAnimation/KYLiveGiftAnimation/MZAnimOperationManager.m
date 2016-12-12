@@ -117,10 +117,19 @@
 - (void)cancelOperationWithLastGift:(MZGiftModel *)model{
     
     // 当上次为空时就不执行取消操作 (第一次进入执行时才会为空)
-    NSString *userReuseIdentifierID = [NSString stringWithFormat:@"%ld_%ld",model.userId,(long)model.gifType];
+  
     if (model.userId > 0) {
+       NSString *userReuseIdentifierID = [self getUserReuseIdentifierID:model];
         [[self.operationCache objectForKey:userReuseIdentifierID] cancel];
     }
+}
+
+//// 获得用户唯一标示reuseIdentifier，记录礼物信息的标示信息
+-(NSString *)getUserReuseIdentifierID:(MZGiftModel *)model{
+   
+    NSString *userReuseIdentifierID = [NSString stringWithFormat:@"%ld_%ld",model.userId,(long)model.gifType];
+    return userReuseIdentifierID; 
+   
 }
 
 #pragma mark - lazy 加载
@@ -252,9 +261,7 @@
 -(void)animPresentView:(MZGiftModel *)model  finishedBlock:(void(^)(BOOL result))finishedBlock{
 
 
-  NSString *userReuseIdentifierID = [NSString stringWithFormat:@"%ld_%ld",model.userId,(long)model.gifType];
-   
-
+ NSString *userReuseIdentifierID = [self getUserReuseIdentifierID:model];
    
     // 在有用户礼物信息时
     if ([self.userGigtInfos objectForKey:userReuseIdentifierID]) {
@@ -292,22 +299,22 @@
         // 将操作添加到缓存池
         [self.operationCache setObject:op forKey:userReuseIdentifierID];
         
-//        // 根据用户ID 控制显示的位置
-//        if ([userID integerValue] % 2) {
-//            
-//            if (op.model.giftCount != 0) {
-//                op.presentView.frame  = CGRectMake(-KLivePresentViewWidth, 300, KLivePresentViewWidth, KLivePresentViewHight);
-//                op.presentView.originFrame = op.presentView.frame;
-//                [self.queue1 addOperation:op];
-//            }
-//        }else {
-//            
-//            if (op.model.giftCount != 0) {
-//                op.presentView.frame  = CGRectMake(-KLivePresentViewWidth, 240, KLivePresentViewWidth, KLivePresentViewHight);
-//                op.presentView.originFrame = op.presentView.frame;
-//                [self.queue2 addOperation:op];
-//            }
-//        }
+        // 根据用户ID 控制显示的位置
+        if ([userReuseIdentifierID integerValue] % 2) {
+            
+            if (op.model.giftCount != 0) {
+                op.presentView.frame  = CGRectMake(-KLivePresentViewWidth, kLiveQueue2OriginY, KLivePresentViewWidth, KLivePresentViewHight);
+                op.presentView.originFrame = op.presentView.frame;
+                [self.queue2 addOperation:op];
+            }
+        }else {
+            
+            if (op.model.giftCount != 0) {
+                op.presentView.frame  = CGRectMake(-KLivePresentViewWidth, kLiveQueue1OriginY, KLivePresentViewWidth, KLivePresentViewHight);
+                op.presentView.originFrame = op.presentView.frame;
+                [self.queue1 addOperation:op];
+            }
+        }
     }
     
     // 在没有用户礼物信息时
@@ -343,16 +350,16 @@
         if ([userReuseIdentifierID integerValue] % 2) {
             
             if (op.model.giftCount != 0) {
-                op.presentView.frame  = CGRectMake(-KLivePresentViewWidth, 300, KLivePresentViewWidth, KLivePresentViewHight);
+                op.presentView.frame  = CGRectMake(-KLivePresentViewWidth, kLiveQueue2OriginY, KLivePresentViewWidth, KLivePresentViewHight);
                 op.presentView.originFrame = op.presentView.frame;
-                [self.queue1 addOperation:op];
+                [self.queue2 addOperation:op];
             }
         }else {
             
             if (op.model.giftCount != 0) {
-                op.presentView.frame  = CGRectMake(-KLivePresentViewWidth, 240, KLivePresentViewWidth, KLivePresentViewHight);
+                op.presentView.frame  = CGRectMake(-KLivePresentViewWidth, kLiveQueue1OriginY, KLivePresentViewWidth, KLivePresentViewHight);
                 op.presentView.originFrame = op.presentView.frame;
-                [self.queue2 addOperation:op];
+                [self.queue1 addOperation:op];
             }
         }
     

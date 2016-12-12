@@ -42,6 +42,9 @@
 /// 取消上一次的动画操作
 - (void)cancelOperationWithLastGift:(MZGiftModel *)model;
 
+//// 获得用户唯一标示reuseIdentifier，记录礼物信息的标示信息
+-(NSString *)getUserReuseIdentifierID:(MZGiftModel *)model;
+
 /// 注销释放内存 
 -(void)resetDealloc;
 
