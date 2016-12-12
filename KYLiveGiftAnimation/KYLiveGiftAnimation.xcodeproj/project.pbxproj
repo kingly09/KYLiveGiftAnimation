@@ -1,0 +1,360 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BCF29E891DFE487600C9E731 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF29E881DFE487600C9E731 /* main.m */; };
+		BCF29E8C1DFE487600C9E731 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF29E8B1DFE487600C9E731 /* AppDelegate.m */; };
+		BCF29E8F1DFE487600C9E731 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF29E8E1DFE487600C9E731 /* ViewController.m */; };
+		BCF29E921DFE487600C9E731 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCF29E901DFE487600C9E731 /* Main.storyboard */; };
+		BCF29E941DFE487600C9E731 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BCF29E931DFE487600C9E731 /* Assets.xcassets */; };
+		BCF29E971DFE487600C9E731 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCF29E951DFE487600C9E731 /* LaunchScreen.storyboard */; };
+		BCF29EA11DFE499B00C9E731 /* MZGiftModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF29EA01DFE499B00C9E731 /* MZGiftModel.m */; };
+		BCF29EAD1DFE4BB800C9E731 /* MZAnimOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF29EAC1DFE4BB800C9E731 /* MZAnimOperationManager.m */; };
+		BCF29EB01DFE4C9200C9E731 /* MZPresentView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF29EAF1DFE4C9200C9E731 /* MZPresentView.m */; };
+		BCF29EB31DFE4CB200C9E731 /* MZAnimOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF29EB21DFE4CB200C9E731 /* MZAnimOperation.m */; };
+		BCF29EB61DFE4CD400C9E731 /* MZShakeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF29EB51DFE4CD400C9E731 /* MZShakeLabel.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		BCF29E841DFE487600C9E731 /* KYLiveGiftAnimation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KYLiveGiftAnimation.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BCF29E881DFE487600C9E731 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		BCF29E8A1DFE487600C9E731 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		BCF29E8B1DFE487600C9E731 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		BCF29E8D1DFE487600C9E731 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		BCF29E8E1DFE487600C9E731 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		BCF29E911DFE487600C9E731 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		BCF29E931DFE487600C9E731 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BCF29E961DFE487600C9E731 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		BCF29E981DFE487600C9E731 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BCF29E9F1DFE499B00C9E731 /* MZGiftModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZGiftModel.h; sourceTree = "<group>"; };
+		BCF29EA01DFE499B00C9E731 /* MZGiftModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZGiftModel.m; sourceTree = "<group>"; };
+		BCF29EAB1DFE4BB800C9E731 /* MZAnimOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZAnimOperationManager.h; sourceTree = "<group>"; };
+		BCF29EAC1DFE4BB800C9E731 /* MZAnimOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZAnimOperationManager.m; sourceTree = "<group>"; };
+		BCF29EAE1DFE4C9200C9E731 /* MZPresentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZPresentView.h; sourceTree = "<group>"; };
+		BCF29EAF1DFE4C9200C9E731 /* MZPresentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZPresentView.m; sourceTree = "<group>"; };
+		BCF29EB11DFE4CB200C9E731 /* MZAnimOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZAnimOperation.h; sourceTree = "<group>"; };
+		BCF29EB21DFE4CB200C9E731 /* MZAnimOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZAnimOperation.m; sourceTree = "<group>"; };
+		BCF29EB41DFE4CD400C9E731 /* MZShakeLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZShakeLabel.h; sourceTree = "<group>"; };
+		BCF29EB51DFE4CD400C9E731 /* MZShakeLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZShakeLabel.m; sourceTree = "<group>"; };
+		BCF29EB71DFE569D00C9E731 /* MZLiveGiftAnimationHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MZLiveGiftAnimationHeader.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BCF29E811DFE487600C9E731 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BCF29E7B1DFE487600C9E731 = {
+			isa = PBXGroup;
+			children = (
+				BCF29E861DFE487600C9E731 /* KYLiveGiftAnimation */,
+				BCF29E851DFE487600C9E731 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BCF29E851DFE487600C9E731 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BCF29E841DFE487600C9E731 /* KYLiveGiftAnimation.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BCF29E861DFE487600C9E731 /* KYLiveGiftAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				BCF29EB71DFE569D00C9E731 /* MZLiveGiftAnimationHeader.h */,
+				BCF29EAE1DFE4C9200C9E731 /* MZPresentView.h */,
+				BCF29EAF1DFE4C9200C9E731 /* MZPresentView.m */,
+				BCF29EB11DFE4CB200C9E731 /* MZAnimOperation.h */,
+				BCF29EB21DFE4CB200C9E731 /* MZAnimOperation.m */,
+				BCF29EAB1DFE4BB800C9E731 /* MZAnimOperationManager.h */,
+				BCF29EAC1DFE4BB800C9E731 /* MZAnimOperationManager.m */,
+				BCF29EB41DFE4CD400C9E731 /* MZShakeLabel.h */,
+				BCF29EB51DFE4CD400C9E731 /* MZShakeLabel.m */,
+				BCF29E9E1DFE497700C9E731 /* model */,
+				BCF29E8A1DFE487600C9E731 /* AppDelegate.h */,
+				BCF29E8B1DFE487600C9E731 /* AppDelegate.m */,
+				BCF29E8D1DFE487600C9E731 /* ViewController.h */,
+				BCF29E8E1DFE487600C9E731 /* ViewController.m */,
+				BCF29E901DFE487600C9E731 /* Main.storyboard */,
+				BCF29E931DFE487600C9E731 /* Assets.xcassets */,
+				BCF29E951DFE487600C9E731 /* LaunchScreen.storyboard */,
+				BCF29E981DFE487600C9E731 /* Info.plist */,
+				BCF29E871DFE487600C9E731 /* Supporting Files */,
+			);
+			path = KYLiveGiftAnimation;
+			sourceTree = "<group>";
+		};
+		BCF29E871DFE487600C9E731 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BCF29E881DFE487600C9E731 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BCF29E9E1DFE497700C9E731 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				BCF29E9F1DFE499B00C9E731 /* MZGiftModel.h */,
+				BCF29EA01DFE499B00C9E731 /* MZGiftModel.m */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BCF29E831DFE487600C9E731 /* KYLiveGiftAnimation */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BCF29E9B1DFE487600C9E731 /* Build configuration list for PBXNativeTarget "KYLiveGiftAnimation" */;
+			buildPhases = (
+				BCF29E801DFE487600C9E731 /* Sources */,
+				BCF29E811DFE487600C9E731 /* Frameworks */,
+				BCF29E821DFE487600C9E731 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KYLiveGiftAnimation;
+			productName = KYLiveGiftAnimation;
+			productReference = BCF29E841DFE487600C9E731 /* KYLiveGiftAnimation.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BCF29E7C1DFE487600C9E731 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = MZ;
+				LastUpgradeCheck = 0810;
+				ORGANIZATIONNAME = "KYLiveGiftAnimation   Software (https://github.com/kingly09/KYLiveGiftAnimation) by kingly inc.  \n\n//\n// Permission is hereby granted, free of charge, to any person obtaining a copy\n// of this software and associated documentation files (the \"Software\"), to deal\n// in the Software without restriction, including without limitation the rights\n// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n// copies of the Software, and to permit persons to whom the Software is\n// furnished to do so, subject to the following conditions:\n//\n// The above copyright notice and this permission notice shall be included in\n// all copies or substantial portions of the Software.\n//\n// THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\n// THE SOFTWARE.";
+				TargetAttributes = {
+					BCF29E831DFE487600C9E731 = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = V446K9WVQL;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = BCF29E7F1DFE487600C9E731 /* Build configuration list for PBXProject "KYLiveGiftAnimation" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BCF29E7B1DFE487600C9E731;
+			productRefGroup = BCF29E851DFE487600C9E731 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BCF29E831DFE487600C9E731 /* KYLiveGiftAnimation */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BCF29E821DFE487600C9E731 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BCF29E971DFE487600C9E731 /* LaunchScreen.storyboard in Resources */,
+				BCF29E941DFE487600C9E731 /* Assets.xcassets in Resources */,
+				BCF29E921DFE487600C9E731 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BCF29E801DFE487600C9E731 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BCF29EAD1DFE4BB800C9E731 /* MZAnimOperationManager.m in Sources */,
+				BCF29E8F1DFE487600C9E731 /* ViewController.m in Sources */,
+				BCF29E8C1DFE487600C9E731 /* AppDelegate.m in Sources */,
+				BCF29EA11DFE499B00C9E731 /* MZGiftModel.m in Sources */,
+				BCF29EB61DFE4CD400C9E731 /* MZShakeLabel.m in Sources */,
+				BCF29E891DFE487600C9E731 /* main.m in Sources */,
+				BCF29EB01DFE4C9200C9E731 /* MZPresentView.m in Sources */,
+				BCF29EB31DFE4CB200C9E731 /* MZAnimOperation.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		BCF29E901DFE487600C9E731 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BCF29E911DFE487600C9E731 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		BCF29E951DFE487600C9E731 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BCF29E961DFE487600C9E731 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BCF29E991DFE487600C9E731 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BCF29E9A1DFE487600C9E731 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BCF29E9C1DFE487600C9E731 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = V446K9WVQL;
+				INFOPLIST_FILE = KYLiveGiftAnimation/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.kingly09.KYLiveGiftAnimation;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		BCF29E9D1DFE487600C9E731 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = V446K9WVQL;
+				INFOPLIST_FILE = KYLiveGiftAnimation/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.kingly09.KYLiveGiftAnimation;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BCF29E7F1DFE487600C9E731 /* Build configuration list for PBXProject "KYLiveGiftAnimation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BCF29E991DFE487600C9E731 /* Debug */,
+				BCF29E9A1DFE487600C9E731 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BCF29E9B1DFE487600C9E731 /* Build configuration list for PBXNativeTarget "KYLiveGiftAnimation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BCF29E9C1DFE487600C9E731 /* Debug */,
+				BCF29E9D1DFE487600C9E731 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BCF29E7C1DFE487600C9E731 /* Project object */;
+}
