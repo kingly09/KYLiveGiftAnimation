@@ -39,7 +39,7 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   // Do any additional setup after loading the view, typically from a nib.
-  self.view.backgroundColor = [UIColor grayColor];
+  self.view.backgroundColor =  [UIColor colorWithPatternImage:[UIImage imageNamed:@"直播界面"]]; 
   
   manager = [MZAnimOperationManager sharedManager];
 }
