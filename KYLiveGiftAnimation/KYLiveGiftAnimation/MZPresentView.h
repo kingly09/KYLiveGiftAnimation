@@ -29,6 +29,7 @@
 #import "MZShakeLabel.h"
 #import "MZGiftModel.h"
 
+
 typedef void(^completeBlock)(BOOL finished,NSInteger finishCount);
 
 @interface MZPresentView : UIView

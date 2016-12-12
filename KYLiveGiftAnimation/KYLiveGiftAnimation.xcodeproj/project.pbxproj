@@ -18,6 +18,7 @@
 		BCF29EB01DFE4C9200C9E731 /* MZPresentView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF29EAF1DFE4C9200C9E731 /* MZPresentView.m */; };
 		BCF29EB31DFE4CB200C9E731 /* MZAnimOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF29EB21DFE4CB200C9E731 /* MZAnimOperation.m */; };
 		BCF29EB61DFE4CD400C9E731 /* MZShakeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF29EB51DFE4CD400C9E731 /* MZShakeLabel.m */; };
+		BCF29EBA1DFE806C00C9E731 /* UIColor+CustomColor.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF29EB91DFE806C00C9E731 /* UIColor+CustomColor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,8 @@
 		BCF29EB41DFE4CD400C9E731 /* MZShakeLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZShakeLabel.h; sourceTree = "<group>"; };
 		BCF29EB51DFE4CD400C9E731 /* MZShakeLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZShakeLabel.m; sourceTree = "<group>"; };
 		BCF29EB71DFE569D00C9E731 /* MZLiveGiftAnimationHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MZLiveGiftAnimationHeader.h; sourceTree = "<group>"; };
+		BCF29EB81DFE806C00C9E731 /* UIColor+CustomColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+CustomColor.h"; sourceTree = "<group>"; };
+		BCF29EB91DFE806C00C9E731 /* UIColor+CustomColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CustomColor.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +61,8 @@
 		BCF29E7B1DFE487600C9E731 = {
 			isa = PBXGroup;
 			children = (
+				BCF29EB81DFE806C00C9E731 /* UIColor+CustomColor.h */,
+				BCF29EB91DFE806C00C9E731 /* UIColor+CustomColor.m */,
 				BCF29E861DFE487600C9E731 /* KYLiveGiftAnimation */,
 				BCF29E851DFE487600C9E731 /* Products */,
 			);
@@ -194,6 +199,7 @@
 				BCF29EB61DFE4CD400C9E731 /* MZShakeLabel.m in Sources */,
 				BCF29E891DFE487600C9E731 /* main.m in Sources */,
 				BCF29EB01DFE4C9200C9E731 /* MZPresentView.m in Sources */,
+				BCF29EBA1DFE806C00C9E731 /* UIColor+CustomColor.m in Sources */,
 				BCF29EB31DFE4CB200C9E731 /* MZAnimOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

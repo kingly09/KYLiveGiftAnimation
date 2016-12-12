@@ -26,6 +26,7 @@
 //
 
 #import "MZPresentView.h"
+#import "MZLiveGiftAnimationHeader.h"
 
 @interface MZPresentView ()
 @property (nonatomic,strong) UIImageView *bgImageView;
@@ -46,24 +47,26 @@
 
 -(void)setupCustomView{
 
- _bgImageView = [[UIImageView alloc] init];
+    _bgImageView = [[UIImageView alloc] init];
     _bgImageView.backgroundColor = [UIColor blackColor];
     _bgImageView.alpha = 0.3;
     _headImageView = [[UIImageView alloc] init];
     _giftImageView = [[UIImageView alloc] init];
     _nameLabel = [[UILabel alloc] init];
     _giftLabel = [[UILabel alloc] init];
+    
     _nameLabel.textColor  = [UIColor whiteColor];
-    _nameLabel.font = [UIFont systemFontOfSize:13];
-    _giftLabel.textColor  = [UIColor yellowColor];
-    _giftLabel.font = [UIFont systemFontOfSize:13];
+    _nameLabel.font = [UIFont systemFontOfSize:12];
+    
+    _giftLabel.textColor  = [UIColor colorWithHex:0x00eaff];
+    _giftLabel.font = [UIFont systemFontOfSize:12];
     
     // 初始化动画label
     _skLabel =  [[MZShakeLabel alloc] init];
-    _skLabel.font = [UIFont systemFontOfSize:16];
-    _skLabel.borderColor = [UIColor yellowColor];
-    _skLabel.textColor = [UIColor greenColor];
-    _skLabel.textAlignment = NSTextAlignmentCenter;
+    _skLabel.font = [UIFont systemFontOfSize:25];
+    _skLabel.borderColor = [UIColor whiteColor];
+    _skLabel.textColor = [UIColor colorWithHex:0xff3c6f];
+    _skLabel.textAlignment = NSTextAlignmentLeft;
     _animCount = 0;
     
     [self addSubview:_bgImageView];
@@ -79,20 +82,22 @@
 - (void)layoutSubviews {
     
     [super layoutSubviews];
-    _headImageView.frame = CGRectMake(0, 0, self.frame.size.height, self.frame.size.height);
-    _headImageView.layer.borderWidth = 1;
-    _headImageView.layer.borderColor = [UIColor cyanColor].CGColor;
+    _headImageView.frame = CGRectMake(KLivePresentViewWidthSpace, 0, self.frame.size.height, self.frame.size.height);
     _headImageView.layer.cornerRadius = _headImageView.frame.size.height / 2;
     _headImageView.layer.masksToBounds = YES;
-    _giftImageView.frame = CGRectMake(self.frame.size.width - 50, self.frame.size.height - 50, 50, 50);
-    _nameLabel.frame = CGRectMake(_headImageView.frame.size.width + 5, 5, _headImageView.frame.size.width * 3, 10);
-    _giftLabel.frame = CGRectMake(_nameLabel.frame.origin.x, CGRectGetMaxY(_headImageView.frame) - 10 - 5, _nameLabel.frame.size.width, 10);
+    
+    _giftImageView.frame = CGRectMake(self.frame.size.width - KGiftImageViewWidth + KLivePresentViewWidthSpace, self.frame.size.height - KGiftImageViewWidth, KGiftImageViewWidth, KGiftImageViewWidth);
+    
+    _nameLabel.frame = CGRectMake(_headImageView.frame.size.width + KLivePresentViewWidthSpace*2, 0, KLivePresentViewWidth - KGiftImageViewWidth - self.frame.size.height, self.frame.size.height/2);
+    _giftLabel.frame = CGRectMake(_nameLabel.frame.origin.x, CGRectGetMaxY(_headImageView.frame) - self.frame.size.height/2-2, _nameLabel.frame.size.width, self.frame.size.height/2);
     
     _bgImageView.frame = self.bounds;
+    _bgImageView.frame = CGRectMake(KLivePresentViewWidthSpace, 0, self.frame.size.width - KLivePresentViewWidthSpace, self.frame.size.height);
+    
     _bgImageView.layer.cornerRadius = self.frame.size.height / 2;
     _bgImageView.layer.masksToBounds = YES;
     
-    _skLabel.frame = CGRectMake(CGRectGetMaxX(self.frame) + 5,-20, 50, 30);
+    _skLabel.frame = CGRectMake(CGRectGetMaxX(_giftImageView.frame),self.frame.size.height-KLiveShakeLabelHight, KLiveShakeLabelWidth, KLiveShakeLabelHight);
     
 }
 
@@ -103,13 +108,12 @@
   if (_model != model) {
         _model = nil;
         _model = model;
-    
-    _model = model;
+
 #warning  修改
     _headImageView.image = model.headImage;
     _giftImageView.image = model.giftImage;
     _nameLabel.text = model.userName;
-    _giftLabel.text = [NSString stringWithFormat:@"送了%@",model.giftName];
+    _giftLabel.text = [NSString stringWithFormat:@"送出【%@】",model.giftName];
     _giftCount = model.giftCount;
     
     }
@@ -129,12 +133,21 @@
 }
 - (void)shakeNumberLabel{
   
-   _animCount ++;
+   _animCount ++; 
+   
+   if (_giftCount > 0) {
+      _animCount =  _giftCount;
+   }
+   
+   if (_animCount > KLiveShakeLabelMaxNum ) {
+      
+      _animCount = KLiveShakeLabelMaxNum;
+   }
 
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(hidePresendView) object:nil];//可以取消成功。
     [self performSelector:@selector(hidePresendView) withObject:nil afterDelay:2];
     
-    self.skLabel.text = [NSString stringWithFormat:@"X %ld",_animCount];
+    self.skLabel.text = [NSString stringWithFormat:@"x %ld",_animCount];
     [self.skLabel startAnimWithDuration:0.3];
 
 
@@ -160,6 +173,7 @@
     self.frame = _originFrame;
     self.alpha = 1;
     self.animCount = 0;
+    self.giftCount = 0;
     self.skLabel.text = @"";
 }
 

@@ -26,6 +26,7 @@
 //
 
 #import "MZAnimOperationManager.h"
+#import "MZLiveGiftAnimationHeader.h"
 #import "MZAnimOperation.h"
 
 @interface MZAnimOperationManager ()
@@ -101,14 +102,14 @@
         if ([userID integerValue] % 2) {
             
             if (op.model.giftCount != 0) {
-                op.presentView.frame  = CGRectMake(-self.parentView.frame.size.width / 2, 300, self.parentView.frame.size.width / 2, 40);
+                op.presentView.frame  = CGRectMake(-KLivePresentViewWidth, 300, KLivePresentViewWidth, KLivePresentViewHight);
                 op.presentView.originFrame = op.presentView.frame;
                 [self.queue1 addOperation:op];
             }
         }else {
             
             if (op.model.giftCount != 0) {
-                op.presentView.frame  = CGRectMake(-self.parentView.frame.size.width / 2, 240, self.parentView.frame.size.width / 2, 40);
+                op.presentView.frame  = CGRectMake(-KLivePresentViewWidth, 240, KLivePresentViewWidth, KLivePresentViewHight);
                 op.presentView.originFrame = op.presentView.frame;
                 [self.queue2 addOperation:op];
             }
@@ -148,14 +149,14 @@
         if ([userID integerValue] % 2) {
             
             if (op.model.giftCount != 0) {
-                op.presentView.frame  = CGRectMake(-self.parentView.frame.size.width / 2, 300, self.parentView.frame.size.width / 2, 40);
+                op.presentView.frame  = CGRectMake(-KLivePresentViewWidth, 300, KLivePresentViewWidth, KLivePresentViewHight);
                 op.presentView.originFrame = op.presentView.frame;
                 [self.queue1 addOperation:op];
             }
         }else {
             
             if (op.model.giftCount != 0) {
-                op.presentView.frame  = CGRectMake(-self.parentView.frame.size.width / 2, 240, self.parentView.frame.size.width / 2, 40);
+                op.presentView.frame  = CGRectMake(-KLivePresentViewWidth, 240, KLivePresentViewWidth, KLivePresentViewHight);
                 op.presentView.originFrame = op.presentView.frame;
                 [self.queue2 addOperation:op];
             }

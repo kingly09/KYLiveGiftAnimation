@@ -34,5 +34,18 @@
 #import "MZShakeLabel.h"
 #import "MZAnimOperationManager.h"
 
+#import "UIColor+CustomColor.h"
+
+#define KLivePresentViewWidth 200.0
+#define KLivePresentViewHight 30.0
+#define KLivePresentViewWidthSpace 10.0
+
+#define KGiftImageViewWidth 50.0
+
+#define KLiveShakeLabelWidth 70.0 
+#define KLiveShakeLabelHight 27.0 
+
+#define KLiveShakeLabelMaxNum 999 //最大数为999
+
 #endif /* MZLiveGiftAnimationHeader_h */
 

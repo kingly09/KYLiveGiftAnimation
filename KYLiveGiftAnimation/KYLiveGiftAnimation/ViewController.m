@@ -46,11 +46,10 @@
   // Dispose of any resources that can be recreated.
 }
 
-// 模拟收到礼物消息的回调
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+- (IBAction)sendGift01:(id)sender {
 
     // 礼物模型
-    long  x = arc4random() % 9;    
+    long  x = arc4random() % 9+1;    
     MZGiftModel *giftModel = [[MZGiftModel alloc] init];
     giftModel.headImage = [UIImage imageNamed:@"luffy"];
     giftModel.userId = x;
@@ -66,6 +65,61 @@
     [manager animWithGiftModel:giftModel finishedBlock:^(BOOL result) {
         
     }];
+
+
+
+}
+
+- (IBAction)sendGift02:(id)sender {
+
+    // 礼物模型
+    long  x = arc4random() % 9 + 100;    
+    MZGiftModel *giftModel = [[MZGiftModel alloc] init];
+    giftModel.headImage = [UIImage imageNamed:@"mogu"];
+    giftModel.userId = x;
+    giftModel.userName = [NSString stringWithFormat:@"%ld",x];
+    giftModel.giftImage = [UIImage imageNamed:@"ic_bear_small_14th"];
+    giftModel.giftName = @"2个【小熊】";
+    giftModel.giftCount = 20;
+    
+    
+    MZAnimOperationManager *manager = [MZAnimOperationManager sharedManager];
+    manager.parentView = self.view;
+    // model 传入礼物模型
+    [manager animWithGiftModel:giftModel finishedBlock:^(BOOL result) {
+        
+    }];
+
+
+}
+
+- (IBAction)senderGift03:(id)sender {
+
+    // 礼物模型
+    long  x = arc4random() % 9+10;    
+    MZGiftModel *giftModel = [[MZGiftModel alloc] init];
+    giftModel.headImage = [UIImage imageNamed:@"luffy"];
+    giftModel.userId = x;
+    giftModel.userName = [NSString stringWithFormat:@"%ld",x];
+    giftModel.giftImage = [UIImage imageNamed:@"ic_soap_small_14th"];
+    giftModel.giftName = @"甜蜜棒棒糖";
+    giftModel.giftCount = 9999;
+    
+    
+    MZAnimOperationManager *manager = [MZAnimOperationManager sharedManager];
+    manager.parentView = self.view;
+    // model 传入礼物模型
+    [manager animWithGiftModel:giftModel finishedBlock:^(BOOL result) {
+        
+    }];
+
+  
+}
+
+
+// 模拟收到礼物消息的回调
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+
 }
 
 
