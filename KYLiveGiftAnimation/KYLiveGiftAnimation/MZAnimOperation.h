@@ -29,6 +29,8 @@
 #import "MZPresentView.h"
 #import "MZGiftModel.h"
 
+#import "MZRightAnimView.h" 
+
 typedef NS_ENUM(NSInteger, GIFT_INDEX) {
     GIFT_INDEX_queue1          = 1,     //普通队列1
     GIFT_INDEX_queue2          = 0,     //普通队列2
@@ -42,10 +44,14 @@ typedef NS_ENUM(NSInteger, GIFT_INDEX) {
 
 @property (nonatomic,strong) MZPresentView *presentView;
 @property (nonatomic,strong) UIView *listView;
+
+@property (nonatomic,strong) MZRightAnimView *rightAnimView;
+@property (nonatomic,strong) UIView *rightAnimlistView;
+
+
 @property (nonatomic,strong) MZGiftModel *model;
 @property (nonatomic)  enum  GIFT_INDEX index;  //属于那个队列 
 
-@property (nonatomic,copy) NSString *userID; // 新增用户唯一标示reuseIdentifier，记录礼物信息
 
 // 回调参数增加了结束时礼物累计数 
 + (instancetype)animOperationWithGiftModel:(MZGiftModel *)model finishedBlock:(void(^)(BOOL result,NSInteger finishCount))finishedBlock;

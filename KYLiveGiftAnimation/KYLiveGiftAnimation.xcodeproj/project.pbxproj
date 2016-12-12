@@ -19,6 +19,7 @@
 		BCF29EB31DFE4CB200C9E731 /* MZAnimOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF29EB21DFE4CB200C9E731 /* MZAnimOperation.m */; };
 		BCF29EB61DFE4CD400C9E731 /* MZShakeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF29EB51DFE4CD400C9E731 /* MZShakeLabel.m */; };
 		BCF29EBA1DFE806C00C9E731 /* UIColor+CustomColor.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF29EB91DFE806C00C9E731 /* UIColor+CustomColor.m */; };
+		BCF29EBD1DFEB4F300C9E731 /* MZRightAnimView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF29EBC1DFEB4F300C9E731 /* MZRightAnimView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,8 @@
 		BCF29EB71DFE569D00C9E731 /* MZLiveGiftAnimationHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MZLiveGiftAnimationHeader.h; sourceTree = "<group>"; };
 		BCF29EB81DFE806C00C9E731 /* UIColor+CustomColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+CustomColor.h"; sourceTree = "<group>"; };
 		BCF29EB91DFE806C00C9E731 /* UIColor+CustomColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CustomColor.m"; sourceTree = "<group>"; };
+		BCF29EBB1DFEB4F300C9E731 /* MZRightAnimView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZRightAnimView.h; sourceTree = "<group>"; };
+		BCF29EBC1DFEB4F300C9E731 /* MZRightAnimView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZRightAnimView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +85,8 @@
 				BCF29EB71DFE569D00C9E731 /* MZLiveGiftAnimationHeader.h */,
 				BCF29EAE1DFE4C9200C9E731 /* MZPresentView.h */,
 				BCF29EAF1DFE4C9200C9E731 /* MZPresentView.m */,
+				BCF29EBB1DFEB4F300C9E731 /* MZRightAnimView.h */,
+				BCF29EBC1DFEB4F300C9E731 /* MZRightAnimView.m */,
 				BCF29EB11DFE4CB200C9E731 /* MZAnimOperation.h */,
 				BCF29EB21DFE4CB200C9E731 /* MZAnimOperation.m */,
 				BCF29EAB1DFE4BB800C9E731 /* MZAnimOperationManager.h */,
@@ -193,6 +198,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCF29EAD1DFE4BB800C9E731 /* MZAnimOperationManager.m in Sources */,
+				BCF29EBD1DFEB4F300C9E731 /* MZRightAnimView.m in Sources */,
 				BCF29E8F1DFE487600C9E731 /* ViewController.m in Sources */,
 				BCF29E8C1DFE487600C9E731 /* AppDelegate.m in Sources */,
 				BCF29EA11DFE499B00C9E731 /* MZGiftModel.m in Sources */,

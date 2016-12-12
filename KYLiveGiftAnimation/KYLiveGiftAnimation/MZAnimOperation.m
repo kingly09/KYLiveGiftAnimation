@@ -40,7 +40,20 @@
 
 + (instancetype)animOperationWithGiftModel:(MZGiftModel *)model finishedBlock:(void(^)(BOOL result,NSInteger finishCount))finishedBlock; {
     MZAnimOperation *op = [[MZAnimOperation alloc] init];
-    op.presentView = [[MZPresentView alloc] init];
+    
+  if (model.gifType == GIFT_TYPE_DEFAULT) { //普通动画
+      op.presentView = [[MZPresentView alloc] init];
+   }else if (model.gifType == GIFT_TYPE_GUARD) { //爱心守护者
+      op.rightAnimView = [[MZRightAnimView alloc] init];
+   }else if (model.gifType == GIFT_TYPE_MASK) {  //贵族面具
+  
+   }else if (model.gifType == GIFT_TYPE_OCEAN) { //海洋之星
+   
+   }else if (model.gifType == GIFT_TYPE_COOFFEE) { //咖啡印记
+      op.rightAnimView = [[MZRightAnimView alloc] init];
+   }else if (model.gifType == GIFT_TYPE_CASTLE) { //女皇的城堡
+    
+   }
     op.model = model;
     op.finishedBlock = finishedBlock;
     return op;
@@ -64,7 +77,29 @@
     }
     self.executing = YES;
     
-    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+  if (_model.gifType == GIFT_TYPE_DEFAULT) { //普通动画
+          [self addOperationWithPresentView];
+   }else if (_model.gifType == GIFT_TYPE_GUARD) { //爱心守护者
+      
+   }else if (_model.gifType == GIFT_TYPE_MASK) {  //贵族面具
+  
+   }else if (_model.gifType == GIFT_TYPE_OCEAN) { //海洋之星
+   
+   }else if (_model.gifType == GIFT_TYPE_COOFFEE) { //咖啡印记
+   
+       [self addOperationWithPightAnimView];
+      
+   }else if (_model.gifType == GIFT_TYPE_CASTLE) { //女皇的城堡
+    
+   }
+   
+    
+}
+
+// 普通动画添加到队列
+-(void) addOperationWithPresentView{
+
+ [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         _presentView.model = _model;
         _presentView.originFrame = _presentView.frame;
         [self.listView addSubview:_presentView];
@@ -73,9 +108,23 @@
             self.finished = finished;
             self.finishedBlock(finished,finishCount);
         }];
+  }];
 
-    }];
-    
+}
+
+// 右边动画添加到队列
+-(void) addOperationWithPightAnimView{
+
+     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        _rightAnimView.model = _model;
+        _rightAnimView.originFrame = _rightAnimView.frame;
+        [self.rightAnimlistView addSubview:_rightAnimView];
+        
+        [self.rightAnimView animateWithCompleteBlock:^(BOOL finished,NSInteger finishCount) {
+            self.finished = finished;
+            self.finishedBlock(finished,finishCount);
+        }];
+  }];
 }
 
 #pragma mark -  手动触发 KVO

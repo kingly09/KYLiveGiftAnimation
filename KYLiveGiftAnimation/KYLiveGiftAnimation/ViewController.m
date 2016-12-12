@@ -136,6 +136,24 @@
 //咖啡印记
 - (IBAction)sendCoffee:(id)sender {
 
+// 礼物模型
+  long  x = arc4random() % 9+10;    
+  MZGiftModel *giftModel = [[MZGiftModel alloc] init];
+  giftModel.headImage = [UIImage imageNamed:@"luffy"];
+  giftModel.userId = x;
+  giftModel.gifType = GIFT_TYPE_COOFFEE;
+  giftModel.userName = [NSString stringWithFormat:@"%ld",x];
+  giftModel.giftImage = [UIImage imageNamed:@"ic_soap_small_14th"];
+  giftModel.giftName = @"咖啡印记";
+  giftModel.giftCount = 9999;
+  
+  if (manager) {
+    manager.parentView = self.view;
+    // model 传入礼物模型
+    [manager animWithGiftModel:giftModel finishedBlock:^(BOOL result) {
+      
+    }];
+  }
 
 }
 //爱心守护者

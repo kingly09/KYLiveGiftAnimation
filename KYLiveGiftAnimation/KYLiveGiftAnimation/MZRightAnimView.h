@@ -1,5 +1,5 @@
 //
-//  MZLiveGiftAnimationHeader.h
+//  MZRightAnimView.h
 //  KYLiveGiftAnimation
 //
 //  Created by kingly on 2016/12/12.
@@ -25,36 +25,35 @@
 // THE SOFTWARE. All rights reserved.
 //
 
-#ifndef MZLiveGiftAnimationHeader_h
-#define MZLiveGiftAnimationHeader_h
+#import <UIKit/UIKit.h>
 
-#import "UIColor+CustomColor.h"
-#define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
-
-#import "MZPresentView.h"
-#import "MZGiftModel.h"
-#import "MZAnimOperation.h"
 #import "MZShakeLabel.h"
-#import "MZAnimOperationManager.h"
-
-#import "MZRightAnimView.h"
+#import "MZGiftModel.h"
 
 
-#define KLivePresentViewWidth 200.0
-#define KLivePresentViewHight 30.0
-#define KLivePresentViewWidthSpace 10.0
+typedef void(^completeBlock)(BOOL finished,NSInteger finishCount);
 
-#define kLiveQueue2FooterSpace 275.0
-#define kLiveQueue2OriginY (SCREEN_HEIGHT - kLiveQueue2FooterSpace - KGiftImageViewWidth)
-#define kLiveQueue1OriginY (SCREEN_HEIGHT - kLiveQueue2FooterSpace - KGiftImageViewWidth*2 - KLivePresentViewWidthSpace)
+@interface MZRightAnimView : UIView
+
+@property (nonatomic,strong) MZGiftModel *model;
+
+@property (nonatomic,strong) UIImageView *headImageView; // 头像
+@property (nonatomic,strong) UIImageView *giftImageView; // 礼物
+@property (nonatomic,strong) UILabel *nameLabel; // 送礼物者
+@property (nonatomic,strong) UILabel *giftLabel; // 礼物名称
+@property (nonatomic,assign) NSInteger giftCount; // 礼物个数
+
+@property (nonatomic,strong) MZShakeLabel *skLabel;
+@property (nonatomic,assign) NSInteger animCount; // 动画执行到了第几次
+@property (nonatomic,assign) CGRect originFrame; // 记录原始坐标
+
+@property (nonatomic,assign,getter=isFinished) BOOL finished;
+
+/// 动画完成后的回调
+- (void)animateWithCompleteBlock:(completeBlock)completed;
+
+- (void)shakeNumberLabel;
+- (void)hideRightAnimView;
 
 
-#define KGiftImageViewWidth 50.0
-
-#define KLiveShakeLabelWidth 70.0 
-#define KLiveShakeLabelHight 27.0 
-
-#define KLiveShakeLabelMaxNum 999 //最大数为999
-
-#endif /* MZLiveGiftAnimationHeader_h */
-
+@end
