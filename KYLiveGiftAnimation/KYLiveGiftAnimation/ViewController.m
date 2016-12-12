@@ -133,7 +133,31 @@
   }
   
 }
+//咖啡印记
+- (IBAction)sendCoffee:(id)sender {
 
+
+}
+//爱心守护者
+- (IBAction)sendLover:(id)sender {
+
+
+}
+//贵族面具
+- (IBAction)sendMask:(id)sender {
+
+
+}
+//海洋之星
+- (IBAction)sendOcean:(id)sender {
+
+
+}
+// 女皇的城堡
+- (IBAction)sendCastle:(id)sender {
+
+
+}
 
 // 模拟收到礼物消息的回调
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
