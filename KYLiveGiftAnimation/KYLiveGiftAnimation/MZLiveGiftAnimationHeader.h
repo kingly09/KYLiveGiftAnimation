@@ -46,8 +46,8 @@
 #define KLivePresentViewWidthSpace 10.0
 
 #define kLiveQueue2FooterSpace 275.0
-#define kLiveQueue2OriginY (SCREEN_HEIGHT - kLiveQueue2FooterSpace - KGiftImageViewWidth)
-#define kLiveQueue1OriginY (SCREEN_HEIGHT - kLiveQueue2FooterSpace - KGiftImageViewWidth*2 - KLivePresentViewWidthSpace)
+#define kLiveQueue2OriginY (SCREEN_HEIGHT - kLiveQueue2FooterSpace - KLivePresentViewHight)
+#define kLiveQueue1OriginY (SCREEN_HEIGHT - kLiveQueue2FooterSpace - KLivePresentViewHight*2 - KLivePresentViewWidthSpace*2)
 
 
 #define KGiftImageViewWidth 50.0
