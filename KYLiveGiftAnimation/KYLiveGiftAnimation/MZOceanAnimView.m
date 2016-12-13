@@ -45,6 +45,14 @@
 #define KRightDownAnimViewHight 257
 #define KRightDownAnimViewHightFooterSpace  27.5 
 
+#define KLeftBackAnimViewWidth 193
+#define KLeftBackAnimViewHight 188
+#define KLeftBackAnimViewWidthSpace 37.0
+#define KLeftBackAnimViewHightFooterSpace  188.5 
+
+
+
+
 @interface MZOceanAnimView ()
 @property (nonatomic,strong) UIImageView *bgImageView;
 @property (nonatomic,strong) NSTimer *timer;
@@ -62,11 +70,9 @@
 @property (nonatomic,strong) UIImageView *bigRightStarAnimView;    //中间大星星的左边星星
 
 @property (nonatomic,strong) UIImageView *leftDownAnimView;   //左下角动画
-
 @property (nonatomic,strong) UIImageView *rightDownAnimView;  //右下角动画
-@property (nonatomic,strong) UIImageView *middleAnimView;     //中间动画
-
-
+@property (nonatomic,strong) UIImageView *leftBackAnimView;   //左后动画
+@property (nonatomic,strong) UIImageView *rightBackAnimView;  //右后动画
 @property (nonatomic,strong) UIImageView *shipAnimView;       //海盗船动画
 @property (nonatomic,strong) UIImageView *userInfoAnimView;   //用户信息动画
 
@@ -90,6 +96,10 @@
     
     _leftDownAnimView  = [[UIImageView alloc] init];
     _rightDownAnimView = [[UIImageView alloc] init];
+    
+    _leftBackAnimView =  [[UIImageView alloc] init];
+    _rightBackAnimView =  [[UIImageView alloc] init];
+    _shipAnimView   =  [[UIImageView alloc] init];
 
     _nameLabel = [[UILabel alloc] init];
     _giftLabel = [[UILabel alloc] init];
@@ -112,7 +122,9 @@
     [self addSubview:_leftImageView];
     [self addSubview:_rightImageView];
     
-    
+    [self addSubview:_leftBackAnimView];
+    [self addSubview:_rightBackAnimView];
+    [self addSubview:_shipAnimView];
     [self addSubview:_leftDownAnimView];
     [self addSubview:_rightDownAnimView];
     
@@ -125,6 +137,9 @@
   if (_model != model) {
     _model = nil;
     _model = model;
+    
+    
+    //
      
      //左海浪
     _leftImageView.image   = [UIImage imageNamed:@"ic_wave_L_14th"];
