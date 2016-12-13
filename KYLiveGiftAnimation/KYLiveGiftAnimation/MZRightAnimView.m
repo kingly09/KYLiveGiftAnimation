@@ -35,14 +35,12 @@
 @property (nonatomic,copy) void(^completeBlock)(BOOL finished,NSInteger finishCount); // 新增了回调参数 finishCount， 用来记录动画结束时累加数量，将来在3秒内，还能继续累加
 
 @property (nonatomic,strong) UIImageView *loveAnimateView;
+@property (nonatomic,strong) UIImageView *hotGasAnimateView;  //热气
+@property (nonatomic,strong) UIImageView *coffeeCupImageView; //杯子
+
 @end
 
 @implementation MZRightAnimView
-{
-
- __unsafe_unretained UIImageView *_animateView;
-
-}
 
 - (instancetype)init {
     if (self = [super init]) {
@@ -76,14 +74,20 @@
     //爱心动画
     _loveAnimateView = [[UIImageView alloc] init];
     
+    //热气动画
+    _hotGasAnimateView  = [[UIImageView alloc] init];
+    _coffeeCupImageView = [[UIImageView alloc] init];
+    
     [self addSubview:_bgImageView];
     [self addSubview:_nameLabel];
     [self addSubview:_giftLabel];
     [self addSubview:_skLabel];
     [self addSubview:_loveAnimateView];
-
     
-
+    
+    [self addSubview:_coffeeCupImageView];
+    [_coffeeCupImageView addSubview:_hotGasAnimateView];
+    
 }
 
 #pragma mark 布局 UI
@@ -102,6 +106,8 @@
     _loveAnimateView.frame = CGRectMake(0,-KLiveRightAnimViewLoveHight+KLiveRightAnimViewLabelVarSpace*2, KLiveRightAnimViewLoveWidth,KLiveRightAnimViewLoveHight);
     _skLabel.frame = CGRectMake(self.frame.size.width - KLiveShakeLabelWidth,-KLiveRightAnimViewShakeNumberLabelVarSpace-KLiveShakeLabelHight, KLiveShakeLabelWidth, KLiveShakeLabelHight);
     
+    _coffeeCupImageView.frame = CGRectMake(0,-KLiveRightAnimViewLoveHight+KLiveRightAnimViewLabelVarSpace*2,KLiveRightAnimViewLoveWidth,KLiveRightAnimViewLoveHight);
+    _hotGasAnimateView.frame  = CGRectMake(KLiveCoffeeCupImageViewWidthSpace,KLiveCoffeeCupImageViewHightSpace,KLiveCoffeeCupImageViewWidth,KLiveCoffeeCupImageViewHight);
 }
 
 #pragma mark - 对外接口
@@ -126,7 +132,13 @@
     _giftLabel.attributedText = giftattstr;
     _giftCount = model.giftCount;
     
+    //咖啡动画
+    if (_model.gifType == GIFT_TYPE_COOFFEE) {
+        
+        _coffeeCupImageView.image = [UIImage imageNamed:@"ic_cofeemov_14th"];
+        _hotGasAnimateView.image  = [UIImage imageNamed:@"ic_fogmov_14th"];
     }
+  }
 }
 
 
@@ -152,7 +164,6 @@
     [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
         [self startLoveAnimating];
     } completion:^(BOOL finished) {
-    
       dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
           [self shakeNumberLabel];
       });
@@ -163,7 +174,8 @@
 -(void)showOffeeAnim{
 
     [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-          [self startLoveAnimating];
+          [self startOffeeAnimating];
+          [self hotGasAnimation];
     } completion:^(BOOL finished) {
       dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
           [self shakeNumberLabel];
@@ -242,6 +254,47 @@
   dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
     [_loveAnimateView stopAnimating];
   });
+  
+}
+
+// 开始offee动画
+- (void)startOffeeAnimating {
+
+  CAKeyframeAnimation *upDownAnimation;
+   upDownAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position.y"];
+   upDownAnimation.values = @[@(self.coffeeCupImageView.layer.position.y), @(self.coffeeCupImageView.layer.position.y - KLiveRightAnimViewLabelVarSpace*2),@(self.coffeeCupImageView.layer.position.y)];
+   upDownAnimation.duration = 0.5;
+   upDownAnimation.fillMode = kCAFillModeBoth;
+   upDownAnimation.calculationMode = kCAAnimationCubic;
+   upDownAnimation.repeatCount = 1;
+  [self.coffeeCupImageView.layer addAnimation:upDownAnimation forKey:@"upDownAnimation"];
+  
+}
+
+// 热气动画
+-(void)hotGasAnimation{
+
+  [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        _hotGasAnimateView.center  = CGPointMake(_hotGasAnimateView.center.x-10,_hotGasAnimateView.center.y-10);
+        _hotGasAnimateView.alpha = 0;
+  } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+            _hotGasAnimateView.center  = CGPointMake(_hotGasAnimateView.center.x-10,_hotGasAnimateView.center.y-10);
+            _hotGasAnimateView.alpha = 1;
+        } completion:^(BOOL finished) {
+             [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+              _hotGasAnimateView.center  = CGPointMake(_hotGasAnimateView.center.x-10,_hotGasAnimateView.center.y-10);
+              _hotGasAnimateView.alpha = 0;
+
+            } completion:^(BOOL finished) {
+                
+                 [self hotGasAnimation];
+            }];
+        }];
+          
+  }];
+  
+  
 }
 
 // 重置

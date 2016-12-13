@@ -73,6 +73,10 @@
 #define KLiveRightAnimViewLoveWidth 145.0
 #define KLiveRightAnimViewLoveHight 110.0
 
+#define KLiveCoffeeCupImageViewWidth 110.0
+#define KLiveCoffeeCupImageViewHight 62.0
+#define KLiveCoffeeCupImageViewWidthSpace 26.0
+#define KLiveCoffeeCupImageViewHightSpace 16.0
 
 #endif /* MZLiveGiftAnimationHeader_h */
 
