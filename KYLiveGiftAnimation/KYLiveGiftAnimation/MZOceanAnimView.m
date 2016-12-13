@@ -61,7 +61,8 @@
 #define KShipAnimViewWidthSpace 60
 #define KShipAnimViewHightFooterSpace  130
 
-
+#define KblueboomAnimViewHight 350
+#define KblueboomAnimViewHightFooterSpace  152
 
 @interface MZOceanAnimView ()
 @property (nonatomic,strong) UIImageView *bgImageView;
@@ -84,6 +85,9 @@
 @property (nonatomic,strong) UIImageView *leftBackAnimView;   //左后动画
 @property (nonatomic,strong) UIImageView *rightBackAnimView;  //右后动画
 @property (nonatomic,strong) UIImageView *shipAnimView;       //海盗船动画
+
+@property (nonatomic,strong) UIImageView *blueboomAnimView;   //烟雾动画
+
 @property (nonatomic,strong) UIImageView *userInfoAnimView;   //用户信息动画
 
 
@@ -107,9 +111,10 @@
     _leftDownAnimView  = [[UIImageView alloc] init];
     _rightDownAnimView = [[UIImageView alloc] init];
     
-    _leftBackAnimView =  [[UIImageView alloc] init];
+    _leftBackAnimView  =  [[UIImageView alloc] init];
     _rightBackAnimView =  [[UIImageView alloc] init];
-    _shipAnimView   =  [[UIImageView alloc] init];
+    _shipAnimView      =  [[UIImageView alloc] init];
+    _blueboomAnimView  =  [[UIImageView alloc] init];
 
     _nameLabel = [[UILabel alloc] init];
     _giftLabel = [[UILabel alloc] init];
@@ -138,6 +143,8 @@
 
     [self addSubview:_rightDownAnimView];
     [self addSubview:_leftDownAnimView];
+    [self addSubview:_blueboomAnimView];
+    
     
 
 }
@@ -160,6 +167,9 @@
     //海盗船
     _shipAnimView.image = [UIImage imageNamed:@"ic_boat_14th"];
     _shipAnimView.frame = CGRectMake(KShipAnimViewWidthSpace,SCREEN_HEIGHT, KShipAnimViewWidth, KShipAnimViewHight);
+    
+    //烟雾
+    _blueboomAnimView.frame = CGRectMake(0,SCREEN_HEIGHT - KblueboomAnimViewHight - KblueboomAnimViewHightFooterSpace,SCREEN_WIDTH,KblueboomAnimViewHight);
     
      
     //左海浪
@@ -190,8 +200,9 @@
 }
 
 - (void)animateWithCompleteBlock:(completeBlock)completed{
-
-
+  //烟雾动画
+  [self startBlueboomAnimView];
+  
   [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
    
       _leftImageView.frame   = CGRectMake(0,_leftImageView.frame.origin.y, KLeftImageViewWidth, KLeftImageViewHight);
@@ -204,7 +215,7 @@
       _leftDownAnimView.frame  = CGRectMake(0,SCREEN_HEIGHT-KLeftDownAnimViewHight-KLeftDownAnimViewHightFooterSpace, KLeftDownAnimViewWidth, KLeftDownAnimViewHight);
       _rightDownAnimView.frame = CGRectMake(_rightDownAnimView.frame.origin.x,SCREEN_HEIGHT - KRightDownAnimViewHight - KRightDownAnimViewHightFooterSpace, KRightDownAnimViewWidth, KRightDownAnimViewHight);
     
-  } completion:^(BOOL finished) {
+   } completion:^(BOOL finished) {
   
       [UIView upDownAnimation:self.leftBackAnimView  withAnimUpToDownHight:KAnimUpToDownHight];
       [UIView downUpAnimation:self.rightBackAnimView withAnimUpToDownHight:KAnimUpToDownHight];
@@ -214,6 +225,7 @@
         
   }];
 
+  
 
   [UIView animateWithDuration:0.5 animations:^{
    
@@ -225,6 +237,40 @@
   self.completeBlock = completed;
 
 }
+
+
+/**
+ 烟雾动画
+ */
+-(void)startBlueboomAnimView{
+  NSArray *magesArray = [NSArray arrayWithObjects:
+                         [UIImage imageNamed:@"ic_Blueboom_1"],
+                         [UIImage imageNamed:@"ic_Blueboom_2"],
+                         [UIImage imageNamed:@"ic_Blueboom_3"],
+                         [UIImage imageNamed:@"ic_Blueboom_4"],
+                         [UIImage imageNamed:@"ic_Blueboom_5"],
+                         [UIImage imageNamed:@"ic_Blueboom_6"],
+                         [UIImage imageNamed:@"ic_Blueboom_7"],
+                         [UIImage imageNamed:@"ic_Blueboom_8"],
+                         [UIImage imageNamed:@"ic_Blueboom_9"],
+                         [UIImage imageNamed:@"ic_Blueboom_10"],
+                         [UIImage imageNamed:@"ic_Blueboom_11"],
+                         [UIImage imageNamed:@"ic_Blueboom_12"],nil];
+  _blueboomAnimView.animationImages = magesArray;//将序列帧数组赋给UIImageView的animationImages属性
+  _blueboomAnimView.animationDuration = 1.2;//设置动画时间
+  _blueboomAnimView.animationRepeatCount = 1;//设置动画次数 0 表示无限
+  [_blueboomAnimView startAnimating];//开始播放动画    
+  
+  //延时结束刷新
+  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    [_blueboomAnimView stopAnimating];
+    _blueboomAnimView.alpha = 0;
+    [_blueboomAnimView removeFromSuperview];
+  });
+
+
+}
+
 - (void)shakeNumberLabel{
   
    _animCount ++; 

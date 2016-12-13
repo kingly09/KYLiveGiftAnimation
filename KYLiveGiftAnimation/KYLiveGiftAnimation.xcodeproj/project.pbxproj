@@ -11,6 +11,7 @@
 		BC070C291DFF87BE001FE82C /* MZMarkAnimView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC070C281DFF87BE001FE82C /* MZMarkAnimView.m */; };
 		BC070C2C1DFF8807001FE82C /* MZCastleAnimView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC070C2B1DFF8807001FE82C /* MZCastleAnimView.m */; };
 		BC070C2F1E0028F2001FE82C /* UIView+animate.m in Sources */ = {isa = PBXBuildFile; fileRef = BC070C2E1E0028F2001FE82C /* UIView+animate.m */; };
+		BC070C321E0047B6001FE82C /* MZAnimationImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = BC070C311E0047B6001FE82C /* MZAnimationImageCache.m */; };
 		BCF29E891DFE487600C9E731 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF29E881DFE487600C9E731 /* main.m */; };
 		BCF29E8C1DFE487600C9E731 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF29E8B1DFE487600C9E731 /* AppDelegate.m */; };
 		BCF29E8F1DFE487600C9E731 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF29E8E1DFE487600C9E731 /* ViewController.m */; };
@@ -35,6 +36,8 @@
 		BC070C2B1DFF8807001FE82C /* MZCastleAnimView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZCastleAnimView.m; sourceTree = "<group>"; };
 		BC070C2D1E0028F2001FE82C /* UIView+animate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+animate.h"; sourceTree = "<group>"; };
 		BC070C2E1E0028F2001FE82C /* UIView+animate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+animate.m"; sourceTree = "<group>"; };
+		BC070C301E0047B6001FE82C /* MZAnimationImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZAnimationImageCache.h; sourceTree = "<group>"; };
+		BC070C311E0047B6001FE82C /* MZAnimationImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZAnimationImageCache.m; sourceTree = "<group>"; };
 		BCF29E841DFE487600C9E731 /* KYLiveGiftAnimation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KYLiveGiftAnimation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCF29E881DFE487600C9E731 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		BCF29E8A1DFE487600C9E731 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -94,6 +97,8 @@
 		BCF29E861DFE487600C9E731 /* KYLiveGiftAnimation */ = {
 			isa = PBXGroup;
 			children = (
+				BC070C301E0047B6001FE82C /* MZAnimationImageCache.h */,
+				BC070C311E0047B6001FE82C /* MZAnimationImageCache.m */,
 				BCF29EB71DFE569D00C9E731 /* MZLiveGiftAnimationHeader.h */,
 				BC070C2A1DFF8807001FE82C /* MZCastleAnimView.h */,
 				BC070C2B1DFF8807001FE82C /* MZCastleAnimView.m */,
@@ -229,6 +234,7 @@
 				BCF29EB01DFE4C9200C9E731 /* MZPresentView.m in Sources */,
 				BC070C2C1DFF8807001FE82C /* MZCastleAnimView.m in Sources */,
 				BC070C291DFF87BE001FE82C /* MZMarkAnimView.m in Sources */,
+				BC070C321E0047B6001FE82C /* MZAnimationImageCache.m in Sources */,
 				BCF29EBA1DFE806C00C9E731 /* UIColor+CustomColor.m in Sources */,
 				BCF29EB31DFE4CB200C9E731 /* MZAnimOperation.m in Sources */,
 			);

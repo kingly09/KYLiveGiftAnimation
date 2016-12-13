@@ -38,6 +38,7 @@
 #import "MZShakeLabel.h"
 #import "MZAnimOperationManager.h"
 #import "UIView+animate.h"
+#import "MZAnimationImageCache.h"
 
 #import "MZRightAnimView.h"
 #import "MZOceanAnimView.h"
