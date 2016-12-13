@@ -135,8 +135,8 @@
     //咖啡动画
     if (_model.gifType == GIFT_TYPE_COOFFEE) {
         
-        _coffeeCupImageView.image = [UIImage imageNamed:@"ic_cofeemov_14th"];
-        _hotGasAnimateView.image  = [UIImage imageNamed:@"ic_fogmov_14th"];
+//        _coffeeCupImageView.image = [UIImage imageNamed:@"ic_cofeemov_14th"];
+//        _hotGasAnimateView.image  = [UIImage imageNamed:@"ic_fogmov_14th"];
     }
   }
 }
@@ -175,7 +175,6 @@
 
     [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
           [self startOffeeAnimating];
-          [self hotGasAnimation];
     } completion:^(BOOL finished) {
       dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
           [self shakeNumberLabel];
@@ -268,6 +267,30 @@
    upDownAnimation.calculationMode = kCAAnimationCubic;
    upDownAnimation.repeatCount = 1;
   [self.coffeeCupImageView.layer addAnimation:upDownAnimation forKey:@"upDownAnimation"];
+  
+  //热气动画
+  NSArray *magesArray = [NSArray arrayWithObjects:
+                         [UIImage imageNamed:@"ic_fogmov_14th_1"],
+                         [UIImage imageNamed:@"ic_fogmov_14th_2"],
+                         [UIImage imageNamed:@"ic_fogmov_14th_3"],
+                         [UIImage imageNamed:@"ic_fogmov_14th_4"],
+                         [UIImage imageNamed:@"ic_fogmov_14th_5"],
+                         [UIImage imageNamed:@"ic_fogmov_14th_6"],
+                         [UIImage imageNamed:@"ic_fogmov_14th_7"],
+                         [UIImage imageNamed:@"ic_fogmov_14th_8"],
+                         [UIImage imageNamed:@"ic_fogmov_14th_9"],
+                         [UIImage imageNamed:@"ic_fogmov_14th_10"],
+                         [UIImage imageNamed:@"ic_fogmov_14th_11"],
+                         [UIImage imageNamed:@"ic_fogmov_14th_12"],nil];
+  _coffeeCupImageView.animationImages = magesArray;//将序列帧数组赋给UIImageView的animationImages属性
+  _coffeeCupImageView.animationDuration = 1.6;//设置动画时间
+  _coffeeCupImageView.animationRepeatCount = 0;//设置动画次数 0 表示无限
+  [_coffeeCupImageView startAnimating];//开始播放动画    
+  
+  //延时结束刷新
+  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    [_coffeeCupImageView stopAnimating];
+  });
   
 }
 
