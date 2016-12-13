@@ -64,6 +64,10 @@
 #define KblueboomAnimViewHight 350
 #define KblueboomAnimViewHightFooterSpace  152
 
+#define KbigStarImageViewWidth 278
+#define KbigStarImageViewHight 282
+#define KbigStarImageViewHightTopSpace 9
+
 @interface MZOceanAnimView ()
 @property (nonatomic,strong) UIImageView *bgImageView;
 @property (nonatomic,strong) NSTimer *timer;
@@ -115,6 +119,10 @@
     _rightBackAnimView =  [[UIImageView alloc] init];
     _shipAnimView      =  [[UIImageView alloc] init];
     _blueboomAnimView  =  [[UIImageView alloc] init];
+    
+    
+    _bigStarImageView  = [[UIImageView alloc] init];
+
 
     _nameLabel = [[UILabel alloc] init];
     _giftLabel = [[UILabel alloc] init];
@@ -134,6 +142,9 @@
     _animCount = 0;
     
     [self addSubview:_skLabel];
+    
+    [self addSubview:_bigStarImageView];
+
     [self addSubview:_leftImageView];
     [self addSubview:_rightImageView];
     
@@ -155,6 +166,10 @@
   if (_model != model) {
     _model = nil;
     _model = model;
+    
+    //发光的星星
+    _bigStarImageView.frame = CGRectMake((SCREEN_WIDTH-KbigStarImageViewWidth)/2 ,-KbigStarImageViewHight, KbigStarImageViewWidth, KbigStarImageViewHight);
+         
     
     //左后海浪
     _leftBackAnimView.image = [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_wave_Back_L_14th"];
@@ -200,6 +215,9 @@
 }
 
 - (void)animateWithCompleteBlock:(completeBlock)completed{
+
+  //发光的星星
+  [self shiningStarAinmView];
   //烟雾动画
   [self startBlueboomAnimView];
   
@@ -238,6 +256,23 @@
 
 }
 
+//发光的星星动画效果
+-(void)shiningStarAinmView{
+
+  [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+     _bigStarImageView.frame = CGRectMake(_bigStarImageView.frame.origin.x ,KbigStarImageViewHightTopSpace, KbigStarImageViewWidth, KbigStarImageViewHight);
+    
+    NSArray *magesArray = [NSArray arrayWithObjects:
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_shiningstar_1_14th"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_shiningstar_2_14th"],nil];
+  _bigStarImageView.animationImages = magesArray;//将序列帧数组赋给UIImageView的animationImages属性
+  _bigStarImageView.animationDuration = 0.2;//设置动画时间
+  _bigStarImageView.animationRepeatCount = 0;//设置动画次数 0 表示无限
+  [_bigStarImageView startAnimating];//开始播放动画    
+  
+  } completion:^(BOOL finished) {}];
+
+}
 
 /**
  烟雾动画
