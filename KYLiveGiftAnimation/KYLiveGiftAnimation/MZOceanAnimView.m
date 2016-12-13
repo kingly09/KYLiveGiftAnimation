@@ -28,10 +28,49 @@
 #import "MZOceanAnimView.h"
 #import "MZLiveGiftAnimationHeader.h"
 
+#define KLeftImageViewHerSpace 265.5
+#define KLeftImageViewWidth  53.5
+#define KLeftImageViewHight  127
+
+#define KRightImageViewHerSpace 298.5
+#define KRightImageViewWidth 58.5
+#define KRightImageViewHight 124
+#define KRightImageViewWidthOriginX  (SCREEN_WIDTH - KRightImageViewWidth)
+
+#define KLeftDownAnimViewWidth 181.5
+#define KLeftDownAnimViewHight 179
+#define KLeftDownAnimViewHightFooterSpace  (27.5 - KAnimUpToDownHight) 
+
+#define KRightDownAnimViewWidth 276.5
+#define KRightDownAnimViewHight 257
+#define KRightDownAnimViewHightFooterSpace  27.5 
+
 @interface MZOceanAnimView ()
 @property (nonatomic,strong) UIImageView *bgImageView;
 @property (nonatomic,strong) NSTimer *timer;
+
 @property (nonatomic,copy) void(^completeBlock)(BOOL finished,NSInteger finishCount); // 新增了回调参数 finishCount， 用来记录动画结束时累加数量，将来在3秒内，还能继续累加
+
+@property (nonatomic,strong) UIImageView *leftImageView;      //左边视图
+@property (nonatomic,strong) UIImageView *leftStarAnimView;   //左边星星
+
+@property (nonatomic,strong) UIImageView *rightImageView;     //右边视图
+@property (nonatomic,strong) UIImageView *rightStarAnimView;  //右边星星
+
+@property (nonatomic,strong) UIImageView *bigStarImageView;        //中间大星星
+@property (nonatomic,strong) UIImageView *smallStarAnimView;       //中间大星星的左边星星
+@property (nonatomic,strong) UIImageView *bigRightStarAnimView;    //中间大星星的左边星星
+
+@property (nonatomic,strong) UIImageView *leftDownAnimView;   //左下角动画
+
+@property (nonatomic,strong) UIImageView *rightDownAnimView;  //右下角动画
+@property (nonatomic,strong) UIImageView *middleAnimView;     //中间动画
+
+
+@property (nonatomic,strong) UIImageView *shipAnimView;       //海盗船动画
+@property (nonatomic,strong) UIImageView *userInfoAnimView;   //用户信息动画
+
+
 @end
 
 @implementation MZOceanAnimView
@@ -46,11 +85,12 @@
 
 -(void)setupCustomView{
 
-    _bgImageView = [[UIImageView alloc] init];
-    _bgImageView.backgroundColor = [UIColor blackColor];
-    _bgImageView.alpha = 0.3;
-    _headImageView = [[UIImageView alloc] init];
-    _giftImageView = [[UIImageView alloc] init];
+    _leftImageView = [[UIImageView alloc] init];
+    _rightImageView = [[UIImageView alloc] init];
+    
+    _leftDownAnimView  = [[UIImageView alloc] init];
+    _rightDownAnimView = [[UIImageView alloc] init];
+
     _nameLabel = [[UILabel alloc] init];
     _giftLabel = [[UILabel alloc] init];
     
@@ -68,66 +108,76 @@
     _skLabel.textAlignment = NSTextAlignmentLeft;
     _animCount = 0;
     
-    [self addSubview:_bgImageView];
-    [self addSubview:_headImageView];
-    [self addSubview:_giftImageView];
-    [self addSubview:_nameLabel];
-    [self addSubview:_giftLabel];
     [self addSubview:_skLabel];
+    [self addSubview:_leftImageView];
+    [self addSubview:_rightImageView];
+    
+    
+    [self addSubview:_leftDownAnimView];
+    [self addSubview:_rightDownAnimView];
+    
 
-}
-
-#pragma mark 布局 UI
-- (void)layoutSubviews {
-    
-    [super layoutSubviews];
-    _headImageView.frame = CGRectMake(KLivePresentViewWidthSpace, 0, self.frame.size.height, self.frame.size.height);
-    _headImageView.layer.cornerRadius = _headImageView.frame.size.height / 2;
-    _headImageView.layer.masksToBounds = YES;
-    
-    _giftImageView.frame = CGRectMake(self.frame.size.width - KGiftImageViewWidth + KLivePresentViewWidthSpace, self.frame.size.height - KGiftImageViewWidth, KGiftImageViewWidth, KGiftImageViewWidth);
-    
-    _nameLabel.frame = CGRectMake(_headImageView.frame.size.width + KLivePresentViewWidthSpace*2, 0, KLivePresentViewWidth - KGiftImageViewWidth - self.frame.size.height, self.frame.size.height/2);
-    _giftLabel.frame = CGRectMake(_nameLabel.frame.origin.x, CGRectGetMaxY(_headImageView.frame) - self.frame.size.height/2-2, _nameLabel.frame.size.width, self.frame.size.height/2);
-    
-    _bgImageView.frame = self.bounds;
-    _bgImageView.frame = CGRectMake(KLivePresentViewWidthSpace, 0, self.frame.size.width - KLivePresentViewWidthSpace, self.frame.size.height);
-    
-    _bgImageView.layer.cornerRadius = self.frame.size.height / 2;
-    _bgImageView.layer.masksToBounds = YES;
-    
-    _skLabel.frame = CGRectMake(CGRectGetMaxX(_giftImageView.frame),self.frame.size.height-KLiveShakeLabelHight, KLiveShakeLabelWidth, KLiveShakeLabelHight);
-    
 }
 
 #pragma mark - 对外接口
-
 - (void)setModel:(MZGiftModel *)model {
 
   if (_model != model) {
-        _model = nil;
-        _model = model;
-
-#warning  修改
-    _headImageView.image = model.headImage;
-    _giftImageView.image = model.giftImage;
+    _model = nil;
+    _model = model;
+     
+     //左海浪
+    _leftImageView.image   = [UIImage imageNamed:@"ic_wave_L_14th"];
+    _leftImageView.frame = CGRectMake(-KLeftImageViewWidth,SCREEN_HEIGHT-KLeftImageViewHight-KLeftImageViewHerSpace, KLeftImageViewWidth, KLeftImageViewHight);
+    
+    //右海浪
+    _rightImageView.image  = [UIImage imageNamed:@"ic_wave_R_14th"];
+    _rightImageView.frame = CGRectMake(SCREEN_WIDTH,SCREEN_HEIGHT-KRightImageViewHight-KRightImageViewHerSpace, KRightImageViewWidth, KRightImageViewHight);
+    
+    //海浪-前左（上下浮动）
+    _leftDownAnimView.frame = CGRectMake(0,SCREEN_HEIGHT-KLeftDownAnimViewHight-KLeftDownAnimViewHightFooterSpace, KLeftDownAnimViewWidth, KLeftDownAnimViewHight);
+    _leftDownAnimView.image = [UIImage imageNamed:@"ic_wave_Front_L_14th"];
+    
+    //海浪-前右（上下浮动）
+    _rightDownAnimView.frame = CGRectMake(SCREEN_WIDTH - KRightDownAnimViewWidth,SCREEN_HEIGHT - KRightDownAnimViewHight - KRightDownAnimViewHightFooterSpace, KRightDownAnimViewWidth, KRightDownAnimViewHight);
+    _rightDownAnimView.image = [UIImage imageNamed:@"ic_wave_Front_R_14th"];
+    
+  
+    _skLabel.frame = CGRectMake(0,self.frame.size.height-KLiveShakeLabelHight, KLiveShakeLabelWidth, KLiveShakeLabelHight);
+    
     _nameLabel.text = model.userName;
     _giftLabel.text = [NSString stringWithFormat:@"送出【%@】",model.giftName];
     _giftCount = model.giftCount;
     
-    }
+    
+  }
 }
-
 
 - (void)animateWithCompleteBlock:(completeBlock)completed{
 
-   [UIView animateWithDuration:0.3 animations:^{
-        self.frame = CGRectMake(0, self.frame.origin.y, self.frame.size.width, self.frame.size.height);
-    } completion:^(BOOL finished) {
-        [self shakeNumberLabel];
-    }];
-    self.completeBlock = completed;
 
+  [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+   
+      _leftImageView.frame  = CGRectMake(0,_leftImageView.frame.origin.y, KLeftImageViewWidth, KLeftImageViewHight);
+      _rightImageView.frame = CGRectMake(SCREEN_WIDTH-KRightImageViewWidth,_rightImageView.frame.origin.y, KRightImageViewWidth, KRightImageViewHight);
+    
+     [self downUpAnimation:self.leftDownAnimView];
+     [self upDownAnimation:self.rightDownAnimView];
+  
+  } completion:^(BOOL finished) {
+  
+  
+  }];
+
+
+  [UIView animateWithDuration:0.5 animations:^{
+   
+
+  } completion:^(BOOL finished) {
+        [self shakeNumberLabel];
+  }];
+  
+  self.completeBlock = completed;
 
 }
 - (void)shakeNumberLabel{
@@ -147,7 +197,7 @@
     [self performSelector:@selector(hideCurretView) withObject:nil afterDelay:2];
     
     self.skLabel.text = [NSString stringWithFormat:@"x %ld",_animCount];
-    [self.skLabel startAnimWithDuration:0.3];
+    [self.skLabel startAnimWithDuration:0.5];
 
 
 }
@@ -155,7 +205,7 @@
 - (void)hideCurretView{
     
      [UIView animateWithDuration:0.30 delay:2 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        self.frame = CGRectMake(0, self.frame.origin.y - 20, self.frame.size.width, self.frame.size.height);
+        self.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
         self.alpha = 0;
     } completion:^(BOOL finished) {
         if (self.completeBlock) {
@@ -167,6 +217,36 @@
     }];
 
 }
+
+#pragma mark - 私有动画效果
+
+// 上下浮动
+-(void)upDownAnimation:(UIView *)upDownAnimationView{
+
+  CAKeyframeAnimation *upDownAnimation;
+   upDownAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position.y"];
+   upDownAnimation.values = @[@(upDownAnimationView.layer.position.y), @(upDownAnimationView.layer.position.y + KAnimUpToDownHight),@(upDownAnimationView.layer.position.y)];
+   upDownAnimation.duration = 0.5;
+   upDownAnimation.fillMode = kCAFillModeBoth;
+   upDownAnimation.calculationMode = kCAAnimationCubic;
+   upDownAnimation.repeatCount = HUGE_VALF;
+  [upDownAnimationView.layer addAnimation:upDownAnimation forKey:@"upDownAnimation"];
+
+}
+// 下上浮动
+-(void)downUpAnimation:(UIView *)animationView{
+
+  CAKeyframeAnimation *downUpAnimation;
+   downUpAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position.y"];
+   downUpAnimation.values = @[@(animationView.layer.position.y), @(animationView.layer.position.y - KAnimUpToDownHight),@(animationView.layer.position.y)];
+   downUpAnimation.duration = 0.5;
+   downUpAnimation.fillMode = kCAFillModeBoth;
+   downUpAnimation.calculationMode = kCAAnimationCubic;
+   downUpAnimation.repeatCount = HUGE_VALF;
+  [animationView.layer addAnimation:downUpAnimation forKey:@"downUpAnimation"];
+
+}
+
 // 重置
 - (void)resetframe {
     self.frame = _originFrame;

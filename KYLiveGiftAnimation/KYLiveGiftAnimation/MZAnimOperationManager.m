@@ -510,7 +510,7 @@
         
         // 根据用户ID 控制显示的位置
         if (op.model.giftCount != 0) {
-            op.oceanAnimView.frame  = CGRectMake(SCREEN_WIDTH, KLiveRightAnimViewWidthOriginY, KLiveRightAnimViewWidth, KLiveRightAnimViewHight);
+            op.oceanAnimView.frame  = self.parentView.frame;
             op.oceanAnimView.originFrame = op.oceanAnimView.frame;
             [self.oceanQueue addOperation:op];
         }
@@ -547,7 +547,7 @@
         [self.operationCache setObject:op forKey:userReuseIdentifierID];
         
         if (op.model.giftCount != 0) {
-            op.oceanAnimView.frame  = CGRectMake(SCREEN_WIDTH, KLiveRightAnimViewWidthOriginY, KLiveRightAnimViewWidth, KLiveRightAnimViewHight);
+            op.oceanAnimView.frame  = self.parentView.frame;
             op.oceanAnimView.originFrame = op.oceanAnimView.frame;
             [self.oceanQueue addOperation:op];
         }

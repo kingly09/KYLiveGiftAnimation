@@ -59,6 +59,8 @@
 
 #define KLiveShakeLabelMaxNum 999 //最大数为999
 
+#define KAnimUpToDownHight  10  //所有动画上下往返运动
+
 #define KLiveRightAnimViewWidth  198.0
 #define KLiveRightAnimViewHight  56.0
 #define KLiveRightAnimViewFooterSpace 253.0
