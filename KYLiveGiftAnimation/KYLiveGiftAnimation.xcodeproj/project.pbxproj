@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BC070C261DFF86A1001FE82C /* MZOceanAnimView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC070C251DFF86A1001FE82C /* MZOceanAnimView.m */; };
+		BC070C291DFF87BE001FE82C /* MZMarkAnimView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC070C281DFF87BE001FE82C /* MZMarkAnimView.m */; };
+		BC070C2C1DFF8807001FE82C /* MZCastleAnimView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC070C2B1DFF8807001FE82C /* MZCastleAnimView.m */; };
 		BCF29E891DFE487600C9E731 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF29E881DFE487600C9E731 /* main.m */; };
 		BCF29E8C1DFE487600C9E731 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF29E8B1DFE487600C9E731 /* AppDelegate.m */; };
 		BCF29E8F1DFE487600C9E731 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF29E8E1DFE487600C9E731 /* ViewController.m */; };
@@ -23,6 +26,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BC070C241DFF86A1001FE82C /* MZOceanAnimView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZOceanAnimView.h; sourceTree = "<group>"; };
+		BC070C251DFF86A1001FE82C /* MZOceanAnimView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZOceanAnimView.m; sourceTree = "<group>"; };
+		BC070C271DFF87BE001FE82C /* MZMarkAnimView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZMarkAnimView.h; sourceTree = "<group>"; };
+		BC070C281DFF87BE001FE82C /* MZMarkAnimView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZMarkAnimView.m; sourceTree = "<group>"; };
+		BC070C2A1DFF8807001FE82C /* MZCastleAnimView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZCastleAnimView.h; sourceTree = "<group>"; };
+		BC070C2B1DFF8807001FE82C /* MZCastleAnimView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZCastleAnimView.m; sourceTree = "<group>"; };
 		BCF29E841DFE487600C9E731 /* KYLiveGiftAnimation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KYLiveGiftAnimation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCF29E881DFE487600C9E731 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		BCF29E8A1DFE487600C9E731 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -82,6 +91,12 @@
 		BCF29E861DFE487600C9E731 /* KYLiveGiftAnimation */ = {
 			isa = PBXGroup;
 			children = (
+				BC070C2A1DFF8807001FE82C /* MZCastleAnimView.h */,
+				BC070C2B1DFF8807001FE82C /* MZCastleAnimView.m */,
+				BC070C271DFF87BE001FE82C /* MZMarkAnimView.h */,
+				BC070C281DFF87BE001FE82C /* MZMarkAnimView.m */,
+				BC070C241DFF86A1001FE82C /* MZOceanAnimView.h */,
+				BC070C251DFF86A1001FE82C /* MZOceanAnimView.m */,
 				BCF29EB71DFE569D00C9E731 /* MZLiveGiftAnimationHeader.h */,
 				BCF29EAE1DFE4C9200C9E731 /* MZPresentView.h */,
 				BCF29EAF1DFE4C9200C9E731 /* MZPresentView.m */,
@@ -201,10 +216,13 @@
 				BCF29EBD1DFEB4F300C9E731 /* MZRightAnimView.m in Sources */,
 				BCF29E8F1DFE487600C9E731 /* ViewController.m in Sources */,
 				BCF29E8C1DFE487600C9E731 /* AppDelegate.m in Sources */,
+				BC070C261DFF86A1001FE82C /* MZOceanAnimView.m in Sources */,
 				BCF29EA11DFE499B00C9E731 /* MZGiftModel.m in Sources */,
 				BCF29EB61DFE4CD400C9E731 /* MZShakeLabel.m in Sources */,
 				BCF29E891DFE487600C9E731 /* main.m in Sources */,
 				BCF29EB01DFE4C9200C9E731 /* MZPresentView.m in Sources */,
+				BC070C2C1DFF8807001FE82C /* MZCastleAnimView.m in Sources */,
+				BC070C291DFF87BE001FE82C /* MZMarkAnimView.m in Sources */,
 				BCF29EBA1DFE806C00C9E731 /* UIColor+CustomColor.m in Sources */,
 				BCF29EB31DFE4CB200C9E731 /* MZAnimOperation.m in Sources */,
 			);
@@ -365,6 +383,7 @@
 				BCF29E9D1DFE487600C9E731 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

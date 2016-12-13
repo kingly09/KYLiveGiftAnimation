@@ -46,13 +46,13 @@
    }else if (model.gifType == GIFT_TYPE_GUARD) { //爱心守护者
       op.rightAnimView = [[MZRightAnimView alloc] init];
    }else if (model.gifType == GIFT_TYPE_MASK) {  //贵族面具
-  
+      op.markAnimView  = [[MZMarkAnimView alloc] init];
    }else if (model.gifType == GIFT_TYPE_OCEAN) { //海洋之星
-   
+      op.oceanAnimView = [[MZOceanAnimView alloc]init];
    }else if (model.gifType == GIFT_TYPE_COOFFEE) { //咖啡印记
       op.rightAnimView = [[MZRightAnimView alloc] init];
    }else if (model.gifType == GIFT_TYPE_CASTLE) { //女皇的城堡
-    
+      op.castleAnimView = [[MZCastleAnimView alloc] init];
    }
     op.model = model;
     op.finishedBlock = finishedBlock;
@@ -81,20 +81,15 @@
           [self addOperationWithPresentView];
    }else if (_model.gifType == GIFT_TYPE_GUARD) { //爱心守护者
           [self addOperationWithPightAnimView];
-          
    }else if (_model.gifType == GIFT_TYPE_MASK) {  //贵族面具
-  
-   }else if (_model.gifType == GIFT_TYPE_OCEAN) { //海洋之星
-   
+          [self addOperationWithMarkAnimView];
+   }else if (_model.gifType == GIFT_TYPE_OCEAN) {  //海洋之星
+          [self addOperationWithOceanAnimView];
    }else if (_model.gifType == GIFT_TYPE_COOFFEE) { //咖啡印记
-   
-       [self addOperationWithPightAnimView];
-      
-   }else if (_model.gifType == GIFT_TYPE_CASTLE) { //女皇的城堡
-    
+          [self addOperationWithPightAnimView];
+   }else if (_model.gifType == GIFT_TYPE_CASTLE) {  //女皇的城堡
+          [self addOperationWithCastleAnimView];
    }
-   
-    
 }
 
 // 普通动画添加到队列
@@ -126,6 +121,54 @@
             self.finishedBlock(finished,finishCount);
         }];
   }];
+}
+
+// 海洋之星动画添加到队列
+-(void)addOperationWithOceanAnimView{
+
+  [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        _oceanAnimView.model = _model;
+        _oceanAnimView.originFrame = _oceanAnimView.frame;
+        [self.oceanAnimlistView addSubview:_oceanAnimView];
+        
+        [self.oceanAnimView animateWithCompleteBlock:^(BOOL finished,NSInteger finishCount) {
+            self.finished = finished;
+            self.finishedBlock(finished,finishCount);
+        }];
+  }];
+
+}
+
+// 女皇的城堡动画添加到队列
+-(void)addOperationWithCastleAnimView{
+
+  [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        _castleAnimView.model = _model;
+        _castleAnimView.originFrame = _castleAnimView.frame;
+        [self.castleAnimlistView addSubview:_castleAnimView];
+        
+        [self.castleAnimView animateWithCompleteBlock:^(BOOL finished,NSInteger finishCount) {
+            self.finished = finished;
+            self.finishedBlock(finished,finishCount);
+        }];
+  }];
+
+}
+
+// 贵族面具动画添加到队列
+-(void)addOperationWithMarkAnimView{
+
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        _markAnimView.model = _model;
+        _markAnimView.originFrame = _markAnimView.frame;
+        [self.markAnimlistView addSubview:_markAnimView];
+        
+        [self.markAnimView animateWithCompleteBlock:^(BOOL finished,NSInteger finishCount) {
+            self.finished = finished;
+            self.finishedBlock(finished,finishCount);
+        }];
+  }];
+
 }
 
 #pragma mark -  手动触发 KVO

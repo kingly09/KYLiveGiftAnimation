@@ -182,15 +182,74 @@
 //贵族面具
 - (IBAction)sendMask:(id)sender {
 
+   // 礼物模型
+  long  x = arc4random() % 9+10;    
+  MZGiftModel *giftModel = [[MZGiftModel alloc] init];
+  giftModel.headImage = [UIImage imageNamed:@"luffy"];
+  giftModel.userId = x;
+  giftModel.gifType = GIFT_TYPE_MASK;
+  giftModel.userName = [NSString stringWithFormat:@"%ld",x];
+  giftModel.giftImage = [UIImage imageNamed:@"ic_soap_small_14th"];
+  giftModel.giftName = @"贵族面具";
+  giftModel.giftCount = 9999;
+  
+  if (manager) {
+    manager.parentView = self.view;
+    // model 传入礼物模型
+    [manager animWithGiftModel:giftModel finishedBlock:^(BOOL result) {
+      
+    }];
+  }
+
+
 
 }
 //海洋之星
 - (IBAction)sendOcean:(id)sender {
 
+   // 礼物模型
+  long  x = arc4random() % 9+10;    
+  MZGiftModel *giftModel = [[MZGiftModel alloc] init];
+  giftModel.headImage = [UIImage imageNamed:@"luffy"];
+  giftModel.userId = x;
+  giftModel.gifType = GIFT_TYPE_OCEAN;
+  giftModel.userName = [NSString stringWithFormat:@"%ld",x];
+  giftModel.giftImage = [UIImage imageNamed:@"ic_soap_small_14th"];
+  giftModel.giftName = @"海洋之星";
+  giftModel.giftCount = 9999;
+  
+  if (manager) {
+    manager.parentView = self.view;
+    // model 传入礼物模型
+    [manager animWithGiftModel:giftModel finishedBlock:^(BOOL result) {
+      
+    }];
+  }
+
+
 
 }
 // 女皇的城堡
 - (IBAction)sendCastle:(id)sender {
+
+ // 礼物模型
+  long  x = arc4random() % 9+10;    
+  MZGiftModel *giftModel = [[MZGiftModel alloc] init];
+  giftModel.headImage = [UIImage imageNamed:@"luffy"];
+  giftModel.userId = x;
+  giftModel.gifType = GIFT_TYPE_CASTLE;
+  giftModel.userName = [NSString stringWithFormat:@"%ld",x];
+  giftModel.giftImage = [UIImage imageNamed:@"ic_soap_small_14th"];
+  giftModel.giftName = @"女皇的城堡";
+  giftModel.giftCount = 9999;
+  
+  if (manager) {
+    manager.parentView = self.view;
+    // model 传入礼物模型
+    [manager animWithGiftModel:giftModel finishedBlock:^(BOOL result) {
+      
+    }];
+  }
 
 
 }

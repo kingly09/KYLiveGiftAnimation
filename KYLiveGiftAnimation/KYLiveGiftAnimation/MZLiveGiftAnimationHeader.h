@@ -39,6 +39,8 @@
 #import "MZAnimOperationManager.h"
 
 #import "MZRightAnimView.h"
+#import "MZOceanAnimView.h"
+#import "MZMarkAnimView.h"
 
 
 #define KLivePresentViewWidth 200.0

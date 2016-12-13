@@ -30,6 +30,9 @@
 #import "MZGiftModel.h"
 
 #import "MZRightAnimView.h" 
+#import "MZOceanAnimView.h"
+#import "MZCastleAnimView.h"
+#import "MZMarkAnimView.h"
 
 typedef NS_ENUM(NSInteger, GIFT_INDEX) {
     GIFT_INDEX_queue1          = 1,     //普通队列1
@@ -45,9 +48,17 @@ typedef NS_ENUM(NSInteger, GIFT_INDEX) {
 @property (nonatomic,strong) MZPresentView *presentView;
 @property (nonatomic,strong) UIView *listView;
 
-@property (nonatomic,strong) MZRightAnimView *rightAnimView;
+@property (nonatomic,strong) MZRightAnimView *rightAnimView;  //右边动画
 @property (nonatomic,strong) UIView *rightAnimlistView;
 
+@property (nonatomic,strong) MZOceanAnimView *oceanAnimView;  //海洋之星动画
+@property (nonatomic,strong) UIView *oceanAnimlistView;
+
+@property (nonatomic,strong) MZCastleAnimView *castleAnimView;  //女皇的城堡动画
+@property (nonatomic,strong) UIView *castleAnimlistView;
+
+@property (nonatomic,strong) MZMarkAnimView *markAnimView;      //贵族面具动画
+@property (nonatomic,strong) UIView *markAnimlistView;
 
 @property (nonatomic,strong) MZGiftModel *model;
 @property (nonatomic)  enum  GIFT_INDEX index;  //属于那个队列 
