@@ -132,12 +132,6 @@
     _giftLabel.attributedText = giftattstr;
     _giftCount = model.giftCount;
     
-    //咖啡动画
-    if (_model.gifType == GIFT_TYPE_COOFFEE) {
-        
-//        _coffeeCupImageView.image = [UIImage imageNamed:@"ic_cofeemov_14th"];
-//        _hotGasAnimateView.image  = [UIImage imageNamed:@"ic_fogmov_14th"];
-    }
   }
 }
 
@@ -227,17 +221,12 @@
  */
 - (void)startLoveAnimating
 {
-  
-   CAKeyframeAnimation *upDownAnimation;
-   upDownAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position.y"];
-   upDownAnimation.values = @[@(self.loveAnimateView.layer.position.y), @(self.loveAnimateView.layer.position.y - KLiveRightAnimViewLabelVarSpace*2),@(self.loveAnimateView.layer.position.y)];
-   upDownAnimation.duration = 0.5;
-   upDownAnimation.fillMode = kCAFillModeBoth;
-   upDownAnimation.calculationMode = kCAAnimationCubic;
-   upDownAnimation.repeatCount = 1;
-  [self.loveAnimateView.layer addAnimation:upDownAnimation forKey:@"upDownAnimation"];
+ 
+   [UIView downUpAnimation:self.loveAnimateView 
+    withAnimUpToDownHight:KLiveRightAnimViewLabelVarSpace*2 
+             withDuration:0.5 
+          withRepeatCount:1];
 
-  
   NSArray *magesArray = [NSArray arrayWithObjects:
                          [UIImage imageNamed:@"ic_heart_1_14th"],
                          [UIImage imageNamed:@"ic_heart_2_14th"],
@@ -258,15 +247,10 @@
 
 // 开始offee动画
 - (void)startOffeeAnimating {
-
-  CAKeyframeAnimation *upDownAnimation;
-   upDownAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position.y"];
-   upDownAnimation.values = @[@(self.coffeeCupImageView.layer.position.y), @(self.coffeeCupImageView.layer.position.y - KLiveRightAnimViewLabelVarSpace*2),@(self.coffeeCupImageView.layer.position.y)];
-   upDownAnimation.duration = 0.5;
-   upDownAnimation.fillMode = kCAFillModeBoth;
-   upDownAnimation.calculationMode = kCAAnimationCubic;
-   upDownAnimation.repeatCount = 1;
-  [self.coffeeCupImageView.layer addAnimation:upDownAnimation forKey:@"upDownAnimation"];
+  [UIView downUpAnimation:self.coffeeCupImageView 
+    withAnimUpToDownHight:KLiveRightAnimViewLabelVarSpace*2 
+             withDuration:0.5 
+          withRepeatCount:1];
   
   //热气动画
   NSArray *magesArray = [NSArray arrayWithObjects:

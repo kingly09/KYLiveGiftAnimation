@@ -10,6 +10,7 @@
 		BC070C261DFF86A1001FE82C /* MZOceanAnimView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC070C251DFF86A1001FE82C /* MZOceanAnimView.m */; };
 		BC070C291DFF87BE001FE82C /* MZMarkAnimView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC070C281DFF87BE001FE82C /* MZMarkAnimView.m */; };
 		BC070C2C1DFF8807001FE82C /* MZCastleAnimView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC070C2B1DFF8807001FE82C /* MZCastleAnimView.m */; };
+		BC070C2F1E0028F2001FE82C /* UIView+animate.m in Sources */ = {isa = PBXBuildFile; fileRef = BC070C2E1E0028F2001FE82C /* UIView+animate.m */; };
 		BCF29E891DFE487600C9E731 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF29E881DFE487600C9E731 /* main.m */; };
 		BCF29E8C1DFE487600C9E731 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF29E8B1DFE487600C9E731 /* AppDelegate.m */; };
 		BCF29E8F1DFE487600C9E731 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCF29E8E1DFE487600C9E731 /* ViewController.m */; };
@@ -32,6 +33,8 @@
 		BC070C281DFF87BE001FE82C /* MZMarkAnimView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZMarkAnimView.m; sourceTree = "<group>"; };
 		BC070C2A1DFF8807001FE82C /* MZCastleAnimView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZCastleAnimView.h; sourceTree = "<group>"; };
 		BC070C2B1DFF8807001FE82C /* MZCastleAnimView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZCastleAnimView.m; sourceTree = "<group>"; };
+		BC070C2D1E0028F2001FE82C /* UIView+animate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+animate.h"; sourceTree = "<group>"; };
+		BC070C2E1E0028F2001FE82C /* UIView+animate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+animate.m"; sourceTree = "<group>"; };
 		BCF29E841DFE487600C9E731 /* KYLiveGiftAnimation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KYLiveGiftAnimation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCF29E881DFE487600C9E731 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		BCF29E8A1DFE487600C9E731 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -108,6 +111,8 @@
 				BCF29EAC1DFE4BB800C9E731 /* MZAnimOperationManager.m */,
 				BCF29EB41DFE4CD400C9E731 /* MZShakeLabel.h */,
 				BCF29EB51DFE4CD400C9E731 /* MZShakeLabel.m */,
+				BC070C2D1E0028F2001FE82C /* UIView+animate.h */,
+				BC070C2E1E0028F2001FE82C /* UIView+animate.m */,
 				BCF29E9E1DFE497700C9E731 /* model */,
 				BCF29E8A1DFE487600C9E731 /* AppDelegate.h */,
 				BCF29E8B1DFE487600C9E731 /* AppDelegate.m */,
@@ -218,6 +223,7 @@
 				BCF29E8C1DFE487600C9E731 /* AppDelegate.m in Sources */,
 				BC070C261DFF86A1001FE82C /* MZOceanAnimView.m in Sources */,
 				BCF29EA11DFE499B00C9E731 /* MZGiftModel.m in Sources */,
+				BC070C2F1E0028F2001FE82C /* UIView+animate.m in Sources */,
 				BCF29EB61DFE4CD400C9E731 /* MZShakeLabel.m in Sources */,
 				BCF29E891DFE487600C9E731 /* main.m in Sources */,
 				BCF29EB01DFE4C9200C9E731 /* MZPresentView.m in Sources */,

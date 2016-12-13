@@ -150,11 +150,11 @@
     _rightImageView.frame = CGRectMake(SCREEN_WIDTH,SCREEN_HEIGHT-KRightImageViewHight-KRightImageViewHerSpace, KRightImageViewWidth, KRightImageViewHight);
     
     //海浪-前左（上下浮动）
-    _leftDownAnimView.frame = CGRectMake(0,SCREEN_HEIGHT-KLeftDownAnimViewHight-KLeftDownAnimViewHightFooterSpace, KLeftDownAnimViewWidth, KLeftDownAnimViewHight);
+    _leftDownAnimView.frame = CGRectMake(0,SCREEN_HEIGHT, KLeftDownAnimViewWidth, KLeftDownAnimViewHight);
     _leftDownAnimView.image = [UIImage imageNamed:@"ic_wave_Front_L_14th"];
     
     //海浪-前右（上下浮动）
-    _rightDownAnimView.frame = CGRectMake(SCREEN_WIDTH - KRightDownAnimViewWidth,SCREEN_HEIGHT - KRightDownAnimViewHight - KRightDownAnimViewHightFooterSpace, KRightDownAnimViewWidth, KRightDownAnimViewHight);
+    _rightDownAnimView.frame = CGRectMake(SCREEN_WIDTH - KRightDownAnimViewWidth,SCREEN_HEIGHT, KRightDownAnimViewWidth, KRightDownAnimViewHight);
     _rightDownAnimView.image = [UIImage imageNamed:@"ic_wave_Front_R_14th"];
     
   
@@ -175,13 +175,15 @@
    
       _leftImageView.frame  = CGRectMake(0,_leftImageView.frame.origin.y, KLeftImageViewWidth, KLeftImageViewHight);
       _rightImageView.frame = CGRectMake(SCREEN_WIDTH-KRightImageViewWidth,_rightImageView.frame.origin.y, KRightImageViewWidth, KRightImageViewHight);
+      
+      _leftDownAnimView.frame = CGRectMake(0,SCREEN_HEIGHT-KLeftDownAnimViewHight-KLeftDownAnimViewHightFooterSpace, KLeftDownAnimViewWidth, KLeftDownAnimViewHight);
+      _rightDownAnimView.frame = CGRectMake(_rightDownAnimView.frame.origin.x,SCREEN_HEIGHT - KRightDownAnimViewHight - KRightDownAnimViewHightFooterSpace, KRightDownAnimViewWidth, KRightDownAnimViewHight);
     
-     [self downUpAnimation:self.leftDownAnimView];
-     [self upDownAnimation:self.rightDownAnimView];
-  
   } completion:^(BOOL finished) {
   
-  
+      [UIView downUpAnimation:self.leftDownAnimView  withAnimUpToDownHight:KAnimUpToDownHight];
+      [UIView upDownAnimation:self.rightDownAnimView withAnimUpToDownHight:KAnimUpToDownHight];
+        
   }];
 
 
@@ -235,32 +237,7 @@
 
 #pragma mark - 私有动画效果
 
-// 上下浮动
--(void)upDownAnimation:(UIView *)upDownAnimationView{
 
-  CAKeyframeAnimation *upDownAnimation;
-   upDownAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position.y"];
-   upDownAnimation.values = @[@(upDownAnimationView.layer.position.y), @(upDownAnimationView.layer.position.y + KAnimUpToDownHight),@(upDownAnimationView.layer.position.y)];
-   upDownAnimation.duration = 0.5;
-   upDownAnimation.fillMode = kCAFillModeBoth;
-   upDownAnimation.calculationMode = kCAAnimationCubic;
-   upDownAnimation.repeatCount = HUGE_VALF;
-  [upDownAnimationView.layer addAnimation:upDownAnimation forKey:@"upDownAnimation"];
-
-}
-// 下上浮动
--(void)downUpAnimation:(UIView *)animationView{
-
-  CAKeyframeAnimation *downUpAnimation;
-   downUpAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position.y"];
-   downUpAnimation.values = @[@(animationView.layer.position.y), @(animationView.layer.position.y - KAnimUpToDownHight),@(animationView.layer.position.y)];
-   downUpAnimation.duration = 0.5;
-   downUpAnimation.fillMode = kCAFillModeBoth;
-   downUpAnimation.calculationMode = kCAAnimationCubic;
-   downUpAnimation.repeatCount = HUGE_VALF;
-  [animationView.layer addAnimation:downUpAnimation forKey:@"downUpAnimation"];
-
-}
 
 // 重置
 - (void)resetframe {
