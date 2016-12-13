@@ -48,8 +48,18 @@
 #define KLeftBackAnimViewWidth 193
 #define KLeftBackAnimViewHight 188
 #define KLeftBackAnimViewWidthSpace 37.0
-#define KLeftBackAnimViewHightFooterSpace  188.5 
+#define KLeftBackAnimViewHightFooterSpace  160 
 
+
+#define KRightBackAnimViewWidth 146.9
+#define KRightBackAnimViewHight 143
+#define KRightBackAnimViewWidthSpace 70
+#define KRightBackAnimViewHightFooterSpace  130
+
+#define KShipAnimViewWidth 178.5
+#define KShipAnimViewHight 181.5
+#define KShipAnimViewWidthSpace 60
+#define KShipAnimViewHightFooterSpace  130
 
 
 
@@ -125,8 +135,9 @@
     [self addSubview:_leftBackAnimView];
     [self addSubview:_rightBackAnimView];
     [self addSubview:_shipAnimView];
-    [self addSubview:_leftDownAnimView];
+
     [self addSubview:_rightDownAnimView];
+    [self addSubview:_leftDownAnimView];
     
 
 }
@@ -138,10 +149,20 @@
     _model = nil;
     _model = model;
     
-    
-    //
+    //左后海浪
+    _leftBackAnimView.image = [UIImage imageNamed:@"ic_wave_Back_L_14th"];
+    _leftBackAnimView.frame = CGRectMake(KLeftBackAnimViewWidthSpace,SCREEN_HEIGHT, KLeftBackAnimViewWidth, KLeftBackAnimViewHight);
      
-     //左海浪
+    //右后海浪
+    _rightBackAnimView.image = [UIImage imageNamed:@"ic_wave_Back_R_14th"];
+    _rightBackAnimView.frame = CGRectMake(SCREEN_WIDTH-(KRightBackAnimViewWidthSpace+KRightBackAnimViewWidth),SCREEN_HEIGHT, KRightBackAnimViewWidth, KRightBackAnimViewHight);
+     
+    //海盗船
+    _shipAnimView.image = [UIImage imageNamed:@"ic_boat_14th"];
+    _shipAnimView.frame = CGRectMake(KShipAnimViewWidthSpace,SCREEN_HEIGHT, KShipAnimViewWidth, KShipAnimViewHight);
+    
+     
+    //左海浪
     _leftImageView.image   = [UIImage imageNamed:@"ic_wave_L_14th"];
     _leftImageView.frame = CGRectMake(-KLeftImageViewWidth,SCREEN_HEIGHT-KLeftImageViewHight-KLeftImageViewHerSpace, KLeftImageViewWidth, KLeftImageViewHight);
     
@@ -173,16 +194,23 @@
 
   [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
    
-      _leftImageView.frame  = CGRectMake(0,_leftImageView.frame.origin.y, KLeftImageViewWidth, KLeftImageViewHight);
-      _rightImageView.frame = CGRectMake(SCREEN_WIDTH-KRightImageViewWidth,_rightImageView.frame.origin.y, KRightImageViewWidth, KRightImageViewHight);
+      _leftImageView.frame   = CGRectMake(0,_leftImageView.frame.origin.y, KLeftImageViewWidth, KLeftImageViewHight);
+      _rightImageView.frame  = CGRectMake(SCREEN_WIDTH-KRightImageViewWidth,_rightImageView.frame.origin.y, KRightImageViewWidth, KRightImageViewHight);
       
-      _leftDownAnimView.frame = CGRectMake(0,SCREEN_HEIGHT-KLeftDownAnimViewHight-KLeftDownAnimViewHightFooterSpace, KLeftDownAnimViewWidth, KLeftDownAnimViewHight);
+      //底部海浪与船
+      _leftBackAnimView.frame  = CGRectMake(_leftBackAnimView.frame.origin.x,SCREEN_HEIGHT-KLeftBackAnimViewHight-KLeftBackAnimViewHightFooterSpace, KLeftBackAnimViewWidth, KLeftBackAnimViewHight);
+      _rightBackAnimView.frame = CGRectMake(_rightBackAnimView.frame.origin.x,SCREEN_HEIGHT-KRightBackAnimViewHight-KRightBackAnimViewHightFooterSpace, KRightBackAnimViewWidth, KRightBackAnimViewHight);
+      _shipAnimView.frame      = CGRectMake(_shipAnimView.frame.origin.x,SCREEN_HEIGHT-KShipAnimViewHight-KShipAnimViewHightFooterSpace , KShipAnimViewWidth, KShipAnimViewHight);
+      _leftDownAnimView.frame  = CGRectMake(0,SCREEN_HEIGHT-KLeftDownAnimViewHight-KLeftDownAnimViewHightFooterSpace, KLeftDownAnimViewWidth, KLeftDownAnimViewHight);
       _rightDownAnimView.frame = CGRectMake(_rightDownAnimView.frame.origin.x,SCREEN_HEIGHT - KRightDownAnimViewHight - KRightDownAnimViewHightFooterSpace, KRightDownAnimViewWidth, KRightDownAnimViewHight);
     
   } completion:^(BOOL finished) {
   
-      [UIView downUpAnimation:self.leftDownAnimView  withAnimUpToDownHight:KAnimUpToDownHight];
-      [UIView upDownAnimation:self.rightDownAnimView withAnimUpToDownHight:KAnimUpToDownHight];
+      [UIView upDownAnimation:self.leftBackAnimView  withAnimUpToDownHight:KAnimUpToDownHight];
+      [UIView downUpAnimation:self.rightBackAnimView withAnimUpToDownHight:KAnimUpToDownHight];
+      [UIView downUpAnimation:self.shipAnimView      withAnimUpToDownHight:KAnimUpToDownHight*4 withDuration:1 withRepeatCount:HUGE_VALF];
+      [UIView downUpAnimation:self.leftDownAnimView  withAnimUpToDownHight:KAnimUpToDownHight withDuration:1 withRepeatCount:HUGE_VALF];
+      [UIView upDownAnimation:self.rightDownAnimView withAnimUpToDownHight:KAnimUpToDownHight*2 withDuration:2 withRepeatCount:HUGE_VALF];
         
   }];
 
@@ -234,10 +262,6 @@
     }];
 
 }
-
-#pragma mark - 私有动画效果
-
-
 
 // 重置
 - (void)resetframe {

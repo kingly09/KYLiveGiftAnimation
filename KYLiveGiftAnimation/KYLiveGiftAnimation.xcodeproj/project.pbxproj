@@ -94,13 +94,13 @@
 		BCF29E861DFE487600C9E731 /* KYLiveGiftAnimation */ = {
 			isa = PBXGroup;
 			children = (
+				BCF29EB71DFE569D00C9E731 /* MZLiveGiftAnimationHeader.h */,
 				BC070C2A1DFF8807001FE82C /* MZCastleAnimView.h */,
 				BC070C2B1DFF8807001FE82C /* MZCastleAnimView.m */,
 				BC070C271DFF87BE001FE82C /* MZMarkAnimView.h */,
 				BC070C281DFF87BE001FE82C /* MZMarkAnimView.m */,
 				BC070C241DFF86A1001FE82C /* MZOceanAnimView.h */,
 				BC070C251DFF86A1001FE82C /* MZOceanAnimView.m */,
-				BCF29EB71DFE569D00C9E731 /* MZLiveGiftAnimationHeader.h */,
 				BCF29EAE1DFE4C9200C9E731 /* MZPresentView.h */,
 				BCF29EAF1DFE4C9200C9E731 /* MZPresentView.m */,
 				BCF29EBB1DFEB4F300C9E731 /* MZRightAnimView.h */,
