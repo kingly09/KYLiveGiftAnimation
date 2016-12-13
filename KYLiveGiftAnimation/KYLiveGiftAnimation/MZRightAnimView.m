@@ -145,15 +145,14 @@
     }];
     self.completeBlock = completed;
 
-
 }
 
 //爱心动画
 -(void)showLoveAnim{
-
     [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-          [self startLoveAnimating];
+        [self startLoveAnimating];
     } completion:^(BOOL finished) {
+    
       dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
           [self shakeNumberLabel];
       });
@@ -217,6 +216,16 @@
  */
 - (void)startLoveAnimating
 {
+  
+   CAKeyframeAnimation *upDownAnimation;
+   upDownAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position.y"];
+   upDownAnimation.values = @[@(self.loveAnimateView.layer.position.y), @(self.loveAnimateView.layer.position.y - KLiveRightAnimViewLabelVarSpace*2),@(self.loveAnimateView.layer.position.y)];
+   upDownAnimation.duration = 0.5;
+   upDownAnimation.fillMode = kCAFillModeBoth;
+   upDownAnimation.calculationMode = kCAAnimationCubic;
+   upDownAnimation.repeatCount = 1;
+  [self.loveAnimateView.layer addAnimation:upDownAnimation forKey:@"upDownAnimation"];
+
   
   NSArray *magesArray = [NSArray arrayWithObjects:
                          [UIImage imageNamed:@"ic_heart_1_14th"],
