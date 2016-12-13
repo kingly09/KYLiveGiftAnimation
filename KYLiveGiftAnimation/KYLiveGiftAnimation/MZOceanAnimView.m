@@ -157,15 +157,15 @@
     _model = model;
     
     //左后海浪
-    _leftBackAnimView.image = [UIImage imageNamed:@"ic_wave_Back_L_14th"];
+    _leftBackAnimView.image = [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_wave_Back_L_14th"];
     _leftBackAnimView.frame = CGRectMake(KLeftBackAnimViewWidthSpace,SCREEN_HEIGHT, KLeftBackAnimViewWidth, KLeftBackAnimViewHight);
      
     //右后海浪
-    _rightBackAnimView.image = [UIImage imageNamed:@"ic_wave_Back_R_14th"];
+    _rightBackAnimView.image = [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_wave_Back_R_14th"];
     _rightBackAnimView.frame = CGRectMake(SCREEN_WIDTH-(KRightBackAnimViewWidthSpace+KRightBackAnimViewWidth),SCREEN_HEIGHT, KRightBackAnimViewWidth, KRightBackAnimViewHight);
      
     //海盗船
-    _shipAnimView.image = [UIImage imageNamed:@"ic_boat_14th"];
+    _shipAnimView.image = [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_boat_14th"];
     _shipAnimView.frame = CGRectMake(KShipAnimViewWidthSpace,SCREEN_HEIGHT, KShipAnimViewWidth, KShipAnimViewHight);
     
     //烟雾
@@ -173,20 +173,20 @@
     
      
     //左海浪
-    _leftImageView.image   = [UIImage imageNamed:@"ic_wave_L_14th"];
+    _leftImageView.image   = [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_wave_L_14th"];
     _leftImageView.frame = CGRectMake(-KLeftImageViewWidth,SCREEN_HEIGHT-KLeftImageViewHight-KLeftImageViewHerSpace, KLeftImageViewWidth, KLeftImageViewHight);
     
     //右海浪
-    _rightImageView.image  = [UIImage imageNamed:@"ic_wave_R_14th"];
+    _rightImageView.image  = [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_wave_R_14th"];
     _rightImageView.frame = CGRectMake(SCREEN_WIDTH,SCREEN_HEIGHT-KRightImageViewHight-KRightImageViewHerSpace, KRightImageViewWidth, KRightImageViewHight);
     
     //海浪-前左（上下浮动）
     _leftDownAnimView.frame = CGRectMake(0,SCREEN_HEIGHT, KLeftDownAnimViewWidth, KLeftDownAnimViewHight);
-    _leftDownAnimView.image = [UIImage imageNamed:@"ic_wave_Front_L_14th"];
+    _leftDownAnimView.image = [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_wave_Front_L_14th"];
     
     //海浪-前右（上下浮动）
     _rightDownAnimView.frame = CGRectMake(SCREEN_WIDTH - KRightDownAnimViewWidth,SCREEN_HEIGHT, KRightDownAnimViewWidth, KRightDownAnimViewHight);
-    _rightDownAnimView.image = [UIImage imageNamed:@"ic_wave_Front_R_14th"];
+    _rightDownAnimView.image = [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_wave_Front_R_14th"];
     
   
     _skLabel.frame = CGRectMake(0,self.frame.size.height-KLiveShakeLabelHight, KLiveShakeLabelWidth, KLiveShakeLabelHight);
@@ -244,18 +244,18 @@
  */
 -(void)startBlueboomAnimView{
   NSArray *magesArray = [NSArray arrayWithObjects:
-                         [UIImage imageNamed:@"ic_Blueboom_1"],
-                         [UIImage imageNamed:@"ic_Blueboom_2"],
-                         [UIImage imageNamed:@"ic_Blueboom_3"],
-                         [UIImage imageNamed:@"ic_Blueboom_4"],
-                         [UIImage imageNamed:@"ic_Blueboom_5"],
-                         [UIImage imageNamed:@"ic_Blueboom_6"],
-                         [UIImage imageNamed:@"ic_Blueboom_7"],
-                         [UIImage imageNamed:@"ic_Blueboom_8"],
-                         [UIImage imageNamed:@"ic_Blueboom_9"],
-                         [UIImage imageNamed:@"ic_Blueboom_10"],
-                         [UIImage imageNamed:@"ic_Blueboom_11"],
-                         [UIImage imageNamed:@"ic_Blueboom_12"],nil];
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Blueboom_1"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Blueboom_2"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Blueboom_3"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Blueboom_4"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Blueboom_5"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Blueboom_6"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Blueboom_7"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Blueboom_8"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Blueboom_9"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Blueboom_10"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Blueboom_11"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Blueboom_12"],nil];
   _blueboomAnimView.animationImages = magesArray;//将序列帧数组赋给UIImageView的animationImages属性
   _blueboomAnimView.animationDuration = 1.2;//设置动画时间
   _blueboomAnimView.animationRepeatCount = 1;//设置动画次数 0 表示无限

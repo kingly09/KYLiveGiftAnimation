@@ -101,7 +101,7 @@
     
     _bgImageView.frame = self.bounds;
     _bgImageView.frame = CGRectMake(0, 0, self.frame.size.width - KLiveRightAnimViewWidthSpace, self.frame.size.height);
-    _bgImageView.image = [UIImage imageNamed:@"bg_backgroundcolor_14th"];
+    _bgImageView.image = [[MZAnimationImageCache shareInstance] getImageWithName:@"bg_backgroundcolor_14th"];
   
     _loveAnimateView.frame = CGRectMake(0,-KLiveRightAnimViewLoveHight+KLiveRightAnimViewLabelVarSpace*2, KLiveRightAnimViewLoveWidth,KLiveRightAnimViewLoveHight);
     _skLabel.frame = CGRectMake(self.frame.size.width - KLiveShakeLabelWidth,-KLiveRightAnimViewShakeNumberLabelVarSpace-KLiveShakeLabelHight, KLiveShakeLabelWidth, KLiveShakeLabelHight);
@@ -228,11 +228,11 @@
           withRepeatCount:1];
 
   NSArray *magesArray = [NSArray arrayWithObjects:
-                         [UIImage imageNamed:@"ic_heart_1_14th"],
-                         [UIImage imageNamed:@"ic_heart_2_14th"],
-                         [UIImage imageNamed:@"ic_heart_3_14th"],
-                         [UIImage imageNamed:@"ic_heart_4_14th"],
-                         [UIImage imageNamed:@"ic_heart_5_14th"],nil];
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_heart_1_14th"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_heart_2_14th"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_heart_3_14th"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_heart_4_14th"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_heart_5_14th"],nil];
   _loveAnimateView.animationImages = magesArray;//将序列帧数组赋给UIImageView的animationImages属性
   _loveAnimateView.animationDuration = 0.5;//设置动画时间
   _loveAnimateView.animationRepeatCount = 0;//设置动画次数 0 表示无限
@@ -254,18 +254,18 @@
   
   //热气动画
   NSArray *magesArray = [NSArray arrayWithObjects:
-                         [UIImage imageNamed:@"ic_fogmov_14th_1"],
-                         [UIImage imageNamed:@"ic_fogmov_14th_2"],
-                         [UIImage imageNamed:@"ic_fogmov_14th_3"],
-                         [UIImage imageNamed:@"ic_fogmov_14th_4"],
-                         [UIImage imageNamed:@"ic_fogmov_14th_5"],
-                         [UIImage imageNamed:@"ic_fogmov_14th_6"],
-                         [UIImage imageNamed:@"ic_fogmov_14th_7"],
-                         [UIImage imageNamed:@"ic_fogmov_14th_8"],
-                         [UIImage imageNamed:@"ic_fogmov_14th_9"],
-                         [UIImage imageNamed:@"ic_fogmov_14th_10"],
-                         [UIImage imageNamed:@"ic_fogmov_14th_11"],
-                         [UIImage imageNamed:@"ic_fogmov_14th_12"],nil];
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_fogmov_14th_1"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_fogmov_14th_2"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_fogmov_14th_3"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_fogmov_14th_4"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_fogmov_14th_5"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_fogmov_14th_6"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_fogmov_14th_7"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_fogmov_14th_8"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_fogmov_14th_9"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_fogmov_14th_10"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_fogmov_14th_11"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_fogmov_14th_12"],nil];
   _coffeeCupImageView.animationImages = magesArray;//将序列帧数组赋给UIImageView的animationImages属性
   _coffeeCupImageView.animationDuration = 1.6;//设置动画时间
   _coffeeCupImageView.animationRepeatCount = 0;//设置动画次数 0 表示无限
