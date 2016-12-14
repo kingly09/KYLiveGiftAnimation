@@ -68,7 +68,7 @@
 #define KbigStarImageViewHight 282
 #define KbigStarImageViewHightTopSpace 9
 
-#define KUserInfoAnimViewWidth  227
+#define KUserInfoAnimViewWidth  277
 #define KUserInfoAnimViewHight  62.5
 #define KUserInfoAnimViewHightFooterSpace  333
 

@@ -28,45 +28,12 @@
 #import "MZMarkAnimView.h"
 #import "MZLiveGiftAnimationHeader.h"
 
-#define KLeftImageViewHerSpace 265.5
-#define KLeftImageViewWidth  53.5
-#define KLeftImageViewHight  127
-
-#define KRightImageViewHerSpace 298.5
-#define KRightImageViewWidth 58.5
-#define KRightImageViewHight 124
-#define KRightImageViewWidthOriginX  (SCREEN_WIDTH - KRightImageViewWidth)
-
-#define KLeftDownAnimViewWidth 181.5
-#define KLeftDownAnimViewHight 179
-#define KLeftDownAnimViewHightFooterSpace  (27.5 - KAnimUpToDownHight) 
-
-#define KRightDownAnimViewWidth 276.5
-#define KRightDownAnimViewHight 257
-#define KRightDownAnimViewHightFooterSpace  27.5 
-
-#define KLeftBackAnimViewWidth 193
-#define KLeftBackAnimViewHight 188
-#define KLeftBackAnimViewWidthSpace 37.0
-#define KLeftBackAnimViewHightFooterSpace  160 
-
-
-#define KRightBackAnimViewWidth 146.9
-#define KRightBackAnimViewHight 143
-#define KRightBackAnimViewWidthSpace 70
-#define KRightBackAnimViewHightFooterSpace  130
-
-#define KShipAnimViewWidth 178.5
-#define KShipAnimViewHight 181.5
-#define KShipAnimViewWidthSpace 60
-#define KShipAnimViewHightFooterSpace  110
+#define KMarkImageViewWidth 205
+#define KMarkImageViewHight 260 
 
 #define KblueboomAnimViewHight 350
 #define KblueboomAnimViewHightFooterSpace  152
 
-#define KbigStarImageViewWidth 278
-#define KbigStarImageViewHight 282
-#define KbigStarImageViewHightTopSpace 9
 
 #define KUserInfoAnimViewWidth  227
 #define KUserInfoAnimViewHight  62.5
@@ -79,10 +46,9 @@
 
 @property (nonatomic,copy) void(^completeBlock)(BOOL finished,NSInteger finishCount); // 新增了回调参数 finishCount， 用来记录动画结束时累加数量，将来在3秒内，还能继续累加
 
-@property (nonatomic,strong) UIImageView *markImageView;      //左边视图
+@property (nonatomic,strong) UIImageView *markImageView;      //面具动画
 
-
-@property (nonatomic,strong) UIImageView *blueboomAnimView;   //烟雾动画
+@property (nonatomic,strong) UIImageView *markboomAnimView;   //烟雾动画
 
 @property (nonatomic,strong) UIImageView *userInfoAnimView;   //用户信息动画
 
@@ -105,7 +71,7 @@
     //面具
     _markImageView = [[UIImageView alloc] init];
    
-    _blueboomAnimView  =  [[UIImageView alloc] init];
+    _markboomAnimView  =  [[UIImageView alloc] init];
 
     _userInfoAnimView  = [[UIImageView alloc] init];
 
@@ -127,7 +93,8 @@
     _skLabel.textAlignment = NSTextAlignmentLeft;
     _animCount = 0;
     
-    [self addSubview:_blueboomAnimView];
+    [self addSubview:_markImageView];
+    [self addSubview:_markboomAnimView];
     [self addSubview:_userInfoAnimView];
     [_userInfoAnimView addSubview:_nameLabel];
     [_userInfoAnimView addSubview:_giftLabel];
@@ -143,12 +110,19 @@
     _model = nil;
     _model = model;
     
+    //烟雾
+    _markboomAnimView.frame = CGRectMake(0,SCREEN_HEIGHT - KblueboomAnimViewHight - KblueboomAnimViewHightFooterSpace,SCREEN_WIDTH,KblueboomAnimViewHight);
+    
+            
+    _markImageView.frame = CGRectMake((SCREEN_WIDTH - KMarkImageViewWidth)/2,0, KMarkImageViewWidth, KMarkImageViewHight);
+    _markImageView.image = [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_mask_bigger_14th"];
+    _markImageView.hidden = YES;
     //用户打赏信息动画
     _userInfoAnimView.frame = CGRectMake((SCREEN_WIDTH - KUserInfoAnimViewWidth)/2,SCREEN_HEIGHT - KUserInfoAnimViewHightFooterSpace - KUserInfoAnimViewHight, KUserInfoAnimViewWidth, KUserInfoAnimViewHight);
     _userInfoAnimView.image = [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_background_mask_14th"];
     _userInfoAnimView.hidden = YES;
    
-    _skLabel.frame = CGRectMake(SCREEN_WIDTH - KLiveShakeLabelWidth - 30 ,KbigStarImageViewHightTopSpace + KbigStarImageViewHight*2/3 - 60, KLiveShakeLabelWidth, KLiveShakeLabelHight);
+    _skLabel.frame = CGRectMake(SCREEN_WIDTH - KLiveShakeLabelWidth - 15 ,199, KLiveShakeLabelWidth, KLiveShakeLabelHight);
   
     _nameLabel.frame = CGRectMake(KAnimNameLabelLeftSPace,KAnimMameLabelTopSPace, KUserInfoAnimViewWidth - KAnimNameLabelLeftSPace*2, (KUserInfoAnimViewHight - KAnimNameLabelFooterSPace - KAnimMameLabelTopSPace)/2);
     _giftLabel.frame = CGRectMake(_nameLabel.frame.origin.x,KAnimMameLabelTopSPace+_nameLabel.frame.size.height, _nameLabel.frame.size.width,_nameLabel.frame.size.height);
@@ -159,7 +133,7 @@
     [attstr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHex:0x00ff00] range:rangeStr];
     _nameLabel.attributedText = attstr;
    
-    NSString *giftLabelStr = [NSString stringWithFormat:@"送出的【%@】",model.giftName.length>0?model.giftName:@"【海洋之星】"];
+    NSString *giftLabelStr = [NSString stringWithFormat:@"送出的【%@】",model.giftName.length>0?model.giftName:@"【贵州面具】"];
     NSMutableAttributedString *giftattstr = [[NSMutableAttributedString alloc]initWithString:giftLabelStr];
     NSRange giftrangeStr = [giftLabelStr rangeOfString:[NSString stringWithFormat:@"【%@】",model.giftName]];
     [giftattstr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHex:0x00eaff] range:giftrangeStr];
@@ -170,19 +144,20 @@
 }
 
 - (void)animateWithCompleteBlock:(completeBlock)completed{
-
   
-  [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-   
-        
-   } completion:^(BOOL finished) {
+  //烟雾效果
+  [self startPurpleboomAnimView];
   
+  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.7 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+      [self showMarkImageViewAinm];
+    } completion:^(BOOL finished) {
       //用户打赏动画
       [self showUserInfoAinm];   
-  }];
+    }];
+  });
   
-  
-  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
      [self shakeNumberLabel];
   });
   
@@ -191,7 +166,30 @@
 
 }
 
-
+/**
+ 面具动画
+ */
+-(void)showMarkImageViewAinm{     
+  _markImageView.hidden = NO;
+  _markImageView.alpha = 0;
+  [UIView animateKeyframesWithDuration:0.5 delay:0 options:0 animations:^{
+        _markImageView.alpha = 1;
+        [UIView addKeyframeWithRelativeStartTime:0 relativeDuration:1/2.0 animations:^{
+            
+            _markImageView.transform = CGAffineTransformMakeScale(3, 3);
+        }];
+        [UIView addKeyframeWithRelativeStartTime:1/3.0 relativeDuration:1/3.0 animations:^{
+            
+            _markImageView.transform = CGAffineTransformMakeScale(1, 1);
+        }];
+        
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.2 delay:0 usingSpringWithDamping:0.4 initialSpringVelocity:10 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                _markImageView.alpha = 1;
+                _markImageView.transform = CGAffineTransformMakeScale(1.0, 1.0);
+            } completion:nil];
+        }];
+}
 
 // 显示用户打赏信息 
 -(void)showUserInfoAinm{
@@ -213,37 +211,37 @@
                 self.userInfoAnimView.alpha = 1;
                 self.userInfoAnimView.transform = CGAffineTransformMakeScale(1.0, 1.0);
             } completion:nil];
-             [self shakeNumberLabel];
+         
         }];
 }
 
 /**
  烟雾动画
  */
--(void)startBlueboomAnimView{
+-(void)startPurpleboomAnimView{
   NSArray *magesArray = [NSArray arrayWithObjects:
-                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Blueboom_1"],
-                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Blueboom_2"],
-                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Blueboom_3"],
-                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Blueboom_4"],
-                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Blueboom_5"],
-                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Blueboom_6"],
-                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Blueboom_7"],
-                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Blueboom_8"],
-                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Blueboom_9"],
-                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Blueboom_10"],
-                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Blueboom_11"],
-                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Blueboom_12"],nil];
-  _blueboomAnimView.animationImages = magesArray;//将序列帧数组赋给UIImageView的animationImages属性
-  _blueboomAnimView.animationDuration = 1.2;//设置动画时间
-  _blueboomAnimView.animationRepeatCount = 1;//设置动画次数 0 表示无限
-  [_blueboomAnimView startAnimating];//开始播放动画    
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Purpleboom_1"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Purpleboom_2"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Purpleboom_3"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Purpleboom_4"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Purpleboom_5"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Purpleboom_6"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Purpleboom_7"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Purpleboom_8"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Purpleboom_9"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Purpleboom_10"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Purpleboom_11"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Purpleboom_12"],nil];
+  _markboomAnimView.animationImages = magesArray;//将序列帧数组赋给UIImageView的animationImages属性
+  _markboomAnimView.animationDuration = 1.2;//设置动画时间
+  _markboomAnimView.animationRepeatCount = 1;//设置动画次数 0 表示无限
+  [_markboomAnimView startAnimating];//开始播放动画    
   
   //延时结束刷新
   dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-    [_blueboomAnimView stopAnimating];
-    _blueboomAnimView.alpha = 0;
-    [_blueboomAnimView removeFromSuperview];
+    [_markboomAnimView stopAnimating];
+    _markboomAnimView.alpha = 0;
+    [_markboomAnimView removeFromSuperview];
   });
 
 

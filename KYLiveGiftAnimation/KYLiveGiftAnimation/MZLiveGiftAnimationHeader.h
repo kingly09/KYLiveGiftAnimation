@@ -83,7 +83,7 @@
 #define KLiveCoffeeCupImageViewHightSpace 16.0
 
 //用户打赏动画
-#define KAnimNameLabelLeftSPace   44
+#define KAnimNameLabelLeftSPace   55
 #define KAnimMameLabelTopSPace    18
 #define KAnimNameLabelFooterSPace   12
 
