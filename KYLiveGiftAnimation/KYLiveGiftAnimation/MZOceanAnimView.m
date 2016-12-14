@@ -287,17 +287,15 @@
   //发光的星星
   [self shiningStarAinmView];
 
+  //星星旋转
+  [self startRotationAnimView];
   //烟雾动画
   [self startBlueboomAnimView];
   
   [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
      
       _leftImageView.frame   = CGRectMake(0,_leftImageView.frame.origin.y, KLeftImageViewWidth, KLeftImageViewHight);
-      _leftStarAnimView.frame = CGRectMake(KLeftStarAnimViewSpace,_leftImageView.frame.origin.y, KBigStarWidth, KBigStarWidth);
-    
       _rightImageView.frame  = CGRectMake(SCREEN_WIDTH-KRightImageViewWidth,_rightImageView.frame.origin.y, KRightImageViewWidth, KRightImageViewHight);
-      _rightStarAnimView.frame = CGRectMake(_rightStarAnimView.frame.origin.x ,_rightImageView.frame.origin.y, KBigStarWidth, KBigStarWidth);
-    
     
       //底部海浪与船
       _leftBackAnimView.frame  = CGRectMake(_leftBackAnimView.frame.origin.x,SCREEN_HEIGHT-KLeftBackAnimViewHight-KLeftBackAnimViewHightFooterSpace, KLeftBackAnimViewWidth, KLeftBackAnimViewHight);
@@ -307,6 +305,7 @@
       _rightDownAnimView.frame = CGRectMake(_rightDownAnimView.frame.origin.x,SCREEN_HEIGHT - KRightDownAnimViewHight - KRightDownAnimViewHightFooterSpace, KRightDownAnimViewWidth, KRightDownAnimViewHight);
     
    } completion:^(BOOL finished) {
+   
   
       [UIView upDownAnimation:self.leftBackAnimView  withAnimUpToDownHight:KAnimUpToDownHight];
       [UIView downUpAnimation:self.rightBackAnimView withAnimUpToDownHight:KAnimUpToDownHight];
@@ -335,6 +334,8 @@
      _bigStarImageView.frame = CGRectMake(_bigStarImageView.frame.origin.x ,KbigStarImageViewHightTopSpace, KbigStarImageViewWidth, KbigStarImageViewHight);
      _smallLeftStarAnimView.frame = CGRectMake(_smallLeftStarAnimView.frame.origin.x,KLeftSmallStarAnimViewTopSpace, KSmallStarWidth, KSmallStarWidth);
      _smallRightStarAnimView.frame = CGRectMake(_smallRightStarAnimView.frame.origin.x,KRigthSmallStarAnimViewTopSpace, KSmallStarWidth, KSmallStarWidth);
+     _leftStarAnimView.frame = CGRectMake(KLeftStarAnimViewSpace,_leftImageView.frame.origin.y, KBigStarWidth, KBigStarWidth);
+     _rightStarAnimView.frame = CGRectMake(_rightStarAnimView.frame.origin.x ,_rightImageView.frame.origin.y, KBigStarWidth, KBigStarWidth);
     
     NSArray *magesArray = [NSArray arrayWithObjects:
                          [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_shiningstar_1_14th"],
@@ -344,7 +345,37 @@
   _bigStarImageView.animationRepeatCount = 0;//设置动画次数 0 表示无限
   [_bigStarImageView startAnimating];//开始播放动画    
   
-  } completion:^(BOOL finished) {}];
+  } completion:^(BOOL finished) {
+  
+     [self startRotationAnimView];
+  }];
+
+}
+
+// 4个小星星 动画
+-(void)startRotationAnimView{
+
+    int minRotion = 30;
+    int maxRotion = 120;
+
+    _smallLeftStarAnimView.transform = CGAffineTransformMakeRotation([self getRandomNumber:minRotion to:maxRotion]*M_PI/180);
+    _smallRightStarAnimView.transform = CGAffineTransformMakeRotation([self getRandomNumber:minRotion to:maxRotion]*M_PI/180);
+   _leftStarAnimView.transform = CGAffineTransformMakeRotation([self getRandomNumber:minRotion to:maxRotion]*M_PI/180);
+   _rightStarAnimView.transform = CGAffineTransformMakeRotation([self getRandomNumber:minRotion to:maxRotion]*M_PI/180);
+   
+   [UIView opacityAnimation:_smallLeftStarAnimView];
+   [UIView opacityAnimation:_smallRightStarAnimView];
+   [UIView opacityAnimation:_leftStarAnimView];
+   [UIView opacityAnimation:_rightStarAnimView];
+   
+}
+/**
+*  取一个随机整数，范围在[from,to），包括from，包括to
+*/
+-(int)getRandomNumber:(int)from to:(int)to
+
+{
+    return (int)(from + (arc4random() % (to - from + 1)));
 
 }
 

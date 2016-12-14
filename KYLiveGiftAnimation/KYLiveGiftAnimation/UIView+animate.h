@@ -65,5 +65,19 @@
  */
 +(void)downUpAnimation:(UIView *)animationView withAnimUpToDownHight:(float )animUpToDownHight withDuration:(float)duration withRepeatCount:(float)repeatCount;
 
+/**
+ 闪动画
+
+ @param opacityAnimationView  需要闪的动画
+ */
++(void)opacityAnimation:(UIView *)opacityAnimationView;
+
+/**
+ 闪动画
+
+ @param opacityAnimationView 闪动画
+ @param duration 闪动画的时间
+ */
++(void)opacityAnimation:(UIView *)opacityAnimationView withDuration:(float )duration;
 
 @end

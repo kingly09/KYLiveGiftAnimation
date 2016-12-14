@@ -65,5 +65,22 @@
 
 }
 
++(void)opacityAnimation:(UIView *)opacityAnimationView{
+
+    [self opacityAnimation:opacityAnimationView withDuration:0.5];
+}
+
++(void)opacityAnimation:(UIView *)opacityAnimationView withDuration:(float )duration{
+
+    CAKeyframeAnimation *opacityAnimation;
+    opacityAnimation = [CAKeyframeAnimation animationWithKeyPath:@"opacity"];
+    opacityAnimation.values = @[@(1), @(0.6), @(1)];
+    opacityAnimation.duration = duration;
+    opacityAnimation.fillMode = kCAFillModeBoth;
+    opacityAnimation.calculationMode = kCAAnimationCubic;
+    opacityAnimation.repeatCount = HUGE_VALF;
+    [opacityAnimationView.layer addAnimation:opacityAnimation forKey:@"opacityAnimation"];
+}
+
 
 @end
