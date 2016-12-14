@@ -79,21 +79,8 @@
 
 @property (nonatomic,copy) void(^completeBlock)(BOOL finished,NSInteger finishCount); // 新增了回调参数 finishCount， 用来记录动画结束时累加数量，将来在3秒内，还能继续累加
 
-@property (nonatomic,strong) UIImageView *leftImageView;      //左边视图
-@property (nonatomic,strong) UIImageView *leftStarAnimView;   //左边星星
+@property (nonatomic,strong) UIImageView *markImageView;      //左边视图
 
-@property (nonatomic,strong) UIImageView *rightImageView;     //右边视图
-@property (nonatomic,strong) UIImageView *rightStarAnimView;  //右边星星
-
-@property (nonatomic,strong) UIImageView *bigStarImageView;        //中间大星星
-@property (nonatomic,strong) UIImageView *smallStarAnimView;       //中间大星星的左边星星
-@property (nonatomic,strong) UIImageView *bigRightStarAnimView;    //中间大星星的左边星星
-
-@property (nonatomic,strong) UIImageView *leftDownAnimView;   //左下角动画
-@property (nonatomic,strong) UIImageView *rightDownAnimView;  //右下角动画
-@property (nonatomic,strong) UIImageView *leftBackAnimView;   //左后动画
-@property (nonatomic,strong) UIImageView *rightBackAnimView;  //右后动画
-@property (nonatomic,strong) UIImageView *shipAnimView;       //海盗船动画
 
 @property (nonatomic,strong) UIImageView *blueboomAnimView;   //烟雾动画
 
@@ -114,18 +101,12 @@
 
 -(void)setupCustomView{
 
-    _leftImageView = [[UIImageView alloc] init];
-    _rightImageView = [[UIImageView alloc] init];
-    
-    _leftDownAnimView  = [[UIImageView alloc] init];
-    _rightDownAnimView = [[UIImageView alloc] init];
-    
-    _leftBackAnimView  =  [[UIImageView alloc] init];
-    _rightBackAnimView =  [[UIImageView alloc] init];
-    _shipAnimView      =  [[UIImageView alloc] init];
+
+    //面具
+    _markImageView = [[UIImageView alloc] init];
+   
     _blueboomAnimView  =  [[UIImageView alloc] init];
-    
-    _bigStarImageView  = [[UIImageView alloc] init];
+
     _userInfoAnimView  = [[UIImageView alloc] init];
 
 
@@ -146,18 +127,6 @@
     _skLabel.textAlignment = NSTextAlignmentLeft;
     _animCount = 0;
     
-    [self addSubview:_bigStarImageView];
-
-    [self addSubview:_leftImageView];
-    [self addSubview:_rightImageView];
-    
-    [self addSubview:_leftBackAnimView];
-    [self addSubview:_rightBackAnimView];
-    [self addSubview:_shipAnimView];
-
-   
-    [self addSubview:_rightDownAnimView];
-    [self addSubview:_leftDownAnimView];
     [self addSubview:_blueboomAnimView];
     [self addSubview:_userInfoAnimView];
     [_userInfoAnimView addSubview:_nameLabel];
@@ -174,62 +143,22 @@
     _model = nil;
     _model = model;
     
-    //发光的星星
-    _bigStarImageView.frame = CGRectMake((SCREEN_WIDTH-KbigStarImageViewWidth)/2 ,-KbigStarImageViewHight, KbigStarImageViewWidth, KbigStarImageViewHight);
-         
-    //左后海浪
-    _leftBackAnimView.image = [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_wave_Back_L_14th"];
-    _leftBackAnimView.frame = CGRectMake(KLeftBackAnimViewWidthSpace,SCREEN_HEIGHT, KLeftBackAnimViewWidth, KLeftBackAnimViewHight);
-     
-    //右后海浪
-    _rightBackAnimView.image = [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_wave_Back_R_14th"];
-    _rightBackAnimView.frame = CGRectMake(SCREEN_WIDTH-(KRightBackAnimViewWidthSpace+KRightBackAnimViewWidth),SCREEN_HEIGHT, KRightBackAnimViewWidth, KRightBackAnimViewHight);
-     
-    //海盗船
-    _shipAnimView.image = [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_boat_14th"];
-    _shipAnimView.frame = CGRectMake(KShipAnimViewWidthSpace,SCREEN_HEIGHT, KShipAnimViewWidth, KShipAnimViewHight);
-    
-    //烟雾
-    _blueboomAnimView.frame = CGRectMake(0,SCREEN_HEIGHT - KblueboomAnimViewHight - KblueboomAnimViewHightFooterSpace,SCREEN_WIDTH,KblueboomAnimViewHight);
-    
-     
-    //左海浪
-    _leftImageView.image   = [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_wave_L_14th"];
-    _leftImageView.frame = CGRectMake(-KLeftImageViewWidth,SCREEN_HEIGHT-KLeftImageViewHight-KLeftImageViewHerSpace, KLeftImageViewWidth, KLeftImageViewHight);
-    
-    //右海浪
-    _rightImageView.image  = [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_wave_R_14th"];
-    _rightImageView.frame = CGRectMake(SCREEN_WIDTH,SCREEN_HEIGHT-KRightImageViewHight-KRightImageViewHerSpace, KRightImageViewWidth, KRightImageViewHight);
-    
-    //海浪-前左（上下浮动）
-    _leftDownAnimView.frame = CGRectMake(0,SCREEN_HEIGHT, KLeftDownAnimViewWidth, KLeftDownAnimViewHight);
-    _leftDownAnimView.image = [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_wave_Front_L_14th"];
-    
-    //海浪-前右（上下浮动）
-    _rightDownAnimView.frame = CGRectMake(SCREEN_WIDTH - KRightDownAnimViewWidth,SCREEN_HEIGHT, KRightDownAnimViewWidth, KRightDownAnimViewHight);
-    _rightDownAnimView.image = [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_wave_Front_R_14th"];
-    
-    
     //用户打赏信息动画
     _userInfoAnimView.frame = CGRectMake((SCREEN_WIDTH - KUserInfoAnimViewWidth)/2,SCREEN_HEIGHT - KUserInfoAnimViewHightFooterSpace - KUserInfoAnimViewHight, KUserInfoAnimViewWidth, KUserInfoAnimViewHight);
     _userInfoAnimView.image = [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_background_mask_14th"];
     _userInfoAnimView.hidden = YES;
    
     _skLabel.frame = CGRectMake(SCREEN_WIDTH - KLiveShakeLabelWidth - 30 ,KbigStarImageViewHightTopSpace + KbigStarImageViewHight*2/3 - 60, KLiveShakeLabelWidth, KLiveShakeLabelHight);
-    
-    
+  
     _nameLabel.frame = CGRectMake(KAnimNameLabelLeftSPace,KAnimMameLabelTopSPace, KUserInfoAnimViewWidth - KAnimNameLabelLeftSPace*2, (KUserInfoAnimViewHight - KAnimNameLabelFooterSPace - KAnimMameLabelTopSPace)/2);
     _giftLabel.frame = CGRectMake(_nameLabel.frame.origin.x,KAnimMameLabelTopSPace+_nameLabel.frame.size.height, _nameLabel.frame.size.width,_nameLabel.frame.size.height);
     
-   
-     NSString *nameLabelStr = [NSString stringWithFormat:@"感谢%@",model.userName];
+    NSString *nameLabelStr = [NSString stringWithFormat:@"感谢%@",model.userName];
     NSMutableAttributedString *attstr = [[NSMutableAttributedString alloc]initWithString:nameLabelStr];
     NSRange rangeStr = [nameLabelStr rangeOfString:[NSString stringWithFormat:@"%@",model.userName]];
     [attstr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHex:0x00ff00] range:rangeStr];
     _nameLabel.attributedText = attstr;
    
-    
-  
     NSString *giftLabelStr = [NSString stringWithFormat:@"送出的【%@】",model.giftName.length>0?model.giftName:@"【海洋之星】"];
     NSMutableAttributedString *giftattstr = [[NSMutableAttributedString alloc]initWithString:giftLabelStr];
     NSRange giftrangeStr = [giftLabelStr rangeOfString:[NSString stringWithFormat:@"【%@】",model.giftName]];
@@ -237,37 +166,17 @@
     _giftLabel.attributedText = giftattstr;
     _giftCount = model.giftCount;
 
-    
   }
 }
 
 - (void)animateWithCompleteBlock:(completeBlock)completed{
 
-  //发光的星星
-  [self shiningStarAinmView];
-  //烟雾动画
-  [self startBlueboomAnimView];
   
   [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
    
-      _leftImageView.frame   = CGRectMake(0,_leftImageView.frame.origin.y, KLeftImageViewWidth, KLeftImageViewHight);
-      _rightImageView.frame  = CGRectMake(SCREEN_WIDTH-KRightImageViewWidth,_rightImageView.frame.origin.y, KRightImageViewWidth, KRightImageViewHight);
-      
-      //底部海浪与船
-      _leftBackAnimView.frame  = CGRectMake(_leftBackAnimView.frame.origin.x,SCREEN_HEIGHT-KLeftBackAnimViewHight-KLeftBackAnimViewHightFooterSpace, KLeftBackAnimViewWidth, KLeftBackAnimViewHight);
-      _rightBackAnimView.frame = CGRectMake(_rightBackAnimView.frame.origin.x,SCREEN_HEIGHT-KRightBackAnimViewHight-KRightBackAnimViewHightFooterSpace, KRightBackAnimViewWidth, KRightBackAnimViewHight);
-      _shipAnimView.frame      = CGRectMake(_shipAnimView.frame.origin.x,SCREEN_HEIGHT-KShipAnimViewHight-KShipAnimViewHightFooterSpace , KShipAnimViewWidth, KShipAnimViewHight);
-      _leftDownAnimView.frame  = CGRectMake(0,SCREEN_HEIGHT-KLeftDownAnimViewHight-KLeftDownAnimViewHightFooterSpace, KLeftDownAnimViewWidth, KLeftDownAnimViewHight);
-      _rightDownAnimView.frame = CGRectMake(_rightDownAnimView.frame.origin.x,SCREEN_HEIGHT - KRightDownAnimViewHight - KRightDownAnimViewHightFooterSpace, KRightDownAnimViewWidth, KRightDownAnimViewHight);
-    
+        
    } completion:^(BOOL finished) {
   
-      [UIView upDownAnimation:self.leftBackAnimView  withAnimUpToDownHight:KAnimUpToDownHight];
-      [UIView downUpAnimation:self.rightBackAnimView withAnimUpToDownHight:KAnimUpToDownHight];
-      [UIView downUpAnimation:self.shipAnimView      withAnimUpToDownHight:KAnimUpToDownHight*4 withDuration:1 withRepeatCount:HUGE_VALF];
-      [UIView downUpAnimation:self.leftDownAnimView  withAnimUpToDownHight:KAnimUpToDownHight withDuration:1 withRepeatCount:HUGE_VALF];
-      [UIView upDownAnimation:self.rightDownAnimView withAnimUpToDownHight:KAnimUpToDownHight*2 withDuration:2 withRepeatCount:HUGE_VALF];
-       
       //用户打赏动画
       [self showUserInfoAinm];   
   }];
@@ -282,23 +191,7 @@
 
 }
 
-//发光的星星动画效果
--(void)shiningStarAinmView{
 
-  [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-     _bigStarImageView.frame = CGRectMake(_bigStarImageView.frame.origin.x ,KbigStarImageViewHightTopSpace, KbigStarImageViewWidth, KbigStarImageViewHight);
-    
-    NSArray *magesArray = [NSArray arrayWithObjects:
-                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_shiningstar_1_14th"],
-                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_shiningstar_2_14th"],nil];
-  _bigStarImageView.animationImages = magesArray;//将序列帧数组赋给UIImageView的animationImages属性
-  _bigStarImageView.animationDuration = 0.2;//设置动画时间
-  _bigStarImageView.animationRepeatCount = 0;//设置动画次数 0 表示无限
-  [_bigStarImageView startAnimating];//开始播放动画    
-  
-  } completion:^(BOOL finished) {}];
-
-}
 
 // 显示用户打赏信息 
 -(void)showUserInfoAinm{
