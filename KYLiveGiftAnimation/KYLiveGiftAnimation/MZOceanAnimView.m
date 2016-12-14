@@ -59,7 +59,7 @@
 #define KShipAnimViewWidth 178.5
 #define KShipAnimViewHight 181.5
 #define KShipAnimViewWidthSpace 60
-#define KShipAnimViewHightFooterSpace  130
+#define KShipAnimViewHightFooterSpace  110
 
 #define KblueboomAnimViewHight 350
 #define KblueboomAnimViewHightFooterSpace  152
@@ -67,6 +67,14 @@
 #define KbigStarImageViewWidth 278
 #define KbigStarImageViewHight 282
 #define KbigStarImageViewHightTopSpace 9
+
+#define KUserInfoAnimViewWidth  227
+#define KUserInfoAnimViewHight  62.5
+#define KUserInfoAnimViewHightFooterSpace  333
+
+
+
+   
 
 @interface MZOceanAnimView ()
 @property (nonatomic,strong) UIImageView *bgImageView;
@@ -120,18 +128,18 @@
     _shipAnimView      =  [[UIImageView alloc] init];
     _blueboomAnimView  =  [[UIImageView alloc] init];
     
-    
     _bigStarImageView  = [[UIImageView alloc] init];
+    _userInfoAnimView  = [[UIImageView alloc] init];
 
 
     _nameLabel = [[UILabel alloc] init];
     _giftLabel = [[UILabel alloc] init];
     
     _nameLabel.textColor  = [UIColor whiteColor];
-    _nameLabel.font = [UIFont systemFontOfSize:12];
+    _nameLabel.font = [UIFont systemFontOfSize:15];
     
-    _giftLabel.textColor  = [UIColor colorWithHex:0x00eaff];
-    _giftLabel.font = [UIFont systemFontOfSize:12];
+    _giftLabel.textColor  = [UIColor whiteColor];
+    _giftLabel.font = [UIFont systemFontOfSize:15];
     
     // 初始化动画label
     _skLabel =  [[MZShakeLabel alloc] init];
@@ -140,8 +148,6 @@
     _skLabel.textColor = [UIColor colorWithHex:0xff3c6f];
     _skLabel.textAlignment = NSTextAlignmentLeft;
     _animCount = 0;
-    
-    [self addSubview:_skLabel];
     
     [self addSubview:_bigStarImageView];
 
@@ -152,11 +158,15 @@
     [self addSubview:_rightBackAnimView];
     [self addSubview:_shipAnimView];
 
+   
     [self addSubview:_rightDownAnimView];
     [self addSubview:_leftDownAnimView];
     [self addSubview:_blueboomAnimView];
-    
-    
+    [self addSubview:_userInfoAnimView];
+    [_userInfoAnimView addSubview:_nameLabel];
+    [_userInfoAnimView addSubview:_giftLabel];
+    [self addSubview:_skLabel];
+
 
 }
 
@@ -170,7 +180,6 @@
     //发光的星星
     _bigStarImageView.frame = CGRectMake((SCREEN_WIDTH-KbigStarImageViewWidth)/2 ,-KbigStarImageViewHight, KbigStarImageViewWidth, KbigStarImageViewHight);
          
-    
     //左后海浪
     _leftBackAnimView.image = [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_wave_Back_L_14th"];
     _leftBackAnimView.frame = CGRectMake(KLeftBackAnimViewWidthSpace,SCREEN_HEIGHT, KLeftBackAnimViewWidth, KLeftBackAnimViewHight);
@@ -203,13 +212,34 @@
     _rightDownAnimView.frame = CGRectMake(SCREEN_WIDTH - KRightDownAnimViewWidth,SCREEN_HEIGHT, KRightDownAnimViewWidth, KRightDownAnimViewHight);
     _rightDownAnimView.image = [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_wave_Front_R_14th"];
     
-  
+    
+    //用户打赏信息动画
+    _userInfoAnimView.frame = CGRectMake((SCREEN_WIDTH - KUserInfoAnimViewWidth)/2,SCREEN_HEIGHT - KUserInfoAnimViewHightFooterSpace - KUserInfoAnimViewHight, KUserInfoAnimViewWidth, KUserInfoAnimViewHight);
+    _userInfoAnimView.image = [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_background_mask_14th"];
+    _userInfoAnimView.hidden = YES;
+   
     _skLabel.frame = CGRectMake(0,self.frame.size.height-KLiveShakeLabelHight, KLiveShakeLabelWidth, KLiveShakeLabelHight);
     
-    _nameLabel.text = model.userName;
-    _giftLabel.text = [NSString stringWithFormat:@"送出【%@】",model.giftName];
-    _giftCount = model.giftCount;
     
+    _nameLabel.frame = CGRectMake(KAnimNameLabelLeftSPace,KAnimMameLabelTopSPace, (KUserInfoAnimViewWidth - KAnimNameLabelLeftSPace)/2, (KUserInfoAnimViewHight - KAnimNameLabelFooterSPace - KAnimMameLabelTopSPace)/2);
+    _giftLabel.frame = CGRectMake(_nameLabel.frame.origin.x,KAnimMameLabelTopSPace+_nameLabel.frame.size.height, _nameLabel.frame.size.width,_nameLabel.frame.size.height);
+    
+   
+     NSString *nameLabelStr = [NSString stringWithFormat:@"感谢%@",model.userName];
+    NSMutableAttributedString *attstr = [[NSMutableAttributedString alloc]initWithString:nameLabelStr];
+    NSRange rangeStr = [nameLabelStr rangeOfString:[NSString stringWithFormat:@"%@",model.userName]];
+    [attstr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHex:0x00ff00] range:rangeStr];
+    _nameLabel.attributedText = attstr;
+    _nameLabel.backgroundColor = [UIColor redColor];
+    
+  
+    NSString *giftLabelStr = [NSString stringWithFormat:@"送出的【%@】",model.giftName.length>0?model.giftName:@"【海洋之星】"];
+    NSMutableAttributedString *giftattstr = [[NSMutableAttributedString alloc]initWithString:giftLabelStr];
+    NSRange giftrangeStr = [giftLabelStr rangeOfString:[NSString stringWithFormat:@"【%@】",model.giftName]];
+    [giftattstr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHex:0x00eaff] range:giftrangeStr];
+    _giftLabel.attributedText = giftattstr;
+    _giftCount = model.giftCount;
+
     
   }
 }
@@ -240,18 +270,17 @@
       [UIView downUpAnimation:self.shipAnimView      withAnimUpToDownHight:KAnimUpToDownHight*4 withDuration:1 withRepeatCount:HUGE_VALF];
       [UIView downUpAnimation:self.leftDownAnimView  withAnimUpToDownHight:KAnimUpToDownHight withDuration:1 withRepeatCount:HUGE_VALF];
       [UIView upDownAnimation:self.rightDownAnimView withAnimUpToDownHight:KAnimUpToDownHight*2 withDuration:2 withRepeatCount:HUGE_VALF];
-        
-  }];
-
-  
-
-  [UIView animateWithDuration:0.5 animations:^{
-   
-
-  } completion:^(BOOL finished) {
-        [self shakeNumberLabel];
+       
+      //用户打赏动画
+      [self showUserInfoAinm];   
   }];
   
+  
+  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+     [self shakeNumberLabel];
+  });
+  
+
   self.completeBlock = completed;
 
 }
@@ -272,6 +301,30 @@
   
   } completion:^(BOOL finished) {}];
 
+}
+
+// 显示用户打赏信息 
+-(void)showUserInfoAinm{
+  _userInfoAnimView.hidden = NO;
+  self.userInfoAnimView.alpha = 0;
+  [UIView animateKeyframesWithDuration:0.5 delay:0 options:0 animations:^{
+        self.userInfoAnimView.alpha = 1;
+        [UIView addKeyframeWithRelativeStartTime:0 relativeDuration:1/2.0 animations:^{
+            
+            self.userInfoAnimView.transform = CGAffineTransformMakeScale(3, 3);
+        }];
+        [UIView addKeyframeWithRelativeStartTime:1/3.0 relativeDuration:1/3.0 animations:^{
+            
+            self.userInfoAnimView.transform = CGAffineTransformMakeScale(1, 1);
+        }];
+        
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.2 delay:0 usingSpringWithDamping:0.4 initialSpringVelocity:10 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                self.userInfoAnimView.alpha = 1;
+                self.userInfoAnimView.transform = CGAffineTransformMakeScale(1.0, 1.0);
+            } completion:nil];
+             [self shakeNumberLabel];
+        }];
 }
 
 /**
@@ -306,6 +359,7 @@
 
 }
 
+// 打赏的数量
 - (void)shakeNumberLabel{
   
    _animCount ++; 
