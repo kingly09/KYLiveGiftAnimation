@@ -148,7 +148,7 @@
     
     //用户打赏信息动画
     _userInfoAnimView.frame = CGRectMake((SCREEN_WIDTH - KUserInfoAnimViewWidth)/2,SCREEN_HEIGHT - KUserInfoAnimViewHightFooterSpace - KUserInfoAnimViewHight, KUserInfoAnimViewWidth, KUserInfoAnimViewHight);
-    _userInfoAnimView.image = [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_background_mask_14th"];
+    _userInfoAnimView.image = [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_background_queen_14th"];
     _userInfoAnimView.hidden = YES;
    
     _skLabel.frame = CGRectMake(SCREEN_WIDTH - KLiveShakeLabelWidth - 15 ,199, KLiveShakeLabelWidth, KLiveShakeLabelHight);
@@ -162,7 +162,7 @@
     [attstr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHex:0x00ff00] range:rangeStr];
     _nameLabel.attributedText = attstr;
    
-    NSString *giftLabelStr = [NSString stringWithFormat:@"送出的【%@】",model.giftName.length>0?model.giftName:@"【贵州面具】"];
+    NSString *giftLabelStr = [NSString stringWithFormat:@"送出的【%@】",model.giftName.length>0?model.giftName:@"【女皇的城堡】"];
     NSMutableAttributedString *giftattstr = [[NSMutableAttributedString alloc]initWithString:giftLabelStr];
     NSRange giftrangeStr = [giftLabelStr rangeOfString:[NSString stringWithFormat:@"【%@】",model.giftName]];
     [giftattstr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHex:0x00eaff] range:giftrangeStr];
@@ -264,18 +264,18 @@
  */
 -(void)startPurpleboomAnimView{
   NSArray *magesArray = [NSArray arrayWithObjects:
-                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Purpleboom_1"],
-                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Purpleboom_2"],
-                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Purpleboom_3"],
-                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Purpleboom_4"],
-                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Purpleboom_5"],
-                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Purpleboom_6"],
-                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Purpleboom_7"],
-                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Purpleboom_8"],
-                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Purpleboom_9"],
-                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Purpleboom_10"],
-                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Purpleboom_11"],
-                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Purpleboom_12"],nil];
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Pinkboom_1"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Pinkboom_2"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Pinkboom_3"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Pinkboom_4"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Pinkboom_5"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Pinkboom_6"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Pinkboom_7"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Pinkboom_8"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Pinkboom_9"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Pinkboom_10"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Pinkboom_11"],
+                         [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Pinkboom_12"],nil];
   _markboomAnimView.animationImages = magesArray;//将序列帧数组赋给UIImageView的animationImages属性
   _markboomAnimView.animationDuration = 0.6;//设置动画时间
   _markboomAnimView.animationRepeatCount = 1;//设置动画次数 0 表示无限
