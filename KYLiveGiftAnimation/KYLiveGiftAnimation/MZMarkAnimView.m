@@ -35,10 +35,19 @@
 #define KblueboomAnimViewHightFooterSpace  152
 
 
-#define KUserInfoAnimViewWidth  227
+#define KUserInfoAnimViewWidth  277
 #define KUserInfoAnimViewHight  62.5
 #define KUserInfoAnimViewHightFooterSpace  333
 
+#define KFeather1MaskAnimViewWidth 305
+#define KFeather1MaskAnimViewHigth 101.5
+#define KFeather1MaskAnimViewHigthTopSpace  158.5
+#define KFeather1MaskAnimViewRightSpace  13.5
+
+#define KFeather2MaskAnimViewWidth 311.5
+#define KFeather2MaskAnimViewHigth 106.5
+#define KFeather2MaskAnimViewHigthTopSpace  162.5
+#define KFeather2MaskAnimViewLeftSpace  50
 
 @interface MZMarkAnimView ()
 @property (nonatomic,strong) UIImageView *bgImageView;
@@ -52,6 +61,9 @@
 
 @property (nonatomic,strong) UIImageView *userInfoAnimView;   //用户信息动画
 
+@property (nonatomic,strong) UIImageView *feather1MaskAnimView; //羽毛01
+
+@property (nonatomic,strong) UIImageView *feather2MaskAnimView; //羽毛02
 
 @end
 
@@ -74,7 +86,10 @@
     _markboomAnimView  =  [[UIImageView alloc] init];
 
     _userInfoAnimView  = [[UIImageView alloc] init];
+    
+    _feather1MaskAnimView = [[UIImageView alloc] init];
 
+    _feather2MaskAnimView = [[UIImageView alloc] init];
 
     _nameLabel = [[UILabel alloc] init];
     _giftLabel = [[UILabel alloc] init];
@@ -95,10 +110,15 @@
     
     [self addSubview:_markImageView];
     [self addSubview:_markboomAnimView];
+    [self addSubview:_feather1MaskAnimView];
+    [self addSubview:_feather2MaskAnimView];
+    
     [self addSubview:_userInfoAnimView];
     [_userInfoAnimView addSubview:_nameLabel];
     [_userInfoAnimView addSubview:_giftLabel];
     [self addSubview:_skLabel];
+    
+    
 
 
 }
@@ -117,6 +137,15 @@
     _markImageView.frame = CGRectMake((SCREEN_WIDTH - KMarkImageViewWidth)/2,0, KMarkImageViewWidth, KMarkImageViewHight);
     _markImageView.image = [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_mask_bigger_14th"];
     _markImageView.hidden = YES;
+    
+    _feather1MaskAnimView.frame = CGRectMake(SCREEN_WIDTH - KFeather1MaskAnimViewWidth - KFeather1MaskAnimViewRightSpace,KFeather1MaskAnimViewHigthTopSpace, KFeather1MaskAnimViewWidth, KFeather1MaskAnimViewHigth);
+    _feather1MaskAnimView.image = [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_feather1_mask_14th"];
+    _feather1MaskAnimView.hidden = YES;
+    
+    _feather2MaskAnimView.frame = CGRectMake(SCREEN_WIDTH - KFeather2MaskAnimViewWidth - KFeather2MaskAnimViewLeftSpace,KFeather2MaskAnimViewHigthTopSpace, KFeather2MaskAnimViewWidth, KFeather2MaskAnimViewHigth);
+    _feather2MaskAnimView.image = [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_feather2_mask_14th"];
+    _feather2MaskAnimView.hidden = YES;
+    
     //用户打赏信息动画
     _userInfoAnimView.frame = CGRectMake((SCREEN_WIDTH - KUserInfoAnimViewWidth)/2,SCREEN_HEIGHT - KUserInfoAnimViewHightFooterSpace - KUserInfoAnimViewHight, KUserInfoAnimViewWidth, KUserInfoAnimViewHight);
     _userInfoAnimView.image = [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_background_mask_14th"];
@@ -148,16 +177,18 @@
   //烟雾效果
   [self startPurpleboomAnimView];
   
-  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.7 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
     [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
       [self showMarkImageViewAinm];
+      [self showFeatherAinm];
+      
     } completion:^(BOOL finished) {
       //用户打赏动画
       [self showUserInfoAinm];   
     }];
   });
   
-  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
      [self shakeNumberLabel];
   });
   
@@ -189,6 +220,19 @@
                 _markImageView.transform = CGAffineTransformMakeScale(1.0, 1.0);
             } completion:nil];
         }];
+}
+
+/**
+ 显示羽毛动画
+ */
+-(void)showFeatherAinm{
+   
+   _feather1MaskAnimView.hidden = NO;
+   [UIView upDownAnimation:_feather1MaskAnimView  withAnimUpToDownHight:KAnimUpToDownHight withDuration:1 withRepeatCount:HUGE_VALF];
+   
+   _feather2MaskAnimView.hidden = NO;
+   [UIView downUpAnimation:_feather2MaskAnimView  withAnimUpToDownHight:KAnimUpToDownHight withDuration:1 withRepeatCount:HUGE_VALF];
+   
 }
 
 // 显示用户打赏信息 
@@ -233,7 +277,7 @@
                          [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Purpleboom_11"],
                          [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Purpleboom_12"],nil];
   _markboomAnimView.animationImages = magesArray;//将序列帧数组赋给UIImageView的animationImages属性
-  _markboomAnimView.animationDuration = 1.2;//设置动画时间
+  _markboomAnimView.animationDuration = 0.6;//设置动画时间
   _markboomAnimView.animationRepeatCount = 1;//设置动画次数 0 表示无限
   [_markboomAnimView startAnimating];//开始播放动画    
   

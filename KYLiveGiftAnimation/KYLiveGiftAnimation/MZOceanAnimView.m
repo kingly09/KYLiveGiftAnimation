@@ -59,7 +59,7 @@
 #define KShipAnimViewWidth 178.5
 #define KShipAnimViewHight 181.5
 #define KShipAnimViewWidthSpace 60
-#define KShipAnimViewHightFooterSpace  110
+#define KShipAnimViewHightFooterSpace  120
 
 #define KblueboomAnimViewHight 350
 #define KblueboomAnimViewHightFooterSpace  152
@@ -267,7 +267,7 @@
   
       [UIView upDownAnimation:self.leftBackAnimView  withAnimUpToDownHight:KAnimUpToDownHight];
       [UIView downUpAnimation:self.rightBackAnimView withAnimUpToDownHight:KAnimUpToDownHight];
-      [UIView downUpAnimation:self.shipAnimView      withAnimUpToDownHight:KAnimUpToDownHight*4 withDuration:1 withRepeatCount:HUGE_VALF];
+      [UIView downUpAnimation:self.shipAnimView      withAnimUpToDownHight:KAnimUpToDownHight*3 withDuration:1 withRepeatCount:HUGE_VALF];
       [UIView downUpAnimation:self.leftDownAnimView  withAnimUpToDownHight:KAnimUpToDownHight withDuration:1 withRepeatCount:HUGE_VALF];
       [UIView upDownAnimation:self.rightDownAnimView withAnimUpToDownHight:KAnimUpToDownHight*2 withDuration:2 withRepeatCount:HUGE_VALF];
        
@@ -345,7 +345,7 @@
                          [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Blueboom_11"],
                          [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_Blueboom_12"],nil];
   _blueboomAnimView.animationImages = magesArray;//将序列帧数组赋给UIImageView的animationImages属性
-  _blueboomAnimView.animationDuration = 1.2;//设置动画时间
+  _blueboomAnimView.animationDuration = 0.6;//设置动画时间
   _blueboomAnimView.animationRepeatCount = 1;//设置动画次数 0 表示无限
   [_blueboomAnimView startAnimating];//开始播放动画    
   
