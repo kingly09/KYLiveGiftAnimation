@@ -244,7 +244,7 @@
       [UIView downUpAnimation:_cloudDownAnimView withAnimUpToDownHight:KAnimUpToDownHight*3/2];
       [UIView upDownAnimation:_cloudFrontAnimView withAnimUpToDownHight:KAnimUpToDownHight withDuration:2 withRepeatCount:HUGE_VALF];
    
-         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
           //用户打赏动画
           [self showUserInfoAinm]; 
         });  
