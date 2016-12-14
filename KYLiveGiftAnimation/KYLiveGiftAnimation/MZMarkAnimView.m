@@ -183,12 +183,15 @@
       [self showFeatherAinm];
       
     } completion:^(BOOL finished) {
-      //用户打赏动画
-      [self showUserInfoAinm];   
+      
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        //用户打赏动画
+          [self showUserInfoAinm]; 
+        });  
     }];
   });
   
-  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
      [self shakeNumberLabel];
   });
   
