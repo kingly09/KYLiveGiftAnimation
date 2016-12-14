@@ -411,7 +411,7 @@
         
         // 根据用户ID 控制显示的位置
         if (op.model.giftCount != 0) {
-            op.markAnimView.frame  = CGRectMake(SCREEN_WIDTH, KLiveRightAnimViewWidthOriginY, KLiveRightAnimViewWidth, KLiveRightAnimViewHight);
+            op.markAnimView.frame  = self.parentView.frame;
             op.markAnimView.originFrame = op.markAnimView.frame;
             [self.markQueue addOperation:op];
         }
@@ -448,7 +448,7 @@
         [self.operationCache setObject:op forKey:userReuseIdentifierID];
         
         if (op.model.giftCount != 0) {
-            op.markAnimView.frame  = CGRectMake(SCREEN_WIDTH, KLiveRightAnimViewWidthOriginY, KLiveRightAnimViewWidth, KLiveRightAnimViewHight);
+            op.markAnimView.frame  = self.parentView.frame;
             op.markAnimView.originFrame = op.markAnimView.frame;
             [self.markQueue addOperation:op];
         }
