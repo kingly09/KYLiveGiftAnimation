@@ -606,8 +606,8 @@
         
         // 根据用户ID 控制显示的位置
         if (op.model.giftCount != 0) {
-            op.castleAnimView.frame  = CGRectMake(SCREEN_WIDTH, KLiveRightAnimViewWidthOriginY, KLiveRightAnimViewWidth, KLiveRightAnimViewHight);
-            op.castleAnimView.originFrame = op.castleAnimView.frame;
+            op.castleAnimView.frame  = self.parentView.frame;
+                  op.castleAnimView.originFrame = op.castleAnimView.frame;
             [self.castleQueue addOperation:op];
         }
     }
@@ -643,7 +643,7 @@
         [self.operationCache setObject:op forKey:userReuseIdentifierID];
         
         if (op.model.giftCount != 0) {
-            op.castleAnimView.frame  = CGRectMake(SCREEN_WIDTH, KLiveRightAnimViewWidthOriginY, KLiveRightAnimViewWidth, KLiveRightAnimViewHight);
+            op.castleAnimView.frame  =  self.parentView.frame;
             op.castleAnimView.originFrame = op.castleAnimView.frame;
             [self.castleQueue addOperation:op];
         }

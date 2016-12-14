@@ -35,12 +35,9 @@ typedef void(^completeBlock)(BOOL finished,NSInteger finishCount);
 @interface MZCastleAnimView : UIView
 
 @property (nonatomic,strong) MZGiftModel *model;
-@property (nonatomic,strong) UIImageView *headImageView; // 头像
-@property (nonatomic,strong) UIImageView *giftImageView; // 礼物
+@property (nonatomic,assign) NSInteger giftCount; // 礼物个数
 @property (nonatomic,strong) UILabel *nameLabel; // 送礼物者
 @property (nonatomic,strong) UILabel *giftLabel; // 礼物名称
-@property (nonatomic,assign) NSInteger giftCount; // 礼物个数
-
 @property (nonatomic,strong) MZShakeLabel *skLabel;
 @property (nonatomic,assign) NSInteger animCount; // 动画执行到了第几次
 @property (nonatomic,assign) CGRect originFrame; // 记录原始坐标
