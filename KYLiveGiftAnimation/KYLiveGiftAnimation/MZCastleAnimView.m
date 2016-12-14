@@ -45,6 +45,26 @@
 #define KCloudRightAnimViewHight 78.5
 #define KCloudRightAnimViewHightTopSpace 225.5
 
+#define KCloudLeftAnimViewWidth 34
+#define KCloudLeftAnimViewHight 91
+#define KCloudLeftAnimViewHightTopSpace 176.5
+
+#define KCastleAnimViewWidth 308
+#define KCastleAnimViewHight 415
+#define KCastleAnimViewHightToFooterpSpace 65
+
+#define KCloudUpAnimViewWidth 117
+#define KCloudUpAnimViewHight 138
+#define KCloudUpAnimViewHightToFooterpSpace 247
+
+#define KCloudDownAnimViewWidth 128
+#define KCloudDownAnimViewHight 175
+#define KCloudDownAnimViewHightToFooterpSpace 50
+
+#define KCloudFrontAnimViewWidth 273.5
+#define KCloudFrontAnimViewHight 179.5
+#define KCloudFrontAnimViewHightToFooterpSpace 20
+
 @interface MZCastleAnimView ()
 @property (nonatomic,strong) UIImageView *bgImageView;
 @property (nonatomic,strong) NSTimer *timer;
@@ -52,11 +72,21 @@
 @property (nonatomic,copy) void(^completeBlock)(BOOL finished,NSInteger finishCount); // 新增了回调参数 finishCount， 用来记录动画结束时累加数量，将来在3秒内，还能继续累加
 
 @property (nonatomic,strong) UIImageView *castleboomAnimView;   //烟雾动画
+
 @property (nonatomic,strong) UIImageView *userInfoAnimView;   //用户信息动画
 
 @property (nonatomic,strong) UIImageView *moonAnimView;       //月亮动画
 @property (nonatomic,strong) UIImageView *cloudRightAnimView; //树右动画
 
+@property (nonatomic,strong) UIImageView *cloudLeftAnimView; //树左动画
+
+@property (nonatomic,strong) UIImageView *castleAnimView; //城堡动画
+
+@property (nonatomic,strong) UIImageView *cloudUpAnimView; //云上边动画
+
+@property (nonatomic,strong) UIImageView *cloudDownAnimView; //云下边动画
+
+@property (nonatomic,strong) UIImageView *cloudFrontAnimView; //云-前 动画
 
 @end
 
@@ -79,7 +109,13 @@
     
     _moonAnimView = [[UIImageView alloc] init];
     _cloudRightAnimView = [[UIImageView alloc] init];
+    _cloudLeftAnimView  = [[UIImageView alloc] init];
+    _castleAnimView     = [[UIImageView alloc] init];
+    _cloudUpAnimView    = [[UIImageView alloc] init];
+    _cloudDownAnimView  = [[UIImageView alloc] init];
+    _cloudFrontAnimView = [[UIImageView alloc] init];
 
+  
     _nameLabel = [[UILabel alloc] init];
     _giftLabel = [[UILabel alloc] init];
     
@@ -99,7 +135,12 @@
     
 
     [self addSubview:_moonAnimView];
-    [self addSubview:_cloudRightAnimView];  
+    [self addSubview:_cloudRightAnimView]; 
+    [self addSubview:_cloudLeftAnimView]; 
+    [self addSubview:_castleAnimView];
+    [self addSubview:_cloudUpAnimView];
+    [self addSubview:_cloudDownAnimView];
+    [self addSubview:_cloudFrontAnimView];
     
     [self addSubview:_userInfoAnimView];
 
@@ -128,9 +169,33 @@
     _moonAnimView.image = [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_moon_14th"];
     _cloudRightAnimView.frame = CGRectMake(SCREEN_WIDTH,KCloudRightAnimViewHightTopSpace,KCloudRightAnimViewWidth,KCloudRightAnimViewHight);
     _cloudRightAnimView.image = [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_cloud_right_14th"];
+    
+    //树的左边动画
+    _cloudLeftAnimView.frame = CGRectMake(- KCloudLeftAnimViewWidth,KCloudLeftAnimViewHightTopSpace,KCloudLeftAnimViewWidth,KCloudLeftAnimViewHight);
+    _cloudLeftAnimView.image = [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_cloud_left_14th"];
+    
+    
+    //城堡动画
+    _castleAnimView.frame = CGRectMake(SCREEN_WIDTH - KCastleAnimViewWidth,SCREEN_HEIGHT,KCastleAnimViewWidth,KCastleAnimViewHight);
+    _castleAnimView.image = [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_castle_14th"];
+    
+    //云上边动画
+    _cloudUpAnimView.frame = CGRectMake(0,SCREEN_HEIGHT,KCloudUpAnimViewWidth,KCloudUpAnimViewHight);
+    _cloudUpAnimView.image = [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_cloud_up_14th"];
+    
+    //云 -下动画
+    _cloudDownAnimView.frame = CGRectMake(0,SCREEN_HEIGHT,KCloudDownAnimViewWidth,KCloudDownAnimViewHight);
+    _cloudDownAnimView.image = [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_cloud_down_14th"];
+    
+
+    //云 -前 动画
+    _cloudFrontAnimView.frame = CGRectMake( (SCREEN_WIDTH - KCloudFrontAnimViewWidth)/2,SCREEN_HEIGHT,KCloudFrontAnimViewWidth,KCloudFrontAnimViewHight);
+    _cloudFrontAnimView.image = [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_cloud_front_14th"];
+    
+    
      
     //用户打赏信息动画
-    _userInfoAnimView.frame = CGRectMake((SCREEN_WIDTH - KUserInfoAnimViewWidth)/2,SCREEN_HEIGHT - KUserInfoAnimViewHightFooterSpace - KUserInfoAnimViewHight, KUserInfoAnimViewWidth, KUserInfoAnimViewHight);
+    _userInfoAnimView.frame = CGRectMake((SCREEN_WIDTH - KUserInfoAnimViewWidth)/2,SCREEN_HEIGHT, KUserInfoAnimViewWidth, KUserInfoAnimViewHight);
     _userInfoAnimView.image = [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_background_queen_14th"];
     _userInfoAnimView.hidden = YES;
    
@@ -164,13 +229,23 @@
     [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
       _moonAnimView.frame = CGRectMake(_moonAnimView.frame.origin.x,KMoonAnimViewWidthHigthTopSpace,KMoonAnimViewWidth,KMoonAnimViewWidthHigth);
       _cloudRightAnimView.frame = CGRectMake(SCREEN_WIDTH - KCloudRightAnimViewWidth,KCloudRightAnimViewHightTopSpace,KCloudRightAnimViewWidth,KCloudRightAnimViewHight);
+      _cloudLeftAnimView.frame = CGRectMake(0,KCloudLeftAnimViewHightTopSpace,KCloudLeftAnimViewWidth,KCloudLeftAnimViewHight);
+      _castleAnimView.frame = CGRectMake(_castleAnimView.frame.origin.x,SCREEN_HEIGHT- KCastleAnimViewHightToFooterpSpace - KCastleAnimViewHight,KCastleAnimViewWidth,KCastleAnimViewHight);
+      _cloudUpAnimView.frame = CGRectMake(0,SCREEN_HEIGHT - KCloudUpAnimViewHight - KCloudUpAnimViewHightToFooterpSpace,KCloudUpAnimViewWidth,KCloudUpAnimViewHight);
+      _cloudDownAnimView.frame = CGRectMake(0,SCREEN_HEIGHT - KCloudDownAnimViewHight - KCloudDownAnimViewHightToFooterpSpace,KCloudDownAnimViewWidth,KCloudDownAnimViewHight);
+      _cloudFrontAnimView.frame = CGRectMake( _cloudFrontAnimView.frame.origin.x,SCREEN_HEIGHT - KCloudFrontAnimViewHight - KCloudFrontAnimViewHightToFooterpSpace ,KCloudFrontAnimViewWidth,KCloudFrontAnimViewHight);
     
     } completion:^(BOOL finished) {
     
-     
-      //用户打赏动画
-      [self showUserInfoAinm];   
+      [UIView upDownAnimation:_castleAnimView withAnimUpToDownHight:KAnimUpToDownHight withDuration:1 withRepeatCount:HUGE_VALF];
+      [UIView upDownAnimation:_cloudUpAnimView withAnimUpToDownHight:KAnimUpToDownHight];
+      [UIView downUpAnimation:_cloudDownAnimView withAnimUpToDownHight:KAnimUpToDownHight*3/2];
+      [UIView upDownAnimation:_cloudFrontAnimView withAnimUpToDownHight:KAnimUpToDownHight withDuration:2 withRepeatCount:HUGE_VALF];
     }];
+  });
+  
+  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+     [self showUserInfoAinm];
   });
   
   dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
