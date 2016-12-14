@@ -234,8 +234,10 @@
       _cloudUpAnimView.frame = CGRectMake(0,SCREEN_HEIGHT - KCloudUpAnimViewHight - KCloudUpAnimViewHightToFooterpSpace,KCloudUpAnimViewWidth,KCloudUpAnimViewHight);
       _cloudDownAnimView.frame = CGRectMake(0,SCREEN_HEIGHT - KCloudDownAnimViewHight - KCloudDownAnimViewHightToFooterpSpace,KCloudDownAnimViewWidth,KCloudDownAnimViewHight);
       _cloudFrontAnimView.frame = CGRectMake( _cloudFrontAnimView.frame.origin.x,SCREEN_HEIGHT - KCloudFrontAnimViewHight - KCloudFrontAnimViewHightToFooterpSpace ,KCloudFrontAnimViewWidth,KCloudFrontAnimViewHight);
+      
     
     } completion:^(BOOL finished) {
+    
     
       [UIView upDownAnimation:_castleAnimView withAnimUpToDownHight:KAnimUpToDownHight withDuration:1 withRepeatCount:HUGE_VALF];
       [UIView upDownAnimation:_cloudUpAnimView withAnimUpToDownHight:KAnimUpToDownHight];
@@ -249,6 +251,11 @@
           
       }];
   });
+  
+  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+     [self twinkleStarAnim:20];
+  });
+  
   
   dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
      [self shakeNumberLabel];
@@ -337,6 +344,68 @@
     self.skLabel.text = [NSString stringWithFormat:@"x %ld",_animCount];
     [self.skLabel startAnimWithDuration:0.5];
 
+
+}
+
+/**
+ 随机显示 多少的 闪星星
+
+ @param num 星星的个数
+ */
+-(void)twinkleStarAnim:(float )num{
+    
+   for (int i= 0; i <  num; i++) {
+    
+     UIImageView *starAnimView  =  [[UIImageView alloc] init];
+     starAnimView.image  = [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_star_castle"];
+     starAnimView.frame   = [self randomAinmFrame];
+     
+     NSInteger oddNum =  i % 2;
+     
+    CAKeyframeAnimation *opacityAnimation;
+    opacityAnimation = [CAKeyframeAnimation animationWithKeyPath:@"opacity"];
+    opacityAnimation.values = (oddNum == 0)? @[@(0.6), @(1), @(0.6)]: @[@(1), @(0.6), @(1)];
+    opacityAnimation.duration = 0.1;
+    opacityAnimation.fillMode = kCAFillModeBoth;
+    opacityAnimation.calculationMode = kCAAnimationCubic;
+    opacityAnimation.repeatCount = HUGE_VALF;
+    [starAnimView.layer addAnimation:opacityAnimation forKey:@"opacityAnimation"];
+
+     [self addSubview:starAnimView];
+   } 
+}
+/**
+* 随机出现星星的位置
+*/
+-(CGRect )randomAinmFrame{
+  
+  int minWidth = 10;
+  int maxWidth = 15;
+  
+  int leftMin = minWidth+1;
+  int leftMax = (SCREEN_WIDTH - maxWidth - leftMin);
+  
+  int topMin  = 150;
+  int topMax  = SCREEN_HEIGHT - 150;
+  
+  int x =  [self getRandomNumber:leftMin to:leftMax];
+  
+  int y =  [self getRandomNumber:topMin to:topMax];
+  
+  int w =  [self getRandomNumber:minWidth to:maxWidth];
+  
+  CGRect frame = CGRectMake(x,y,w,w);
+  return frame;
+
+}
+
+/**
+*  取一个随机整数，范围在[from,to），包括from，包括to
+*/
+-(int)getRandomNumber:(int)from to:(int)to
+
+{
+    return (int)(from + (arc4random() % (to - from + 1)));
 
 }
 
