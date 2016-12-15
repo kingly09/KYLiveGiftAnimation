@@ -83,6 +83,8 @@
 #define KRigthSmallStarAnimViewTopSpace 125
 #define KRigthSmallStarAnimViewRightSpace  55
 
+#define KStarTopVarSpace 30 //小星星 动画开始位置
+
 @interface MZOceanAnimView ()
 @property (nonatomic,strong) UIImageView *bgImageView;
 @property (nonatomic,strong) NSTimer *timer;
@@ -199,11 +201,11 @@
     _bigStarImageView.frame = CGRectMake((SCREEN_WIDTH-KbigStarImageViewWidth)/2 ,-KbigStarImageViewHight, KbigStarImageViewWidth, KbigStarImageViewHight);
     
     //左边的小星星
-    _smallLeftStarAnimView.frame = CGRectMake(KLeftSmallStarAnimViewSpace,-KSmallStarWidth, KSmallStarWidth, KSmallStarWidth);
+    _smallLeftStarAnimView.frame = CGRectMake(KLeftSmallStarAnimViewSpace,KStarTopVarSpace, KSmallStarWidth, KSmallStarWidth);
     _smallLeftStarAnimView.image = [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_start_2_z_14th"];
 
      //右边的小星星
-    _smallRightStarAnimView.frame = CGRectMake(SCREEN_WIDTH - KSmallStarWidth - KRigthSmallStarAnimViewRightSpace,-KSmallStarWidth, KSmallStarWidth, KSmallStarWidth);
+    _smallRightStarAnimView.frame = CGRectMake(SCREEN_WIDTH - KSmallStarWidth - KRigthSmallStarAnimViewRightSpace,KStarTopVarSpace, KSmallStarWidth, KSmallStarWidth);
     _smallRightStarAnimView.image = [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_start_2_z_14th"];
 
                    
@@ -228,7 +230,7 @@
     _leftImageView.frame = CGRectMake(-KLeftImageViewWidth,SCREEN_HEIGHT-KLeftImageViewHight-KLeftImageViewHerSpace, KLeftImageViewWidth, KLeftImageViewHight);
     
     // 左海浪旁边的星星
-    _leftStarAnimView.frame = CGRectMake(KLeftStarAnimViewSpace,-KBigStarWidth, KBigStarWidth, KBigStarWidth);
+    _leftStarAnimView.frame = CGRectMake(KLeftStarAnimViewSpace,KStarTopVarSpace, KBigStarWidth, KBigStarWidth);
     _leftStarAnimView.image = [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_start_2_z_14th"];
 
   
@@ -237,7 +239,7 @@
     _rightImageView.frame = CGRectMake(SCREEN_WIDTH,SCREEN_HEIGHT-KRightImageViewHight-KRightImageViewHerSpace, KRightImageViewWidth, KRightImageViewHight);
     
     // 右海浪旁边的星星
-    _rightStarAnimView.frame = CGRectMake(SCREEN_WIDTH - KLeftStarAnimViewSpace*2 -KBigStarWidth ,-KBigStarWidth, KBigStarWidth, KBigStarWidth);
+    _rightStarAnimView.frame = CGRectMake(SCREEN_WIDTH - KLeftStarAnimViewSpace*2 -KBigStarWidth ,KStarTopVarSpace, KBigStarWidth, KBigStarWidth);
     _rightStarAnimView.image = [[MZAnimationImageCache shareInstance] getImageWithName:@"ic_start_2_z_14th"];
 
     
