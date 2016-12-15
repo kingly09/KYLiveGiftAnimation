@@ -53,6 +53,9 @@ typedef void(^completeBlock)(BOOL finished,NSInteger finishCount);
 /// 初始化自定义动画
 -(void)setupCustomView;
 
+/// 初始化公共自定义动画
+-(void)pubicView;
+
 /// 动画完成后的回调
 - (void)animateWithCompleteBlock:(completeBlock)completed;
 

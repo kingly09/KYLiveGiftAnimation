@@ -26,14 +26,17 @@
 //
 
 #import "MZRightAnimView.h"
+
 #import "MZLiveGiftAnimationHeader.h"
 
 @interface MZRightAnimView ()
 @property (nonatomic,strong) UIImageView *bgImageView;
 
-@property (nonatomic,strong) UIImageView *loveAnimateView;    //爱心
+@property (nonatomic,strong) UIImageView *loveAnimateView;
 @property (nonatomic,strong) UIImageView *hotGasAnimateView;  //热气
 @property (nonatomic,strong) UIImageView *coffeeCupImageView; //杯子
+
+@property (nonatomic,strong) MZGiftModel *giftModel;
 
 @end
 
@@ -41,24 +44,38 @@
 
 - (instancetype)init {
     if (self = [super init]) {
-   
+        
     }
     return self;
 }
 
 -(void)setupCustomView{
 
-    [self.userInfoAnimView removeFromSuperview];
-
     _bgImageView = [[UIImageView alloc] init];
   
+    self.nameLabel = [[UILabel alloc] init];
+    self.giftLabel = [[UILabel alloc] init];
+    
+    self.nameLabel.textColor  = [UIColor whiteColor];
+    self.nameLabel.font = [UIFont systemFontOfSize:15];
+    
+    self.giftLabel.textColor  = [UIColor whiteColor];
+    self.giftLabel.font = [UIFont systemFontOfSize:15];
+    
+    // 初始化动画label
+    self.skLabel =  [[MZShakeLabel alloc] init];
+    self.skLabel.font = [UIFont systemFontOfSize:25];
+    self.skLabel.borderColor = [UIColor whiteColor];
+    self.skLabel.textColor = [UIColor colorWithHex:0xff3c6f];
+    self.skLabel.textAlignment = NSTextAlignmentLeft;
+    self.animCount = 0;
+    
     //爱心动画
     _loveAnimateView = [[UIImageView alloc] init];
     
     //热气动画
     _hotGasAnimateView  = [[UIImageView alloc] init];
     _coffeeCupImageView = [[UIImageView alloc] init];
-    
     
     [self addSubview:_bgImageView];
     [self addSubview:self.nameLabel];
@@ -70,6 +87,14 @@
     [self addSubview:_coffeeCupImageView];
     [_coffeeCupImageView addSubview:_hotGasAnimateView];
     
+}
+
+/**
+ * 公共视图初始化
+ **/
+-(void)pubicView{
+
+    ;
 }
 
 #pragma mark 布局 UI
@@ -96,6 +121,8 @@
 
 - (void)setModel:(MZGiftModel *)model {
 
+    _giftModel = model;
+
     NSString *nameLabelStr = [NSString stringWithFormat:@"感谢%@",model.user.userName];
     NSMutableAttributedString *attstr = [[NSMutableAttributedString alloc]initWithString:nameLabelStr];
     NSRange rangeStr = [nameLabelStr rangeOfString:[NSString stringWithFormat:@"%@",model.user.userName]];
@@ -118,9 +145,9 @@
         self.frame = CGRectMake(KLiveRightAnimViewWidthOriginX, self.frame.origin.y, self.frame.size.width, self.frame.size.height);
     } completion:^(BOOL finished) {
     
-       if (self.model.giftType == GIFT_TYPE_COOFFEE) {
+       if (_giftModel.giftType == GIFT_TYPE_COOFFEE) {
           [self showOffeeAnim];
-       }else if (self.model.giftType == GIFT_TYPE_GUARD){
+       }else if (_giftModel.giftType == GIFT_TYPE_GUARD){
           [self showLoveAnim];
        }
        

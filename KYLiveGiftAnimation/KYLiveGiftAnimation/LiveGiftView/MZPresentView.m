@@ -44,10 +44,7 @@
 
 -(void)setupCustomView{
      
-     //重置
-     [self.userInfoAnimView removeFromSuperview];
-     [self.nameLabel removeFromSuperview];
-     [self.giftLabel removeFromSuperview];
+ 
      
     _bgImageView = [[UIImageView alloc] init];
     _bgImageView.backgroundColor = [UIColor blackColor];
@@ -65,13 +62,19 @@
     self.giftLabel.font = [UIFont systemFontOfSize:12];
     
     
+
     [self addSubview:_bgImageView];
     [self addSubview:_headImageView];
     [self addSubview:_giftImageView];
     [self addSubview:self.nameLabel];
     [self addSubview:self.giftLabel];
     
+    
 
+}
+
+-(void)pubicView{
+ ;
 }
 
 #pragma mark 布局 UI
