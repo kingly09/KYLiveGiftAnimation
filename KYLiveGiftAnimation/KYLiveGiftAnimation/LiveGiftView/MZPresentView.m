@@ -44,31 +44,27 @@
 
 -(void)setupCustomView{
      
- 
-     
-    _bgImageView = [[UIImageView alloc] init];
-    _bgImageView.backgroundColor = [UIColor blackColor];
-    _bgImageView.alpha = 0.3;
-    _headImageView = [[UIImageView alloc] init];
-    _giftImageView = [[UIImageView alloc] init];
     
-    self.nameLabel = [[UILabel alloc] init];
-    self.giftLabel = [[UILabel alloc] init];
-    
+
     self.nameLabel.textColor  = [UIColor whiteColor];
     self.nameLabel.font = [UIFont systemFontOfSize:12];
     
     self.giftLabel.textColor  = [UIColor colorWithHex:0x00eaff];
     self.giftLabel.font = [UIFont systemFontOfSize:12];
     
+    _bgImageView = [[UIImageView alloc] init];
+    _bgImageView.backgroundColor = [UIColor blackColor];
+    _bgImageView.alpha = 0.3;
+    _headImageView = [[UIImageView alloc] init];
+    _giftImageView = [[UIImageView alloc] init];
     
-
+   
     [self addSubview:_bgImageView];
     [self addSubview:_headImageView];
     [self addSubview:_giftImageView];
     [self addSubview:self.nameLabel];
     [self addSubview:self.giftLabel];
-    
+    [self addSubview:self.skLabel];    
     
 
 }
@@ -83,6 +79,8 @@
     [super layoutSubviews];
   
     _headImageView.frame = CGRectMake(KLivePresentViewWidthSpace, 0, self.frame.size.height, self.frame.size.height);
+    _headImageView.layer.cornerRadius = self.frame.size.height / 2;
+    _headImageView.layer.masksToBounds = YES;
   
     _giftImageView.frame = CGRectMake(self.frame.size.width - KGiftImageViewWidth + KLivePresentViewWidthSpace, self.frame.size.height - KGiftImageViewWidth, KGiftImageViewWidth, KGiftImageViewWidth);
     
@@ -107,6 +105,8 @@
     self.giftLabel.text = [NSString stringWithFormat:@"送出【%@】",model.giftName];
     self.giftCount = model.giftCount;
     
+    _headImageView.image = model.headImage;
+    _giftImageView.image = model.giftImage;
 }
 
 

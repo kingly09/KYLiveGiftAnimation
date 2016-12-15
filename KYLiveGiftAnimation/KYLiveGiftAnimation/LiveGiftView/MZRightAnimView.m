@@ -53,23 +53,6 @@
 
     _bgImageView = [[UIImageView alloc] init];
   
-    self.nameLabel = [[UILabel alloc] init];
-    self.giftLabel = [[UILabel alloc] init];
-    
-    self.nameLabel.textColor  = [UIColor whiteColor];
-    self.nameLabel.font = [UIFont systemFontOfSize:15];
-    
-    self.giftLabel.textColor  = [UIColor whiteColor];
-    self.giftLabel.font = [UIFont systemFontOfSize:15];
-    
-    // 初始化动画label
-    self.skLabel =  [[MZShakeLabel alloc] init];
-    self.skLabel.font = [UIFont systemFontOfSize:25];
-    self.skLabel.borderColor = [UIColor whiteColor];
-    self.skLabel.textColor = [UIColor colorWithHex:0xff3c6f];
-    self.skLabel.textAlignment = NSTextAlignmentLeft;
-    self.animCount = 0;
-    
     //爱心动画
     _loveAnimateView = [[UIImageView alloc] init];
     

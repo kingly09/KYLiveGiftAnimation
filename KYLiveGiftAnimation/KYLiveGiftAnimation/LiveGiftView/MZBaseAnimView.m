@@ -36,19 +36,21 @@
 @implementation MZBaseAnimView
 
 - (instancetype)init {
-    if (self = [super init]) {
-        _originFrame = self.frame;
-     
-        [self setupCustomView];
-        [self pubicView];
-    }
-    return self;
+  if (self = [super init]) {
+    //初始化公共
+    [self setupInit];
+    //自定义初始化视图
+    [self setupCustomView];
+    //添加公共视图
+    [self pubicView];
+  }
+  return self;
 }
-/**
- * 公共视图初始化
- **/
--(void)pubicView{
 
+-(void)setupInit{
+
+   _originFrame = self.frame;
+    
     //用户信息
     _userInfoAnimView  = [[UIImageView alloc] init];
     
@@ -68,7 +70,14 @@
     _skLabel.textColor = [UIColor colorWithHex:0xff3c6f];
     _skLabel.textAlignment = NSTextAlignmentLeft;
     _animCount = 0;
-    
+
+}
+
+/**
+ * 公共视图初始化
+ **/
+-(void)pubicView{
+
     [self addSubview:_userInfoAnimView];
     [_userInfoAnimView addSubview:_nameLabel];
     [_userInfoAnimView addSubview:_giftLabel];
