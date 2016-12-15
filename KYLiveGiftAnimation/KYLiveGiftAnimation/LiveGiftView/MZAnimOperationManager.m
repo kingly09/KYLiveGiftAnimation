@@ -70,63 +70,62 @@
 
 /// 动画操作 
 - (void)animWithGiftModel:(MZGiftModel *)model finishedBlock:(void(^)(BOOL result))finishedBlock{
-
-  if (model.giftCount == 0 && model.userId == 0 && model.giftId == 0) {
+   
+   //必须要有发送礼物用户信息和礼物个数
+   if (model.giftCount == 0 && model.user.userId == 0 && model.giftId == 0) {
         NSLog(@"必须要有发送礼物用户信息和礼物个数");
         finishedBlock(NO);
       return; 
    }
-  
    
-   if (model.userName.length == 0) {
+   if (model.user.userName.length == 0) {
       NSLog(@"发送礼物者的名字不能为空");
      finishedBlock(NO);
       return; 
    }
    
-   if (model.gifType == GIFT_TYPE_DEFAULT && model.giftPic.length == 0 && model.giftImage == nil) {
+   if (model.giftType == GIFT_TYPE_DEFAULT && model.giftPic.length == 0) {
      NSLog(@"当是普通动画的时候，需要带上礼物的头像");
      finishedBlock(NO);
      return; 
    }
-
-   if (model.gifType == GIFT_TYPE_DEFAULT) { //普通动画
+   
+   if (model.giftType == GIFT_TYPE_DEFAULT) { //普通动画
         
         [self animPresentView:model finishedBlock:^(BOOL result) {
             finishedBlock(result);
         }];
         
-   }else if (model.gifType == GIFT_TYPE_GUARD) { //爱心守护者
+   }else if (model.giftType == GIFT_TYPE_GUARD) { //爱心守护者
    
       [self animWithGuard:model finishedBlock:^(BOOL result) {
             finishedBlock(result);
       }];
    
-   }else if (model.gifType == GIFT_TYPE_MASK) {  //贵族面具
+   }else if (model.giftType == GIFT_TYPE_MASK) {  //贵族面具
    
       [self animWithMask:model finishedBlock:^(BOOL result) {
             finishedBlock(result);
         }];
    
-   }else if (model.gifType == GIFT_TYPE_OCEAN) { //海洋之星
+   }else if (model.giftType == GIFT_TYPE_OCEAN) { //海洋之星
    
       [self animWithOcean:model finishedBlock:^(BOOL result) {
             finishedBlock(result);
       }];
    
-   }else if (model.gifType == GIFT_TYPE_COOFFEE) { //咖啡印记
+   }else if (model.giftType == GIFT_TYPE_COOFFEE) { //咖啡印记
    
       [self animWithCooffee:model finishedBlock:^(BOOL result) {
             finishedBlock(result);
       }];
    
-   }else if (model.gifType == GIFT_TYPE_CASTLE) { //女皇的城堡
+   }else if (model.giftType == GIFT_TYPE_CASTLE) { //女皇的城堡
       
       [self animWithCastle:model finishedBlock:^(BOOL result) {
             finishedBlock(result);
       }];
    }
-
 }
 
 
@@ -137,7 +136,7 @@
     
     // 当上次为空时就不执行取消操作 (第一次进入执行时才会为空)
   
-    if (model.userId > 0) {
+    if (model.user.userId > 0) {
        NSString *userReuseIdentifierID = [self getUserReuseIdentifierID:model];
         [[self.operationCache objectForKey:userReuseIdentifierID] cancel];
     }
@@ -146,7 +145,7 @@
 //// 获得用户唯一标示reuseIdentifier，记录礼物信息的标示信息
 -(NSString *)getUserReuseIdentifierID:(MZGiftModel *)model{
    
-    NSString *userReuseIdentifierID = [NSString stringWithFormat:@"%ld_%ld",model.userId,(long)model.gifType];
+    NSString *userReuseIdentifierID = [NSString stringWithFormat:@"%ld_%ld",model.user.userId,(long)model.giftType];
     return userReuseIdentifierID; 
    
 }

@@ -41,17 +41,17 @@
 + (instancetype)animOperationWithGiftModel:(MZGiftModel *)model finishedBlock:(void(^)(BOOL result,NSInteger finishCount))finishedBlock; {
     MZAnimOperation *op = [[MZAnimOperation alloc] init];
     
-  if (model.gifType == GIFT_TYPE_DEFAULT) { //普通动画
+  if (model.giftType == GIFT_TYPE_DEFAULT) { //普通动画
       op.presentView = [[MZPresentView alloc] init];
-   }else if (model.gifType == GIFT_TYPE_GUARD) { //爱心守护者
+   }else if (model.giftType == GIFT_TYPE_GUARD) { //爱心守护者
       op.rightAnimView = [[MZRightAnimView alloc] init];
-   }else if (model.gifType == GIFT_TYPE_MASK) {  //贵族面具
+   }else if (model.giftType == GIFT_TYPE_MASK) {  //贵族面具
       op.markAnimView  = [[MZMarkAnimView alloc] init];
-   }else if (model.gifType == GIFT_TYPE_OCEAN) { //海洋之星
+   }else if (model.giftType == GIFT_TYPE_OCEAN) { //海洋之星
       op.oceanAnimView = [[MZOceanAnimView alloc]init];
-   }else if (model.gifType == GIFT_TYPE_COOFFEE) { //咖啡印记
+   }else if (model.giftType == GIFT_TYPE_COOFFEE) { //咖啡印记
       op.rightAnimView = [[MZRightAnimView alloc] init];
-   }else if (model.gifType == GIFT_TYPE_CASTLE) { //女皇的城堡
+   }else if (model.giftType == GIFT_TYPE_CASTLE) { //女皇的城堡
       op.castleAnimView = [[MZCastleAnimView alloc] init];
    }
     op.model = model;
@@ -77,17 +77,17 @@
     }
     self.executing = YES;
     
-  if (_model.gifType == GIFT_TYPE_DEFAULT) { //普通动画
+  if (_model.giftType == GIFT_TYPE_DEFAULT) { //普通动画
           [self addOperationWithPresentView];
-   }else if (_model.gifType == GIFT_TYPE_GUARD) { //爱心守护者
+   }else if (_model.giftType == GIFT_TYPE_GUARD) { //爱心守护者
           [self addOperationWithPightAnimView];
-   }else if (_model.gifType == GIFT_TYPE_MASK) {  //贵族面具
+   }else if (_model.giftType == GIFT_TYPE_MASK) {  //贵族面具
           [self addOperationWithMarkAnimView];
-   }else if (_model.gifType == GIFT_TYPE_OCEAN) {  //海洋之星
+   }else if (_model.giftType == GIFT_TYPE_OCEAN) {  //海洋之星
           [self addOperationWithOceanAnimView];
-   }else if (_model.gifType == GIFT_TYPE_COOFFEE) { //咖啡印记
+   }else if (_model.giftType == GIFT_TYPE_COOFFEE) { //咖啡印记
           [self addOperationWithPightAnimView];
-   }else if (_model.gifType == GIFT_TYPE_CASTLE) {  //女皇的城堡
+   }else if (_model.giftType == GIFT_TYPE_CASTLE) {  //女皇的城堡
           [self addOperationWithCastleAnimView];
    }
 }

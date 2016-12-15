@@ -29,8 +29,8 @@
 #import "MZLiveGiftAnimationHeader.h"
 
 @interface ViewController (){
-
-      MZAnimOperationManager *manager;
+  
+  MZAnimOperationManager *manager;
 }
 @end
 
@@ -50,56 +50,41 @@
   // Dispose of any resources that can be recreated.
   
   if (manager != nil) {
-     [manager resetDealloc];
-     manager = nil;
+    [manager resetDealloc];
+    manager = nil;
   }
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
- 
- [super viewWillDisappear:animated];
- 
- if (manager != nil) {
-     [manager resetDealloc];
-     manager = nil;
-  }
-
-}
-
-- (IBAction)sendGift01:(id)sender {
-
-    // 礼物模型
-    long  x = arc4random() % 9+1;    
-    MZGiftModel *giftModel = [[MZGiftModel alloc] init];
-    giftModel.headImage = [UIImage imageNamed:@"luffy"];
-    giftModel.userId = x;
-    giftModel.userName = [NSString stringWithFormat:@"%ld",x];
-    giftModel.giftImage = [UIImage imageNamed:@"flower"];
-    giftModel.giftName = @"1个【鲜花】";
-    giftModel.giftCount = 1;
-    
-   if (manager) {
-      manager.parentView = self.view;
-      // model 传入礼物模型
-      [manager animWithGiftModel:giftModel finishedBlock:^(BOOL result) {
-        
-    }];
+  
+  [super viewWillDisappear:animated];
+  
+  if (manager != nil) {
+    [manager resetDealloc];
+    manager = nil;
   }
   
 }
 
-- (IBAction)sendGift02:(id)sender {
-
-    // 礼物模型
-    long  x = arc4random() % 9 + 100;    
-    MZGiftModel *giftModel = [[MZGiftModel alloc] init];
-    giftModel.headImage = [UIImage imageNamed:@"mogu"];
-    giftModel.userId = x;
-    giftModel.userName = [NSString stringWithFormat:@"%ld",x];
-    giftModel.giftImage = [UIImage imageNamed:@"ic_bear_small_14th"];
-    giftModel.giftName = @"2个【小熊】";
-    giftModel.giftCount = 20;
-    
+- (IBAction)sendGift01:(id)sender {
+  
+  // 礼物模型
+  long  x = arc4random() % 9+1;    
+  MZGiftModel *giftModel = [[MZGiftModel alloc] init];
+  giftModel.giftId = 1;
+  giftModel.headImage = [UIImage imageNamed:@"luffy"];
+  giftModel.giftImage = [UIImage imageNamed:@"flower"];
+  giftModel.giftPic  = @"https:// xxx";
+  giftModel.giftName = @"1个【鲜花】";
+  giftModel.giftCount = 1;
+  
+  
+  MZUserInfo *user = [[MZUserInfo alloc] init];
+  user.userName = [NSString stringWithFormat:@"用户 %ld",x];
+  user.userId   = x;
+  user.headPic  = @"https:// xxx";
+  giftModel.user = user;
+  
   if (manager) {
     manager.parentView = self.view;
     // model 传入礼物模型
@@ -107,8 +92,36 @@
       
     }];
   }
+  
+}
 
-
+- (IBAction)sendGift02:(id)sender {
+  
+  
+  long  x = arc4random() % 9+10;    
+  MZGiftModel *giftModel = [[MZGiftModel alloc] init];
+  giftModel.giftId = 1;
+  giftModel.headImage = [UIImage imageNamed:@"mogu"];
+  giftModel.giftImage = [UIImage imageNamed:@"ic_bear_small_14th"];
+  giftModel.giftPic  = @"https:// xxx";
+  giftModel.giftName =  @"2个【小熊】";
+  giftModel.giftCount = 9999;
+  
+  MZUserInfo *user = [[MZUserInfo alloc] init];
+  user.userName = [NSString stringWithFormat:@"用户 %ld",x];
+  user.userId   = x;
+  user.headPic  = @"https:// xxx";
+  giftModel.user = user;
+  
+  if (manager) {
+    manager.parentView = self.view;
+    // model 传入礼物模型
+    [manager animWithGiftModel:giftModel finishedBlock:^(BOOL result) {
+      
+    }];
+  }
+  
+  
 }
 
 - (IBAction)senderGift03:(id)sender {
@@ -116,12 +129,18 @@
   // 礼物模型
   long  x = arc4random() % 9+10;    
   MZGiftModel *giftModel = [[MZGiftModel alloc] init];
+  giftModel.giftId = 1;
   giftModel.headImage = [UIImage imageNamed:@"luffy"];
-  giftModel.userId = x;
-  giftModel.userName = [NSString stringWithFormat:@"%ld",x];
   giftModel.giftImage = [UIImage imageNamed:@"ic_soap_small_14th"];
-  giftModel.giftName = @"甜蜜棒棒糖";
+  giftModel.giftPic  = @"https:// xxx";
+  giftModel.giftName = @"9个香皂";
   giftModel.giftCount = 9999;
+  
+  MZUserInfo *user = [[MZUserInfo alloc] init];
+  user.userName = [NSString stringWithFormat:@"用户 %ld",x];
+  user.userId   = x;
+  user.headPic  = @"https:// xxx";
+  giftModel.user = user;
   
   
   if (manager) {
@@ -135,18 +154,26 @@
 }
 //咖啡印记
 - (IBAction)sendCoffee:(id)sender {
-
-// 礼物模型
+  
+  // 礼物模型
+  
+  
   long  x = arc4random() % 9+10;    
   MZGiftModel *giftModel = [[MZGiftModel alloc] init];
+  giftModel.giftId = 1;
   giftModel.headImage = [UIImage imageNamed:@"luffy"];
-  giftModel.userId = x;
-  giftModel.gifType = GIFT_TYPE_COOFFEE;
-  giftModel.userName = [NSString stringWithFormat:@"%ld",x];
+  giftModel.giftType = GIFT_TYPE_COOFFEE;
+  giftModel.giftPic  = @"https:// xxx";
   giftModel.giftImage = [UIImage imageNamed:@"ic_soap_small_14th"];
   giftModel.giftName = @"咖啡印记";
   giftModel.giftCount = 9999;
   
+  MZUserInfo *user = [[MZUserInfo alloc] init];
+  user.userName = [NSString stringWithFormat:@"用户 %ld",x];
+  user.userId   = x;
+  user.headPic  = @"https:// xxx";
+  giftModel.user = user;
+  
   if (manager) {
     manager.parentView = self.view;
     // model 传入礼物模型
@@ -154,44 +181,28 @@
       
     }];
   }
-
+  
 }
 //爱心守护者
 - (IBAction)sendLover:(id)sender {
-
-  // 礼物模型
+  
+  // 礼物模型  
   long  x = arc4random() % 9+10;    
   MZGiftModel *giftModel = [[MZGiftModel alloc] init];
+  giftModel.giftId = 1;
   giftModel.headImage = [UIImage imageNamed:@"luffy"];
-  giftModel.userId = x;
-  giftModel.gifType = GIFT_TYPE_GUARD;
-  giftModel.userName = [NSString stringWithFormat:@"%ld",x];
-  giftModel.giftImage = [UIImage imageNamed:@"ic_heart_1_14th"];
+  giftModel.giftType = GIFT_TYPE_GUARD;
+  giftModel.giftPic  = @"https:// xxx";
+  giftModel.giftImage = [UIImage imageNamed:@"ic_soap_small_14th"];
   giftModel.giftName = @"爱心守护者";
   giftModel.giftCount = 9999;
   
-  if (manager) {
-    manager.parentView = self.view;
-    // model 传入礼物模型
-    [manager animWithGiftModel:giftModel finishedBlock:^(BOOL result) {
-      
-    }];
-  }
-
-}
-//贵族面具
-- (IBAction)sendMask:(id)sender {
-
-   // 礼物模型
-  long  x = arc4random() % 9+10;    
-  MZGiftModel *giftModel = [[MZGiftModel alloc] init];
-  giftModel.headImage = [UIImage imageNamed:@"luffy"];
-  giftModel.userId = x;
-  giftModel.gifType = GIFT_TYPE_MASK;
-  giftModel.userName = [NSString stringWithFormat:@"%ld",x];
-  giftModel.giftImage = [UIImage imageNamed:@"ic_soap_small_14th"];
-  giftModel.giftName = @"贵族面具";
-  giftModel.giftCount = 9999;
+  MZUserInfo *user = [[MZUserInfo alloc] init];
+  user.userName = [NSString stringWithFormat:@"用户 %ld",x];
+  user.userId   = x;
+  user.headPic  = @"https:// xxx";
+  giftModel.user = user;
+  
   
   if (manager) {
     manager.parentView = self.view;
@@ -200,48 +211,57 @@
       
     }];
   }
-
-
-
+  
+}
+//贵族面具
+- (IBAction)sendMask:(id)sender {
+  
+  // 礼物模型
+  long  x = arc4random() % 9+10;    
+  MZGiftModel *giftModel = [[MZGiftModel alloc] init];
+  giftModel.giftId = 1;
+  giftModel.giftType = GIFT_TYPE_MASK;
+  giftModel.giftPic  = @"https:// xxx";
+  giftModel.giftName = @"贵族面具";
+  giftModel.giftCount = 9999;
+  
+  MZUserInfo *user = [[MZUserInfo alloc] init];
+  user.userName = [NSString stringWithFormat:@"用户 %ld",x];
+  user.userId   = x;
+  user.headPic  = @"https:// xxx";
+  giftModel.user = user;
+  
+  
+  if (manager) {
+    manager.parentView = self.view;
+    // model 传入礼物模型
+    [manager animWithGiftModel:giftModel finishedBlock:^(BOOL result) {
+      
+    }];
+  }
+  
+  
+  
 }
 //海洋之星
 - (IBAction)sendOcean:(id)sender {
-
-   // 礼物模型
+  
+  // 礼物模型
   long  x = arc4random() % 9+10;    
   MZGiftModel *giftModel = [[MZGiftModel alloc] init];
+  giftModel.giftId = 1;
   giftModel.headImage = [UIImage imageNamed:@"luffy"];
-  giftModel.userId = x;
-  giftModel.gifType = GIFT_TYPE_OCEAN;
-  giftModel.userName = [NSString stringWithFormat:@"%ld",x];
+  giftModel.giftType = GIFT_TYPE_OCEAN;
+  giftModel.giftPic  = @"https:// xxx";
   giftModel.giftImage = [UIImage imageNamed:@"ic_soap_small_14th"];
   giftModel.giftName = @"海洋之星";
   giftModel.giftCount = 9999;
   
-  if (manager) {
-    manager.parentView = self.view;
-    // model 传入礼物模型
-    [manager animWithGiftModel:giftModel finishedBlock:^(BOOL result) {
-      
-    }];
-  }
-
-
-
-}
-// 女皇的城堡
-- (IBAction)sendCastle:(id)sender {
-
- // 礼物模型
-  long  x = arc4random() % 9+10;    
-  MZGiftModel *giftModel = [[MZGiftModel alloc] init];
-  giftModel.headImage = [UIImage imageNamed:@"luffy"];
-  giftModel.userId = x;
-  giftModel.gifType = GIFT_TYPE_CASTLE;
-  giftModel.userName = [NSString stringWithFormat:@"%ld",x];
-  giftModel.giftImage = [UIImage imageNamed:@"ic_soap_small_14th"];
-  giftModel.giftName = @"女皇的城堡";
-  giftModel.giftCount = 9999;
+  MZUserInfo *user = [[MZUserInfo alloc] init];
+  user.userName = [NSString stringWithFormat:@"用户 %ld",x];
+  user.userId   = x;
+  user.headPic  = @"https:// xxx";
+  giftModel.user = user;
   
   if (manager) {
     manager.parentView = self.view;
@@ -250,13 +270,45 @@
       
     }];
   }
-
-
+  
+  
+  
+}
+// 女皇的城堡
+- (IBAction)sendCastle:(id)sender {
+  
+  // 礼物模型
+  long  x = arc4random() % 9+10;  
+    
+  MZGiftModel *giftModel = [[MZGiftModel alloc] init];
+  giftModel.giftId = 1;
+  giftModel.giftType = GIFT_TYPE_CASTLE;
+  giftModel.giftPic  = @"https:// xxx";
+  giftModel.giftImage = [UIImage imageNamed:@"ic_soap_small_14th"];
+  giftModel.giftName = @"女皇的城堡";
+  giftModel.giftCount = 9999;
+  
+  MZUserInfo *user = [[MZUserInfo alloc] init];
+  user.userName = [NSString stringWithFormat:@"用户 %ld",x];
+  user.userId   = x;
+  user.headPic  = @"https:// xxx";
+  giftModel.user = user;
+  
+  
+  if (manager) {
+    manager.parentView = self.view;
+    // model 传入礼物模型
+    [manager animWithGiftModel:giftModel finishedBlock:^(BOOL result) {
+      
+    }];
+  }
+  
+  
 }
 
 // 模拟收到礼物消息的回调
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-
+  
 }
 
 

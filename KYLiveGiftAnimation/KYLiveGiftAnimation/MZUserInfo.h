@@ -1,5 +1,5 @@
 //
-//  MZCastleAnimView.h
+//  MZUserInfo.h
 //  KYLiveGiftAnimation
 //
 //  Created by kingly on 2016/12/13.
@@ -25,29 +25,28 @@
 // THE SOFTWARE. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "MZShakeLabel.h"
-#import "MZGiftModel.h"
+#import <Foundation/Foundation.h>
+
+@protocol MZUserInfo <NSObject>
+
+@end
+/**
+ * @class MZUserInfo 用户信息的模型
+ */
+@interface MZUserInfo : NSObject
+
+@property (nonatomic,assign) long userId;//用户id, 由后台分配
+@property (nonatomic,copy)   NSString *userName;//用户昵称
+@property (nonatomic,assign) int sex;//1男,2女
+@property (nonatomic,copy)   NSString *headPic;//用户头像
+@property (nonatomic,copy)   NSString *bgPic;//背景，保留
+@property (nonatomic,assign) long birthDay;//生日,保留
+@property (nonatomic,copy)   NSString *area;//所在区域
+@property (nonatomic,copy)   NSString *intro;//个人介绍
+@property (nonatomic,copy)   NSString *address;//联系地址
+@property (nonatomic,copy)   NSString *contact;//联系方式
+@property (nonatomic,copy)   NSString *phoneNum; //电话
 
 
-typedef void(^completeBlock)(BOOL finished,NSInteger finishCount);
-
-@interface MZCastleAnimView : UIView
-
-@property (nonatomic,strong) MZGiftModel *model;
-@property (nonatomic,assign) NSInteger giftCount; // 礼物个数
-@property (nonatomic,strong) UILabel *nameLabel; // 送礼物者
-@property (nonatomic,strong) UILabel *giftLabel; // 礼物名称
-@property (nonatomic,strong) MZShakeLabel *skLabel;
-@property (nonatomic,assign) NSInteger animCount; // 动画执行到了第几次
-@property (nonatomic,assign) CGRect originFrame; // 记录原始坐标
-
-@property (nonatomic,assign,getter=isFinished) BOOL finished;
-
-/// 动画完成后的回调
-- (void)animateWithCompleteBlock:(completeBlock)completed;
-
-- (void)shakeNumberLabel;
-- (void)hideCurretView;
 
 @end

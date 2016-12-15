@@ -26,15 +26,12 @@
 //
 
 #import "MZRightAnimView.h"
-
 #import "MZLiveGiftAnimationHeader.h"
 
 @interface MZRightAnimView ()
 @property (nonatomic,strong) UIImageView *bgImageView;
-@property (nonatomic,strong) NSTimer *timer;
-@property (nonatomic,copy) void(^completeBlock)(BOOL finished,NSInteger finishCount); // 新增了回调参数 finishCount， 用来记录动画结束时累加数量，将来在3秒内，还能继续累加
 
-@property (nonatomic,strong) UIImageView *loveAnimateView;
+@property (nonatomic,strong) UIImageView *loveAnimateView;    //爱心
 @property (nonatomic,strong) UIImageView *hotGasAnimateView;  //热气
 @property (nonatomic,strong) UIImageView *coffeeCupImageView; //杯子
 
@@ -44,33 +41,17 @@
 
 - (instancetype)init {
     if (self = [super init]) {
-        _originFrame = self.frame;
-        [self setupCustomView];
+   
     }
     return self;
 }
 
 -(void)setupCustomView{
 
+    [self.userInfoAnimView removeFromSuperview];
+
     _bgImageView = [[UIImageView alloc] init];
   
-    _nameLabel = [[UILabel alloc] init];
-    _giftLabel = [[UILabel alloc] init];
-    
-    _nameLabel.textColor  = [UIColor whiteColor];
-    _nameLabel.font = [UIFont systemFontOfSize:15];
-    
-    _giftLabel.textColor  = [UIColor whiteColor];
-    _giftLabel.font = [UIFont systemFontOfSize:15];
-    
-    // 初始化动画label
-    _skLabel =  [[MZShakeLabel alloc] init];
-    _skLabel.font = [UIFont systemFontOfSize:25];
-    _skLabel.borderColor = [UIColor whiteColor];
-    _skLabel.textColor = [UIColor colorWithHex:0xff3c6f];
-    _skLabel.textAlignment = NSTextAlignmentLeft;
-    _animCount = 0;
-    
     //爱心动画
     _loveAnimateView = [[UIImageView alloc] init];
     
@@ -78,10 +59,11 @@
     _hotGasAnimateView  = [[UIImageView alloc] init];
     _coffeeCupImageView = [[UIImageView alloc] init];
     
+    
     [self addSubview:_bgImageView];
-    [self addSubview:_nameLabel];
-    [self addSubview:_giftLabel];
-    [self addSubview:_skLabel];
+    [self addSubview:self.nameLabel];
+    [self addSubview:self.giftLabel];
+    [self addSubview:self.skLabel];
     [self addSubview:_loveAnimateView];
     
     
@@ -96,15 +78,15 @@
     [super layoutSubviews];
   
     
-    _nameLabel.frame = CGRectMake(KLiveRightAnimViewLabelSpace, KLiveRightAnimViewLabelVarSpace, KLiveRightAnimViewLabelWidth, KLiveRightAnimViewLabelHight);
-    _giftLabel.frame = CGRectMake(_nameLabel.frame.origin.x, KLiveRightAnimViewLabelHight+KLiveRightAnimViewLabelVarSpace, KLiveRightAnimViewLabelWidth, KLiveRightAnimViewLabelHight);
+    self.nameLabel.frame = CGRectMake(KLiveRightAnimViewLabelSpace, KLiveRightAnimViewLabelVarSpace, KLiveRightAnimViewLabelWidth, KLiveRightAnimViewLabelHight);
+    self.giftLabel.frame = CGRectMake(self.nameLabel.frame.origin.x, KLiveRightAnimViewLabelHight+KLiveRightAnimViewLabelVarSpace, KLiveRightAnimViewLabelWidth, KLiveRightAnimViewLabelHight);
     
-    _bgImageView.frame = self.bounds;
+    self.bgImageView.frame = self.bounds;
     _bgImageView.frame = CGRectMake(0, 0, self.frame.size.width - KLiveRightAnimViewWidthSpace, self.frame.size.height);
     _bgImageView.image = [[MZAnimationImageCache shareInstance] getImageWithName:@"bg_backgroundcolor_14th"];
   
     _loveAnimateView.frame = CGRectMake(0,-KLiveRightAnimViewLoveHight+KLiveRightAnimViewLabelVarSpace*2, KLiveRightAnimViewLoveWidth,KLiveRightAnimViewLoveHight);
-    _skLabel.frame = CGRectMake(self.frame.size.width - KLiveShakeLabelWidth,-KLiveRightAnimViewShakeNumberLabelVarSpace-KLiveShakeLabelHight, KLiveShakeLabelWidth, KLiveShakeLabelHight);
+    self.skLabel.frame = CGRectMake(self.frame.size.width - KLiveShakeLabelWidth,-KLiveRightAnimViewShakeNumberLabelVarSpace-KLiveShakeLabelHight, KLiveShakeLabelWidth, KLiveShakeLabelHight);
     
     _coffeeCupImageView.frame = CGRectMake(0,-KLiveRightAnimViewLoveHight+KLiveRightAnimViewLabelVarSpace*2,KLiveRightAnimViewLoveWidth,KLiveRightAnimViewLoveHight);
     _hotGasAnimateView.frame  = CGRectMake(KLiveCoffeeCupImageViewWidthSpace,KLiveCoffeeCupImageViewHightSpace,KLiveCoffeeCupImageViewWidth,KLiveCoffeeCupImageViewHight);
@@ -114,25 +96,19 @@
 
 - (void)setModel:(MZGiftModel *)model {
 
-  if (_model != model) {
-    _model = nil;
-    _model = model;
-    
-
-    NSString *nameLabelStr = [NSString stringWithFormat:@"感谢%@",model.userName];
+    NSString *nameLabelStr = [NSString stringWithFormat:@"感谢%@",model.user.userName];
     NSMutableAttributedString *attstr = [[NSMutableAttributedString alloc]initWithString:nameLabelStr];
-    NSRange rangeStr = [nameLabelStr rangeOfString:[NSString stringWithFormat:@"%@",model.userName]];
+    NSRange rangeStr = [nameLabelStr rangeOfString:[NSString stringWithFormat:@"%@",model.user.userName]];
     [attstr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHex:0x00ff00] range:rangeStr];
-    _nameLabel.attributedText = attstr;
+    self.nameLabel.attributedText = attstr;
 
     NSString *giftLabelStr = [NSString stringWithFormat:@"送出的【%@】",model.giftName];
     NSMutableAttributedString *giftattstr = [[NSMutableAttributedString alloc]initWithString:giftLabelStr];
     NSRange giftrangeStr = [giftLabelStr rangeOfString:[NSString stringWithFormat:@"【%@】",model.giftName]];
     [giftattstr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHex:0x00eaff] range:giftrangeStr];
-    _giftLabel.attributedText = giftattstr;
-    _giftCount = model.giftCount;
+    self.giftLabel.attributedText = giftattstr;
+    self.giftCount = model.giftCount;
     
-  }
 }
 
 
@@ -142,9 +118,9 @@
         self.frame = CGRectMake(KLiveRightAnimViewWidthOriginX, self.frame.origin.y, self.frame.size.width, self.frame.size.height);
     } completion:^(BOOL finished) {
     
-       if (_model.gifType == GIFT_TYPE_COOFFEE) {
+       if (self.model.giftType == GIFT_TYPE_COOFFEE) {
           [self showOffeeAnim];
-       }else if (_model.gifType == GIFT_TYPE_GUARD){
+       }else if (self.model.giftType == GIFT_TYPE_GUARD){
           [self showLoveAnim];
        }
        
@@ -177,39 +153,19 @@
 
 }
 
-- (void)shakeNumberLabel{
-  
-   _animCount ++; 
-   
-   if (_giftCount > 0) {
-      _animCount =  _giftCount;
-   }
-   
-   if (_animCount > KLiveShakeLabelMaxNum ) {
-      
-      _animCount = KLiveShakeLabelMaxNum;
-   }
 
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(hideRightAnimView) object:nil];//可以取消成功。
-    [self performSelector:@selector(hideRightAnimView) withObject:nil afterDelay:3];
-    
-    self.skLabel.text = [NSString stringWithFormat:@"x %ld",_animCount];
-    [self.skLabel startAnimWithDuration:0.5];
-
-
-}
-
-- (void)hideRightAnimView{
+/// 自定义隐藏动画 - 子类重写
+- (void)hideCurretView{
     
      [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         self.frame = CGRectMake(SCREEN_WIDTH, self.frame.origin.y, self.frame.size.width, self.frame.size.height);
         self.alpha = 0;
     } completion:^(BOOL finished) {
         if (self.completeBlock) {
-            self.completeBlock(finished,_animCount);
+            self.completeBlock(finished,self.animCount);
         }
         [self resetframe];
-        _finished = finished;
+        self.finished = finished;
         [self removeFromSuperview];
     }];
 
@@ -303,15 +259,5 @@
   
   
 }
-
-// 重置
-- (void)resetframe {
-    self.frame = _originFrame;
-    self.alpha = 1;
-    self.animCount = 0;
-    self.giftCount = 0;
-    self.skLabel.text = @"";
-}
-
 
 @end

@@ -34,6 +34,7 @@
 // 描边颜色
 @property (nonatomic,strong) UIColor *borderColor;
 
+// 开始礼物数字动画
 - (void)startAnimWithDuration:(NSTimeInterval)duration;
 
 @end

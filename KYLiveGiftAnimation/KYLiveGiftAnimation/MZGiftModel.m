@@ -1,8 +1,8 @@
 //
 //  MZGiftModel.m
-//  MZGogalApp
+//  KYLiveGiftAnimation
 //
-//  Created by kingly on 2016/12/8.
+//  Created by kingly on 2016/12/13.
 //  Copyright © 2016年 KYLiveGiftAnimation   Software (https://github.com/kingly09/KYLiveGiftAnimation) by kingly inc.  
 
 //
@@ -22,7 +22,7 @@
 // AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.All rights reserved.
+// THE SOFTWARE. All rights reserved.
 //
 
 #import "MZGiftModel.h"

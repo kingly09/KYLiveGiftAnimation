@@ -1,8 +1,8 @@
 //
-//  MZOceanAnimView.h
+//  MZPresentView.h
 //  KYLiveGiftAnimation
 //
-//  Created by kingly on 2016/12/13.
+//  Created by kingly on 2016/12/12.
 //  Copyright © 2016年 KYLiveGiftAnimation   Software (https://github.com/kingly09/KYLiveGiftAnimation) by kingly inc.  
 
 //
@@ -25,29 +25,15 @@
 // THE SOFTWARE. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "MZShakeLabel.h"
-#import "MZGiftModel.h"
+#import "MZBaseAnimView.h"
 
 
-typedef void(^completeBlock)(BOOL finished,NSInteger finishCount);
+@interface MZPresentView : MZBaseAnimView
 
-@interface MZOceanAnimView : UIView
 
-@property (nonatomic,strong) MZGiftModel *model;
-@property (nonatomic,assign) NSInteger giftCount; // 礼物个数
-@property (nonatomic,strong) UILabel *nameLabel; // 送礼物者
-@property (nonatomic,strong) UILabel *giftLabel; // 礼物名称
-@property (nonatomic,strong) MZShakeLabel *skLabel;
-@property (nonatomic,assign) NSInteger animCount; // 动画执行到了第几次
-@property (nonatomic,assign) CGRect originFrame; // 记录原始坐标
+@property (nonatomic,strong) UIImageView *headImageView; // 头像
+@property (nonatomic,strong) UIImageView *giftImageView; // 礼物
 
-@property (nonatomic,assign,getter=isFinished) BOOL finished;
-
-/// 动画完成后的回调
-- (void)animateWithCompleteBlock:(completeBlock)completed;
-
-- (void)shakeNumberLabel;
 - (void)hideCurretView;
 
 @end

@@ -32,7 +32,7 @@
 #define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
 #define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
 
-#import "MZPresentView.h"
+
 #import "MZGiftModel.h"
 #import "MZAnimOperation.h"
 #import "MZShakeLabel.h"
@@ -40,6 +40,8 @@
 #import "UIView+animate.h"
 #import "MZAnimationImageCache.h"
 
+#import "MZBaseAnimView.h"
+#import "MZPresentView.h"
 #import "MZRightAnimView.h"
 #import "MZOceanAnimView.h"
 #import "MZMarkAnimView.h"
@@ -86,6 +88,10 @@
 #define KAnimNameLabelLeftSPace   55
 #define KAnimMameLabelTopSPace    18
 #define KAnimNameLabelFooterSPace   12
+
+#define KUserInfoAnimViewWidth  277
+#define KUserInfoAnimViewHight  62.5
+#define KUserInfoAnimViewHightFooterSpace  333
 
 #endif /* MZLiveGiftAnimationHeader_h */
 
