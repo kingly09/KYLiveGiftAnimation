@@ -71,6 +71,25 @@
 /// 动画操作 
 - (void)animWithGiftModel:(MZGiftModel *)model finishedBlock:(void(^)(BOOL result))finishedBlock{
 
+  if (model.giftCount == 0 && model.userId == 0 && model.giftId == 0) {
+        NSLog(@"必须要有发送礼物用户信息和礼物个数");
+        finishedBlock(NO);
+      return; 
+   }
+  
+   
+   if (model.userName.length == 0) {
+      NSLog(@"发送礼物者的名字不能为空");
+     finishedBlock(NO);
+      return; 
+   }
+   
+   if (model.gifType == GIFT_TYPE_DEFAULT && model.giftPic.length == 0 && model.giftImage == nil) {
+     NSLog(@"当是普通动画的时候，需要带上礼物的头像");
+     finishedBlock(NO);
+     return; 
+   }
+
    if (model.gifType == GIFT_TYPE_DEFAULT) { //普通动画
         
         [self animPresentView:model finishedBlock:^(BOOL result) {
