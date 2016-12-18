@@ -4,4 +4,4 @@
 
 # 效果
 
-
+![](https://raw.githubusercontent.com/kingly09/KYLiveGiftAnimation/master/anim.gif)
