@@ -5,3 +5,12 @@
 # 效果
 
 ![](https://raw.githubusercontent.com/kingly09/KYLiveGiftAnimation/master/anim.gif)
+
+UI设计师给出flash动画的实现效果图，与切图，动画的时间轴，每个动画执行的时长，标号对应动画的距离，技术根据动画的进场顺序和时长，结合GCD依次渲染动画，程序在加载图片和实现动画中要特别注意内存和CPU占用。
+
+# 动画时间轴
+
+以海洋之星动画为例：
+
+![](https://raw.githubusercontent.com/kingly09/KYLiveGiftAnimation/master/海洋之星打赏.jpg)
+
