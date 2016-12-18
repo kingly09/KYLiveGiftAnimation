@@ -80,7 +80,7 @@
     opacityAnimation.calculationMode = kCAAnimationCubic;
     opacityAnimation.repeatCount = HUGE_VALF;
     [opacityAnimationView.layer addAnimation:opacityAnimation forKey:@"opacityAnimation"];
-}
 
+}
 
 @end
