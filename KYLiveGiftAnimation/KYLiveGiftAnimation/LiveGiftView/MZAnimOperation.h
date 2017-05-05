@@ -36,11 +36,13 @@
 
 typedef NS_ENUM(NSInteger, GIFT_INDEX) {
     GIFT_INDEX_queue1          = 1,     //普通队列1
-    GIFT_INDEX_queue2          = 0,     //普通队列2
-    GIFT_INDEX_rightQueue      = 3,     //爱心守护者和咖啡印记 队列
-    GIFT_INDEX_markQueue       = 4,     //贵族面具队列
-    GIFT_INDEX_oceanQueue      = 5,     //海洋之星队列
-    GIFT_INDEX_castleQueue     = 6      //女皇的城堡队列
+    GIFT_INDEX_queue2          = 2,     //普通队列2
+    GIFT_INDEX_queue3          = 3,     //普通队列3
+    
+    GIFT_INDEX_rightQueue      = 4,     //爱心守护者和咖啡印记 队列
+    GIFT_INDEX_markQueue       = 5,     //贵族面具队列
+    GIFT_INDEX_oceanQueue      = 6,     //海洋之星队列
+    GIFT_INDEX_castleQueue     = 7      //女皇的城堡队列
 };
 
 @interface MZAnimOperation : NSOperation

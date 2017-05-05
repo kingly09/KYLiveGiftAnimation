@@ -34,6 +34,8 @@
 @property (nonatomic,strong) NSOperationQueue *queue1;
 /// 普通动画队列2
 @property (nonatomic,strong) NSOperationQueue *queue2;
+/// 普通动画队列3
+@property (nonatomic,strong) NSOperationQueue *queue3;
 
 /// 从右边动画队列
 @property (nonatomic,strong) NSOperationQueue *rightQueue;
@@ -171,6 +173,15 @@
     return _queue2;
 }
 
+- (NSOperationQueue *)queue3
+{
+    if (_queue3==nil) {
+        _queue3 = [[NSOperationQueue alloc] init];
+        _queue3.maxConcurrentOperationCount = 1;
+    }
+    return _queue3;
+}
+
 - (NSOperationQueue *)rightQueue
 {
     if (_rightQueue==nil) {
@@ -286,7 +297,7 @@
         // 如果有操作缓存，则直接累加，不需要重新创建op
         if ([self.operationCache objectForKey:userReuseIdentifierID]!=nil) {
             MZAnimOperation *op = [self.operationCache objectForKey:userReuseIdentifierID];
-            op.presentView.giftCount = model.giftCount;
+            op.presentView.giftCount = model.giftCount + op.presentView.giftCount;
             [op.presentView shakeNumberLabel];
             return;
         }
@@ -312,13 +323,21 @@
         op.model.giftCount = op.presentView.animCount + 1;
         
         op.listView = self.parentView;
-        op.index = [userReuseIdentifierID integerValue] % 2;
+        int x =  [self getRandomNumber:1 to:3];
+        op.index = x;
         
         // 将操作添加到缓存池
         [self.operationCache setObject:op forKey:userReuseIdentifierID];
         
-        // 根据用户ID 控制显示的位置
-        if (op.index == GIFT_INDEX_queue2) {
+         // 根据用户ID 控制显示的位置
+        if (op.index == GIFT_INDEX_queue3) {
+            
+            if (op.model.giftCount != 0) {
+                op.presentView.frame  = CGRectMake(-KLivePresentViewWidth, kLiveQueue3OriginY, KLivePresentViewWidth, KLivePresentViewHight);
+                op.presentView.originFrame = op.presentView.frame;
+                [self.queue3 addOperation:op];
+            }
+        }else if (op.index == GIFT_INDEX_queue2) {
             
             if (op.model.giftCount != 0) {
                 op.presentView.frame  = CGRectMake(-KLivePresentViewWidth, kLiveQueue2OriginY, KLivePresentViewWidth, KLivePresentViewHight);
@@ -360,12 +379,21 @@
             });
             
         }];
+        
         op.listView = self.parentView;
-        op.index = [userReuseIdentifierID integerValue] % 2;
+        int x =  [self getRandomNumber:1 to:3];
+        op.index = x;
         // 将操作添加到缓存池
         [self.operationCache setObject:op forKey:userReuseIdentifierID];
         
-        if (op.index == GIFT_INDEX_queue2) {
+         if (op.index == GIFT_INDEX_queue3) {
+            
+            if (op.model.giftCount != 0) {
+                op.presentView.frame  = CGRectMake(-KLivePresentViewWidth, kLiveQueue3OriginY, KLivePresentViewWidth, KLivePresentViewHight);
+                op.presentView.originFrame = op.presentView.frame;
+                [self.queue3 addOperation:op];
+            }
+        }else if (op.index == GIFT_INDEX_queue2) {
             
             if (op.model.giftCount != 0) {
                 op.presentView.frame  = CGRectMake(-KLivePresentViewWidth, kLiveQueue2OriginY, KLivePresentViewWidth, KLivePresentViewHight);
@@ -760,6 +788,16 @@
     
     }
 
+
+}
+
+/**
+*  取一个随机整数，范围在[from,to），包括from，包括to
+*/
+-(int)getRandomNumber:(int)from to:(int)to
+
+{
+    return (int)(from + (arc4random() % (to - from + 1)));
 
 }
 
