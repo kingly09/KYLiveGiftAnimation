@@ -127,6 +127,11 @@
       [self animWithCastle:model finishedBlock:^(BOOL result) {
             finishedBlock(result);
       }];
+   }else if (model.giftType == GIFT_TYPE_BURSTS) { //连发动画
+      
+      [self animBurstsView:model finishedBlock:^(BOOL result) {
+            finishedBlock(result);
+      }];
    }
 }
 
@@ -144,12 +149,12 @@
     }
 }
 
-//// 获得用户唯一标示reuseIdentifier，记录礼物信息的标示信息
+// 获得用户唯一标示reuseIdentifier，记录礼物信息的标示信息
 -(NSString *)getUserReuseIdentifierID:(MZGiftModel *)model{
-   
-    NSString *userReuseIdentifierID = [NSString stringWithFormat:@"%ld_%ld",model.user.userId,(long)model.giftType];
-    return userReuseIdentifierID; 
-   
+  
+  NSString *userReuseIdentifierID = [NSString stringWithFormat:@"%ld_%ld",model.user.userId,model.giftId];
+  return userReuseIdentifierID; 
+  
 }
 
 #pragma mark - lazy 加载
@@ -245,6 +250,10 @@
       _queue2 = nil;
   }
   
+   if (_queue3 != nil) {
+      _queue3 = nil;
+  }
+  
   if (_rightQueue!= nil) {
     _rightQueue = nil;
   }
@@ -297,7 +306,138 @@
         // 如果有操作缓存，则直接累加，不需要重新创建op
         if ([self.operationCache objectForKey:userReuseIdentifierID]!=nil) {
             MZAnimOperation *op = [self.operationCache objectForKey:userReuseIdentifierID];
-            op.presentView.giftCount = model.giftCount + op.presentView.giftCount;
+            op.presentView.giftCount = model.giftCount;
+            [op.presentView shakeNumberLabel];
+            return;
+        }
+         // 没有操作缓存，创建op
+        MZAnimOperation *op = [MZAnimOperation animOperationWithGiftModel:model finishedBlock:^(BOOL result,NSInteger finishCount) {
+            // 回调
+            if (finishedBlock) {
+                finishedBlock(result);
+            }
+            // 将礼物信息数量存起来
+            [self.userGigtInfos setObject:@(finishCount) forKey:userReuseIdentifierID];
+            // 动画完成之后,要移除动画对应的操作
+            [self.operationCache removeObjectForKey:userReuseIdentifierID];
+            // 延时删除用户礼物信息
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.userGigtInfos removeObjectForKey:userReuseIdentifierID];
+            });
+            
+        }];
+        
+        // 注意：下面两句代码是和无用户礼物信息时不同的，其余的逻辑一样
+        op.presentView.animCount = [[self.userGigtInfos objectForKey:userReuseIdentifierID] integerValue];
+        op.model.giftCount = op.presentView.animCount + 1;
+        
+        op.listView = self.parentView;
+        int x =  [self getRandomNumber:1 to:3];
+        op.index = x;
+        
+        // 将操作添加到缓存池
+        [self.operationCache setObject:op forKey:userReuseIdentifierID];
+        
+         // 根据用户ID 控制显示的位置
+        if (op.index == GIFT_INDEX_queue3) {
+            
+            if (op.model.giftCount != 0) {
+                op.presentView.frame  = CGRectMake(-KLivePresentViewWidth, kLiveQueue3OriginY, KLivePresentViewWidth, KLivePresentViewHight);
+                op.presentView.originFrame = op.presentView.frame;
+                [self.queue3 addOperation:op];
+            }
+        }else if (op.index == GIFT_INDEX_queue2) {
+            
+            if (op.model.giftCount != 0) {
+                op.presentView.frame  = CGRectMake(-KLivePresentViewWidth, kLiveQueue2OriginY, KLivePresentViewWidth, KLivePresentViewHight);
+                op.presentView.originFrame = op.presentView.frame;
+                [self.queue2 addOperation:op];
+            }
+        }else {
+            
+            if (op.model.giftCount != 0) {
+                op.presentView.frame  = CGRectMake(-KLivePresentViewWidth, kLiveQueue1OriginY, KLivePresentViewWidth, KLivePresentViewHight);
+                op.presentView.originFrame = op.presentView.frame;
+                [self.queue1 addOperation:op];
+            }
+        }
+    }
+    
+    // 在没有用户礼物信息时
+    else
+    {   // 如果有操作缓存，则直接累加，不需要重新创建op
+        if ([self.operationCache objectForKey:userReuseIdentifierID]!=nil) {
+            MZAnimOperation *op = [self.operationCache objectForKey:userReuseIdentifierID];
+            op.presentView.giftCount = model.giftCount;
+            [op.presentView shakeNumberLabel];
+            return;
+        }
+        
+        MZAnimOperation *op = [MZAnimOperation animOperationWithGiftModel:model finishedBlock:^(BOOL result,NSInteger finishCount) {
+            // 回调
+            if (finishedBlock) {
+                finishedBlock(result);
+            }
+            // 将礼物信息数量存起来
+            [self.userGigtInfos setObject:@(finishCount) forKey:userReuseIdentifierID];
+            // 动画完成之后,要移除动画对应的操作
+            [self.operationCache removeObjectForKey:userReuseIdentifierID];
+            // 延时删除用户礼物信息
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.userGigtInfos removeObjectForKey:userReuseIdentifierID];
+            });
+            
+        }];
+        
+        op.listView = self.parentView;
+        int x =  [self getRandomNumber:1 to:3];
+        op.index = x;
+        // 将操作添加到缓存池
+        [self.operationCache setObject:op forKey:userReuseIdentifierID];
+        
+         if (op.index == GIFT_INDEX_queue3) {
+            
+            if (op.model.giftCount != 0) {
+                op.presentView.frame  = CGRectMake(-KLivePresentViewWidth, kLiveQueue3OriginY, KLivePresentViewWidth, KLivePresentViewHight);
+                op.presentView.originFrame = op.presentView.frame;
+                [self.queue3 addOperation:op];
+            }
+        }else if (op.index == GIFT_INDEX_queue2) {
+            
+            if (op.model.giftCount != 0) {
+                op.presentView.frame  = CGRectMake(-KLivePresentViewWidth, kLiveQueue2OriginY, KLivePresentViewWidth, KLivePresentViewHight);
+                op.presentView.originFrame = op.presentView.frame;
+                [self.queue2 addOperation:op];
+            }
+        }else {
+            
+            if (op.model.giftCount != 0) {
+                op.presentView.frame  = CGRectMake(-KLivePresentViewWidth, kLiveQueue1OriginY, KLivePresentViewWidth, KLivePresentViewHight);
+                op.presentView.originFrame = op.presentView.frame;
+                [self.queue1 addOperation:op];
+            }
+        }
+    
+    }
+
+}
+
+/**
+ 连发动画
+
+ @param model 礼物模型
+ */
+-(void)animBurstsView:(MZGiftModel *)model  finishedBlock:(void(^)(BOOL result))finishedBlock{
+
+
+  NSString *userReuseIdentifierID = [self getUserReuseIdentifierID:model];
+   
+    // 在有用户礼物信息时
+    if ([self.userGigtInfos objectForKey:userReuseIdentifierID]) {
+        // 如果有操作缓存，则直接累加，不需要重新创建op
+        if ([self.operationCache objectForKey:userReuseIdentifierID]!=nil) {
+            MZAnimOperation *op = [self.operationCache objectForKey:userReuseIdentifierID];
+            op.presentView.giftCount = model.giftCount;
             [op.presentView shakeNumberLabel];
             return;
         }

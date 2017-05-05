@@ -30,6 +30,8 @@
 
 @interface MZPresentView ()
 @property (nonatomic,strong) UIImageView *bgImageView;
+@property (nonatomic,strong) MZGiftModel *giftModel;
+@property (nonatomic,assign) NSInteger aCount;     // 动画执行到了第几次
 @end
 
 @implementation MZPresentView
@@ -100,6 +102,8 @@
 #pragma mark - 对外接口
 
 - (void)setModel:(MZGiftModel *)model {
+    
+    _giftModel = model;
      
     self.nameLabel.text = model.user.userName;
     self.giftLabel.text = [NSString stringWithFormat:@"送出【%@】",model.giftName];
@@ -121,6 +125,66 @@
 
 
 }
+
+/// 如果自定义，子类重写
+- (void)shakeNumberLabel{
+  
+  self.animCount ++; 
+  
+  NSInteger  afterDelay = 2;
+  
+  if (self.giftCount > 0) {
+    self.animCount =  self.giftCount;
+    afterDelay     = self.animCount;
+  }
+  
+  if (self.animCount > KLiveShakeLabelMaxNum ) {
+    
+    self.animCount = KLiveShakeLabelMaxNum;
+    afterDelay     = self.animCount;
+  }
+  
+  if (_giftModel.giftType == GIFT_TYPE_DEFAULT) {
+    
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(hideCurretView) object:nil];//可以取消成功。
+    [self performSelector:@selector(hideCurretView) withObject:nil afterDelay:2];
+  
+    self.skLabel.text = [NSString stringWithFormat:@"x %ld",self.animCount];
+    [self.skLabel startAnimWithDuration:0.5];
+    
+  } if (_giftModel.giftType == GIFT_TYPE_BURSTS) {
+      
+       _aCount = 1;
+       self.skLabel.text = [NSString stringWithFormat:@"x %ld",(long)_aCount];
+      [self showBurstsAnimate:self.animCount];
+  }
+  
+}
+
+/**
+ 连发数字动画效果
+ */
+-(void)showBurstsAnimate:(NSUInteger )repeatNum{
+  
+  [self.skLabel startAnimWithDuration:0.5 completion:^(BOOL finished) {
+    
+    if (finished == YES) {
+      _aCount ++;
+      
+      if (_aCount > repeatNum) { //动结束
+        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(hideCurretView) object:nil];//可以取消成功。
+        [self performSelector:@selector(hideCurretView) withObject:nil afterDelay:1];
+        
+        return ;
+      }
+      
+      self.skLabel.text = [NSString stringWithFormat:@"x %ld",(long)_aCount]; 
+      [self showBurstsAnimate:repeatNum];
+    }
+    
+  }];
+}
+
 
 /// 自定义隐藏动画 - 子类重写
 - (void)hideCurretView{

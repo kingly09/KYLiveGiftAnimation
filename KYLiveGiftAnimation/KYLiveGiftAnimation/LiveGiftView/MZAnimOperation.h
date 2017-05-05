@@ -34,6 +34,7 @@
 #import "MZCastleAnimView.h"
 #import "MZMarkAnimView.h"
 
+
 typedef NS_ENUM(NSInteger, GIFT_INDEX) {
     GIFT_INDEX_queue1          = 1,     //普通队列1
     GIFT_INDEX_queue2          = 2,     //普通队列2

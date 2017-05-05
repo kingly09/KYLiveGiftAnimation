@@ -29,12 +29,13 @@
 #import "MZUserInfo.h"
 
 typedef NS_ENUM(NSInteger, GIFT_TYPE) {
-    GIFT_TYPE_DEFAULT    = 0,     //普通
+    GIFT_TYPE_DEFAULT    = 0,     //（默认）普通左边动画
     GIFT_TYPE_MASK       = 1,     //贵族面具
     GIFT_TYPE_OCEAN      = 2,     //海洋之星
     GIFT_TYPE_GUARD      = 3,     //爱心守护者
     GIFT_TYPE_COOFFEE    = 4,     //咖啡印记
-    GIFT_TYPE_CASTLE     = 5      //女皇的城堡
+    GIFT_TYPE_CASTLE     = 5,      //女皇的城堡
+    GIFT_TYPE_BURSTS     = 6       //连发动画
 };
 
 @protocol MZGiftModel <NSObject>
@@ -43,11 +44,12 @@ typedef NS_ENUM(NSInteger, GIFT_TYPE) {
 
 @interface MZGiftModel : NSObject
 
-@property (nonatomic,assign) long giftId;             // 礼物的id
-@property (nonatomic,copy) NSString *giftName;        // 礼物名称
-@property (nonatomic,copy) NSString *giftPic;         // 礼物图片
+@property (nonatomic,assign) long giftId;              // 礼物的id
+@property (nonatomic,copy) NSString *giftName;         // 礼物名称
+@property (nonatomic,copy) NSString *giftPic;          // 礼物图片
 @property (nonatomic)  enum GIFT_TYPE giftType;        // 礼物类型
-@property (nonatomic,assign)  NSInteger sort;         // 礼物的排序
+@property (nonatomic,assign)  NSInteger sort;          // 礼物的排序
+@property (nonatomic,assign) double giftPrice;         // 礼物价格
 
 @property (nonatomic,strong) MZUserInfo *user;     // 送礼者
 @property (nonatomic,assign) NSInteger giftCount;  // 礼物个数

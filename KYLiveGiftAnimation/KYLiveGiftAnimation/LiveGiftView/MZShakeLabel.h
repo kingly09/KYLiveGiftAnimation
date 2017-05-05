@@ -27,6 +27,8 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^shakeLabelCompletion)(BOOL finished);  //动画完成的block回调
+
 @interface MZShakeLabel : UILabel
 
 // 动画时间
@@ -36,5 +38,14 @@
 
 // 开始礼物数字动画
 - (void)startAnimWithDuration:(NSTimeInterval)duration;
+
+/**
+ 开始礼物数字动画 回调完成的结果
+
+ @param duration 什么时候开始
+ @param completion 重复动画的完成后的回调
+ */
+- (void)startAnimWithDuration:(NSTimeInterval)duration  completion:(shakeLabelCompletion )completion;
+
 
 @end

@@ -53,6 +53,8 @@
       op.rightAnimView = [[MZRightAnimView alloc] init];
    }else if (model.giftType == GIFT_TYPE_CASTLE) { //女皇的城堡
       op.castleAnimView = [[MZCastleAnimView alloc] init];
+   }else if (model.giftType == GIFT_TYPE_BURSTS) { //连发动画
+      op.presentView = [[MZPresentView alloc] init];
    }
     op.model = model;
     op.finishedBlock = finishedBlock;
@@ -89,10 +91,12 @@
           [self addOperationWithPightAnimView];
    }else if (_model.giftType == GIFT_TYPE_CASTLE) {  //女皇的城堡
           [self addOperationWithCastleAnimView];
+   }else if (_model.giftType == GIFT_TYPE_BURSTS) {  //连发动画
+          [self addOperationWithPresentView];
    }
 }
 
-// 普通动画添加到队列
+// 普通动画 和 连发动画 添加到队列
 -(void) addOperationWithPresentView{
 
  [[NSOperationQueue mainQueue] addOperationWithBlock:^{
